@@ -3,8 +3,8 @@ package common
 import "math/big"
 
 const (
-	RewardMasterPercent        = 70
-	RewardVoterPercent         = 20
+	RewardMasterPercent        = 60
+	RewardVoterPercent         = 30
 	RewardFoundationPercent    = 10
 	HexSignMethod              = "e341eaa4"
 	HexSetSecret               = "34d38600"
