@@ -152,7 +152,7 @@ func (w *wizard) makeGenesis() {
 			}
 		}
 		validatorCap := new(big.Int)
-		validatorCap.SetString("10000000000000000000000000", 10)
+		validatorCap.SetString("10000000000000000000000", 10)
 		var validatorCaps []*big.Int
 		genesis.ExtraData = make([]byte, 32+len(signers)*common.AddressLength+65)
 		for i, signer := range signers {
@@ -167,8 +167,8 @@ func (w *wizard) makeGenesis() {
 		genesis.Config.DPoS.RewardCheckpoint = epochNumber
 
 		fmt.Println()
-		fmt.Println("How many blocks before checkpoint need to prepare new set of masternodes? (default = 450)")
-		genesis.Config.DPoS.Gap = uint64(w.readDefaultInt(450))
+		fmt.Println("How many blocks before checkpoint need to prepare new set of masternodes? (default = 5)")
+		genesis.Config.DPoS.Gap = uint64(w.readDefaultInt(5))
 
 		fmt.Println()
 		fmt.Println("What is foundation wallet address? (default = 0x746249C61f5832C5eEd53172776b460491bDcd5C)")
@@ -301,8 +301,8 @@ func (w *wizard) makeGenesis() {
 		balance := big.NewInt(0) // 20 billion
 		balance.Add(balance, big.NewInt(30*1000*1000))
 		balance.Mul(balance, big.NewInt(1000000000000000000))
-		subBalance := big.NewInt(0) // i * 50k
-		subBalance.Add(subBalance, big.NewInt(int64(len(signers))*10*1000*1000))
+		subBalance := big.NewInt(0) // i * 10k
+		subBalance.Add(subBalance, big.NewInt(int64(len(signers))*10*1000))
 		subBalance.Mul(subBalance, big.NewInt(1000000000000000000))
 		balance.Sub(balance, subBalance) // 12m - i * 50k
 		genesis.Alloc[common.HexToAddress(common.TeamAddr)] = core.GenesisAccount{
@@ -312,10 +312,10 @@ func (w *wizard) makeGenesis() {
 		}
 
 		fmt.Println()
-		fmt.Println("What is swap wallet address for fund 37.47Billion SDX?")
+		fmt.Println("What is swap wallet address for fund 200Million SDX?")
 		swapAddr := *w.readAddress()
-		baseBalance := big.NewInt(0) // 14.5Billion
-		baseBalance.Add(baseBalance, big.NewInt(3747*1000*1000*10))
+		baseBalance := big.NewInt(0) // 200Million
+		baseBalance.Add(baseBalance, big.NewInt(200*1000*1000))
 		baseBalance.Mul(baseBalance, big.NewInt(1000000000000000000))
 		genesis.Alloc[swapAddr] = core.GenesisAccount{
 			Balance: baseBalance,
