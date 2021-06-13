@@ -1,0 +1,39 @@
+FROM golang:1.10-alpine as builder
+
+RUN apk add --no-cache make gcc musl-dev linux-headers
+
+ADD . /SDXchain
+
+RUN cd /SDXchain \
+    && make SDX \
+    && chmod +x /SDXchain/build/bin/SDX
+
+FROM alpine:latest
+
+LABEL maintainer="deva@swapdex.net"
+
+WORKDIR /SDXchain
+
+COPY --from=builder /SDXchain/build/bin/SDX /usr/local/bin/SDX
+
+ENV IDENTITY ''
+ENV PASSWORD ''
+ENV PRIVATE_KEY ''
+ENV BOOTNODES ''
+ENV EXTIP ''
+ENV VERBOSITY 3
+ENV SYNC_MODE 'full'
+ENV NETWORK_ID '89'
+ENV WS_SECRET ''
+ENV NETSTATS_HOST 'netstats-server'
+ENV NETSTATS_PORT '3000'
+ENV ANNOUNCE_TXS ''
+
+RUN apk add --no-cache ca-certificates
+
+COPY docker/SDXchain ./
+COPY genesis/ ./
+
+EXPOSE 8545 8546 30303 30303/udp
+
+ENTRYPOINT ["./entrypoint.sh"]
