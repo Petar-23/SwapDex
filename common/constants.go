@@ -13,7 +13,7 @@ const (
 	EpocBlockOpening           = 850
 	EpocBlockRandomize         = 900
 	MaxMasternodes             = 1500
-	MaxMasternodesV2           = 108
+	MaxMasternodesV2           = 10500
 	LimitPenaltyEpoch          = 4
 	BlocksPerYear              = uint64(15768000)
 	LimitThresholdNonceInQueue = 10
