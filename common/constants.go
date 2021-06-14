@@ -3,9 +3,9 @@ package common
 import "math/big"
 
 const (
-	RewardMasterPercent        = 60
-	RewardVoterPercent         = 30
-	RewardFoundationPercent    = 10
+	RewardMasterPercent        = 51
+	RewardVoterPercent         = 19
+	RewardFoundationPercent    = 30
 	HexSignMethod              = "e341eaa4"
 	HexSetSecret               = "34d38600"
 	HexSetOpening              = "e11f5ba2"
