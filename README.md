@@ -20,7 +20,7 @@ More details can be found at our [technical white paper](https://Sdxchain.com/do
 
 Read more about us on:
 
-- our website: http://Sdxchain.com
+- our website: https://Swapdex.net
 - our blogs and announcements: https://medium.com/Sdxchain
 - our documentation portal: https://docs.Sdxchain.com
 - our blockchain explorer: https://dexscan.net/
@@ -33,8 +33,8 @@ Building `sdx` requires both a Go (1.7+) and C compiler; install both of these.
 Once the dependencies are installed, just run the below commands:
 
 ```bash
-$ git clone https://github.com/Sdxchain/Sdxchain Sdxchain
-$ cd Sdxchain
+$ git clone https://github.com/69th-byte/SmartDex-Chain SmartDex-Chain
+$ cd SmartDex-Chain
 $ make sdx
 ```
 
@@ -55,7 +55,7 @@ If you'd like to experiment with smart contract creation and DApps, you might be
 In order to connect to one of the masternodes on the Testnet, just run the command below:
 
 ```bash
-$ sdx attach https://rpc.testnet.Sdxchain.com
+$ sdx attach https://rpc.testnet.swapdex.net
 ```
 
 This will open the JavaScript console and let you query the blockchain directly via RPC.
@@ -69,12 +69,12 @@ export GENESIS_PATH=path/to/genesis.json
 ```
 - Testnet
 ```bash
-curl -L https://raw.githubusercontent.com/Sdxchain/Sdxchain/master/genesis/testnet.json -o $GENESIS_PATH
+curl -L https://raw.githubusercontent.com/69th-byte/SmartDex-Chain/master/genesis/testnet.json -o $GENESIS_PATH
 ```
 
 - Mainnet
 ```bash
-curl -L https://raw.githubusercontent.com/Sdxchain/Sdxchain/master/genesis/mainnet.json -o $GENESIS_PATH
+curl -L https://raw.githubusercontent.com/69th-byte/SmartDex-Chain/master/genesis/swapdex.json -o $GENESIS_PATH
 ```
 
 #### Create datadir
