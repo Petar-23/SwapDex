@@ -70,7 +70,7 @@ type Trie interface {
 	Commit(onleaf trie.LeafCallback) (common.Hash, error)
 	Hash() common.Hash
 	NodeIterator(startKey []byte) trie.NodeIterator
-	GetKey([]byte) []byte // TODO(fjl): remove this when TomoXTrie is removed
+	GetKey([]byte) []byte // TODO(fjl): remove this when SdxXTrie is removed
 	Prove(key []byte, fromLevel uint, proofDb ethdb.KeyValueWriter) error
 }
 
@@ -89,16 +89,16 @@ func NewDatabase(db ethdb.Database) Database {
 type cachingDB struct {
 	db            *trie.Database
 	mu            sync.Mutex
-	pastTries     []*TomoXTrie
+	pastTries     []*SdxXTrie
 	codeSizeCache *lru.Cache
 }
 
 // OpenTrie opens the main account trie.
 func (db *cachingDB) OpenTrie(root common.Hash) (Trie, error) {
-	return NewTomoXTrie(root, db.db)
+	return NewSdxXTrie(root, db.db)
 }
 
-func (db *cachingDB) pushTrie(t *TomoXTrie) {
+func (db *cachingDB) pushTrie(t *SdxXTrie) {
 	db.mu.Lock()
 	defer db.mu.Unlock()
 	if len(db.pastTries) >= maxPastTries {
@@ -111,13 +111,13 @@ func (db *cachingDB) pushTrie(t *TomoXTrie) {
 
 // OpenStorageTrie opens the storage trie of an account.
 func (db *cachingDB) OpenStorageTrie(addrHash, root common.Hash) (Trie, error) {
-	return NewTomoXTrie(root, db.db)
+	return NewSdxXTrie(root, db.db)
 }
 
 // CopyTrie returns an independent copy of the given trie.
 func (db *cachingDB) CopyTrie(t Trie) Trie {
 	switch t := t.(type) {
-	case *TomoXTrie:
+	case *SdxXTrie:
 		return t.Copy()
 	default:
 		panic(fmt.Errorf("unknown trie type %T", t))

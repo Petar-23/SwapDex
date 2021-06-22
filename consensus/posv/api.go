@@ -16,11 +16,12 @@
 package posv
 
 import (
+	"math/big"
+
 	"github.com/tomochain/tomochain/common"
 	"github.com/tomochain/tomochain/consensus"
 	"github.com/tomochain/tomochain/core/types"
 	"github.com/tomochain/tomochain/rpc"
-	"math/big"
 )
 
 // API is a user facing RPC API to allow controlling the signer and voting
@@ -33,7 +34,7 @@ type NetworkInformation struct {
 	NetworkId                  *big.Int
 	TomoValidatorAddress       common.Address
 	RelayerRegistrationAddress common.Address
-	TomoXListingAddress        common.Address
+	SdxXListingAddress         common.Address
 	TomoZAddress               common.Address
 	LendingAddress             common.Address
 }
@@ -105,13 +106,13 @@ func (api *API) NetworkInformation() NetworkInformation {
 	if common.IsTestnet {
 		info.LendingAddress = common.HexToAddress(common.LendingRegistrationSMCTestnet)
 		info.RelayerRegistrationAddress = common.HexToAddress(common.RelayerRegistrationSMCTestnet)
-		info.TomoXListingAddress = common.TomoXListingSMCTestNet
-		info.TomoZAddress = common.TRC21IssuerSMCTestNet
+		info.SdxXListingAddress = common.SdxXListingSMCTestNet
+		info.TomoZAddress = common.SRC21IssuerSMCTestNet
 	} else {
 		info.LendingAddress = common.HexToAddress(common.LendingRegistrationSMC)
 		info.RelayerRegistrationAddress = common.HexToAddress(common.RelayerRegistrationSMC)
-		info.TomoXListingAddress = common.TomoXListingSMC
-		info.TomoZAddress = common.TRC21IssuerSMC
+		info.SdxXListingAddress = common.SdxXListingSMC
+		info.TomoZAddress = common.SRC21IssuerSMC
 	}
 	return info
 }

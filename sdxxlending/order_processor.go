@@ -3,6 +3,8 @@ package sdxxlending
 import (
 	"encoding/json"
 	"fmt"
+	"math/big"
+
 	"github.com/tomochain/tomochain/common"
 	"github.com/tomochain/tomochain/consensus"
 	"github.com/tomochain/tomochain/core/state"
@@ -10,7 +12,6 @@ import (
 	"github.com/tomochain/tomochain/log"
 	"github.com/tomochain/tomochain/sdxx/tradingstate"
 	"github.com/tomochain/tomochain/sdxxlending/lendingstate"
-	"math/big"
 )
 
 func (l *Lending) CommitOrder(header *types.Header, coinbase common.Address, chain consensus.ChainContext, statedb *state.StateDB, lendingStateDB *lendingstate.LendingStateDB, tradingStateDb *tradingstate.TradingStateDB, lendingOrderBook common.Hash, order *lendingstate.LendingItem) ([]*lendingstate.LendingTrade, []*lendingstate.LendingItem, error) {
@@ -721,7 +722,7 @@ func (l *Lending) ProcessCancelOrder(header *types.Header, lendingStateDB *lendi
 	}
 	feeRate := lendingstate.GetFee(statedb, originOrder.Relayer)
 	tokenCancelFee, tokenPriceInTOMO := common.Big0, common.Big0
-	if !chain.Config().IsTIPTomoXCancellationFee(header.Number) {
+	if !chain.Config().IsTIPSdxXCancellationFee(header.Number) {
 		tokenCancelFee = getCancelFeeV1(collateralTokenDecimal, collateralPrice, feeRate, &originOrder)
 	} else {
 		tokenCancelFee, tokenPriceInTOMO = l.getCancelFee(chain, statedb, tradingStateDb, &originOrder, feeRate)
@@ -892,19 +893,19 @@ func (l *Lending) LiquidationTrade(lendingStateDB *lendingstate.LendingStateDB, 
 }
 
 // cancellation fee = 1/10 borrowing fee
-// deprecated after hardfork at TIPTomoXCancellationFee
+// deprecated after hardfork at TIPSdxXCancellationFee
 func getCancelFeeV1(collateralTokenDecimal *big.Int, collateralPrice, borrowFee *big.Int, order *lendingstate.LendingItem) *big.Int {
 	cancelFee := big.NewInt(0)
 	if order.Side == lendingstate.Investing {
 		// cancel fee = quantityToLend*borrowFee/LendingCancelFee
 		cancelFee = new(big.Int).Mul(order.Quantity, borrowFee)
-		cancelFee = new(big.Int).Div(cancelFee, common.TomoXBaseCancelFee)
+		cancelFee = new(big.Int).Div(cancelFee, common.SdxXBaseCancelFee)
 	} else {
 		//Fee = quantityToLend * collateralTokenDecimal/collateralPrice *borrowFee/LendingCancelFee
 		cancelFee = new(big.Int).Mul(order.Quantity, collateralTokenDecimal)
 		cancelFee = new(big.Int).Mul(cancelFee, borrowFee)
 		cancelFee = new(big.Int).Div(cancelFee, collateralPrice)
-		cancelFee = new(big.Int).Div(cancelFee, common.TomoXBaseCancelFee)
+		cancelFee = new(big.Int).Div(cancelFee, common.SdxXBaseCancelFee)
 	}
 	return cancelFee
 }
@@ -954,7 +955,7 @@ func (l *Lending) GetMediumTradePriceBeforeEpoch(chain consensus.ChainContext, s
 }
 
 //LendToken and CollateralToken must meet at least one of following conditions
-//- Have direct pair in TomoX: lendToken/CollateralToken or CollateralToken/LendToken
+//- Have direct pair in SdxX: lendToken/CollateralToken or CollateralToken/LendToken
 //- Have pairs with SDX:
 //-  lendToken/SDX and CollateralToken/SDX
 //-  SDX/lendToken and SDX/CollateralToken

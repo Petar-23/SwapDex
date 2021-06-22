@@ -36,8 +36,8 @@ var (
 	ErrInvalidSig               = errors.New("invalid transaction v, r, s values")
 	errNoSigner                 = errors.New("missing signing methods")
 	skipNonceDestinationAddress = map[string]bool{
-		common.TomoXAddr:                         true,
-		common.TradingStateAddr:                  true,
+		common.SdxXAddr:                         true,
+		common.TradingStateAddr:                 true,
 		common.SdxXLendingAddress:               true,
 		common.SdxXLendingFinalizedTradeAddress: true,
 	}
@@ -261,10 +261,10 @@ func (tx *Transaction) AsMessage(s Signer, balanceFee *big.Int, number *big.Int)
 	var err error
 	msg.from, err = Sender(s, tx)
 	if balanceFee != nil {
-		if number.Cmp(common.TIPTRC21Fee) > 0 {
-			msg.gasPrice = common.TRC21GasPrice
+		if number.Cmp(common.TIPSRC21Fee) > 0 {
+			msg.gasPrice = common.SRC21GasPrice
 		} else {
-			msg.gasPrice = common.TRC21GasPriceBefore
+			msg.gasPrice = common.SRC21GasPriceBefore
 		}
 	}
 	return msg, err
@@ -290,8 +290,8 @@ func (tx *Transaction) Cost() *big.Int {
 }
 
 // Cost returns amount + gasprice * gaslimit.
-func (tx *Transaction) TRC21Cost() *big.Int {
-	total := new(big.Int).Mul(common.TRC21GasPrice, new(big.Int).SetUint64(tx.data.GasLimit))
+func (tx *Transaction) SRC21Cost() *big.Int {
+	total := new(big.Int).Mul(common.SRC21GasPrice, new(big.Int).SetUint64(tx.data.GasLimit))
 	total.Add(total, tx.data.Amount)
 	return total
 }
@@ -312,7 +312,7 @@ func (tx *Transaction) IsTradingTransaction() bool {
 		return false
 	}
 
-	if tx.To().String() != common.TomoXAddr {
+	if tx.To().String() != common.SdxXAddr {
 		return false
 	}
 
@@ -411,14 +411,14 @@ func (tx *Transaction) IsVotingTransaction() (bool, *common.Address) {
 	return b, nil
 }
 
-func (tx *Transaction) IsTomoXApplyTransaction() bool {
+func (tx *Transaction) IsSdxXApplyTransaction() bool {
 	if tx.To() == nil {
 		return false
 	}
 
-	addr := common.TomoXListingSMC
+	addr := common.SdxXListingSMC
 	if common.IsTestnet {
-		addr = common.TomoXListingSMCTestNet
+		addr = common.SdxXListingSMCTestNet
 	}
 	if tx.To().String() != addr.String() {
 		return false
@@ -426,7 +426,7 @@ func (tx *Transaction) IsTomoXApplyTransaction() bool {
 
 	method := common.ToHex(tx.Data()[0:4])
 
-	if method != common.TomoXApplyMethod {
+	if method != common.SdxXApplyMethod {
 		return false
 	}
 
@@ -443,9 +443,9 @@ func (tx *Transaction) IsTomoZApplyTransaction() bool {
 		return false
 	}
 
-	addr := common.TRC21IssuerSMC
+	addr := common.SRC21IssuerSMC
 	if common.IsTestnet {
-		addr = common.TRC21IssuerSMCTestNet
+		addr = common.SRC21IssuerSMCTestNet
 	}
 	if tx.To().String() != addr.String() {
 		return false
@@ -571,14 +571,14 @@ func (s TxByPrice) Less(i, j int) bool {
 	i_price := s.txs[i].data.Price
 	if s.txs[i].To() != nil {
 		if _, ok := s.payersSwap[*s.txs[i].To()]; ok {
-			i_price = common.TRC21GasPrice
+			i_price = common.SRC21GasPrice
 		}
 	}
 
 	j_price := s.txs[j].data.Price
 	if s.txs[j].To() != nil {
 		if _, ok := s.payersSwap[*s.txs[j].To()]; ok {
-			j_price = common.TRC21GasPrice
+			j_price = common.SRC21GasPrice
 		}
 	}
 	return i_price.Cmp(j_price) > 0
@@ -698,7 +698,7 @@ type Message struct {
 
 func NewMessage(from common.Address, to *common.Address, nonce uint64, amount *big.Int, gasLimit uint64, gasPrice *big.Int, data []byte, checkNonce bool, balanceTokenFee *big.Int) Message {
 	if balanceTokenFee != nil {
-		gasPrice = common.TRC21GasPrice
+		gasPrice = common.SRC21GasPrice
 	}
 	return Message{
 		from:            from,

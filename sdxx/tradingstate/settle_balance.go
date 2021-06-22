@@ -3,12 +3,13 @@ package tradingstate
 import (
 	"encoding/json"
 	"errors"
+	"math/big"
+
 	"github.com/tomochain/tomochain/common"
 	"github.com/tomochain/tomochain/log"
-	"math/big"
 )
 
-const DefaultFeeRate = 10 // 10 / TomoXBaseFee = 10 / 10000 = 0.1%
+const DefaultFeeRate = 10 // 10 / SdxXBaseFee = 10 / 10000 = 0.1%
 var ErrQuantityTradeTooSmall = errors.New("quantity trade too small")
 
 type TradeResult struct {
@@ -38,13 +39,13 @@ func GetSettleBalance(quotePrice *big.Int, takerSide string, takerFeeRate *big.I
 	quoteTokenQuantity = new(big.Int).Div(quoteTokenQuantity, baseTokenDecimal)
 
 	makerFee := new(big.Int).Mul(quoteTokenQuantity, makerFeeRate)
-	makerFee = new(big.Int).Div(makerFee, common.TomoXBaseFee)
+	makerFee = new(big.Int).Div(makerFee, common.SdxXBaseFee)
 	takerFee := new(big.Int).Mul(quoteTokenQuantity, takerFeeRate)
-	takerFee = new(big.Int).Div(takerFee, common.TomoXBaseFee)
+	takerFee = new(big.Int).Div(takerFee, common.SdxXBaseFee)
 
 	// use the defaultFee to validate small orders
 	defaultFee := new(big.Int).Mul(quoteTokenQuantity, new(big.Int).SetUint64(DefaultFeeRate))
-	defaultFee = new(big.Int).Div(defaultFee, common.TomoXBaseFee)
+	defaultFee = new(big.Int).Div(defaultFee, common.SdxXBaseFee)
 
 	if takerSide == Bid {
 		if quoteTokenQuantity.Cmp(makerFee) <= 0 || quoteTokenQuantity.Cmp(defaultFee) <= 0 {

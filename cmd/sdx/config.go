@@ -20,13 +20,14 @@ import (
 	"bufio"
 	"errors"
 	"fmt"
-	"gopkg.in/urfave/cli.v1"
 	"io"
 	"math/big"
 	"os"
 	"reflect"
 	"strings"
 	"unicode"
+
+	"gopkg.in/urfave/cli.v1"
 
 	"github.com/naoina/toml"
 	"github.com/tomochain/tomochain/cmd/utils"
@@ -93,7 +94,7 @@ type tomoConfig struct {
 	Shh         whisper.Config
 	Node        node.Config
 	Ethstats    ethstatsConfig
-	TomoX       sdxx.Config
+	SdxX        sdxx.Config
 	Account     account
 	StakeEnable bool
 	Bootnodes   Bootnodes
@@ -130,7 +131,7 @@ func makeConfigNode(ctx *cli.Context) (*node.Node, tomoConfig) {
 	cfg := tomoConfig{
 		Eth:         eth.DefaultConfig,
 		Shh:         whisper.DefaultConfig,
-		TomoX:       sdxx.DefaultConfig,
+		SdxX:        sdxx.DefaultConfig,
 		Node:        defaultNodeConfig(),
 		StakeEnable: true,
 		Verbosity:   3,
@@ -156,10 +157,10 @@ func makeConfigNode(ctx *cli.Context) (*node.Node, tomoConfig) {
 	// Check testnet is enable.
 	if ctx.GlobalBool(utils.TomoTestnetFlag.Name) {
 		common.IsTestnet = true
-		common.TRC21IssuerSMC = common.TRC21IssuerSMCTestNet
+		common.SRC21IssuerSMC = common.SRC21IssuerSMCTestNet
 		cfg.Eth.NetworkId = 89
 		common.RelayerRegistrationSMC = common.RelayerRegistrationSMCTestnet
-		common.TIPTRC21Fee = common.TIPTomoXTestnet
+		common.TIPSRC21Fee = common.TIPSdxXTestnet
 		common.TIPSigning = big.NewInt(0)
 		common.TIPRandomize = big.NewInt(0)
 		common.TIP2019Block = big.NewInt(0)
@@ -210,7 +211,7 @@ func makeConfigNode(ctx *cli.Context) (*node.Node, tomoConfig) {
 	}
 
 	utils.SetShhConfig(ctx, stack, &cfg.Shh)
-	utils.SetTomoXConfig(ctx, &cfg.TomoX, cfg.Node.DataDir)
+	utils.SetSdxXConfig(ctx, &cfg.SdxX, cfg.Node.DataDir)
 	return stack, cfg
 }
 
@@ -240,9 +241,9 @@ func enableWhisper(ctx *cli.Context) bool {
 func makeFullNode(ctx *cli.Context) (*node.Node, tomoConfig) {
 	stack, cfg := makeConfigNode(ctx)
 
-	// Register TomoX's OrderBook service if requested.
+	// Register SdxX's OrderBook service if requested.
 	// enable in default
-	utils.RegisterTomoXService(stack, &cfg.TomoX)
+	utils.RegisterSdxXService(stack, &cfg.SdxX)
 	utils.RegisterEthService(stack, &cfg.Eth)
 
 	// Whisper must be explicitly enabled by specifying at least 1 whisper flag or in dev mode

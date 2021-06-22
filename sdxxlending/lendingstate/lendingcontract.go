@@ -2,12 +2,13 @@ package lendingstate
 
 import (
 	"fmt"
+	"math/big"
+
 	"github.com/tomochain/tomochain/common"
 	"github.com/tomochain/tomochain/core/state"
 	"github.com/tomochain/tomochain/crypto"
 	"github.com/tomochain/tomochain/log"
 	"github.com/tomochain/tomochain/sdxx/tradingstate"
-	"math/big"
 )
 
 var (
@@ -143,7 +144,7 @@ func IsValidPair(statedb *state.StateDB, coinbase common.Address, baseToken comm
 // @param terms: term
 // @return:
 //		- collaterals []common.Address  : list of addresses of collateral
-//		- isSpecialCollateral			: TRUE if collateral is a token which is NOT available for trading in TomoX, otherwise FALSE
+//		- isSpecialCollateral			: TRUE if collateral is a token which is NOT available for trading in SdxX, otherwise FALSE
 func GetCollaterals(statedb *state.StateDB, coinbase common.Address, baseToken common.Address, term uint64) (collaterals []common.Address, isSpecialCollateral bool) {
 	validPair, _ := IsValidPair(statedb, coinbase, baseToken, term)
 	if !validPair {

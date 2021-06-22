@@ -18,21 +18,21 @@
 package web3ext
 
 var Modules = map[string]string{
-	"admin":        Admin_JS,
-	"chequebook":   Chequebook_JS,
-	"clique":       Clique_JS,
-	"posv":         Posv_JS,
-	"debug":        Debug_JS,
-	"eth":          Eth_JS,
-	"miner":        Miner_JS,
-	"net":          Net_JS,
-	"personal":     Personal_JS,
-	"rpc":          RPC_JS,
-	"shh":          Shh_JS,
-	"sdxx":        TomoX_JS,
+	"admin":       Admin_JS,
+	"chequebook":  Chequebook_JS,
+	"clique":      Clique_JS,
+	"posv":        Posv_JS,
+	"debug":       Debug_JS,
+	"eth":         Eth_JS,
+	"miner":       Miner_JS,
+	"net":         Net_JS,
+	"personal":    Personal_JS,
+	"rpc":         RPC_JS,
+	"shh":         Shh_JS,
+	"sdxx":        SdxX_JS,
 	"sdxxlending": SdxXLending_JS,
-	"swarmfs":      SWARMFS_JS,
-	"txpool":       TxPool_JS,
+	"swarmfs":     SWARMFS_JS,
+	"txpool":      TxPool_JS,
 }
 
 const Chequebook_JS = `
@@ -636,7 +636,7 @@ web3._extend({
 });
 `
 
-const TomoX_JS = `
+const SdxX_JS = `
 web3._extend({
 	property: 'sdxx',
 	methods: [

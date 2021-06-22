@@ -20,11 +20,12 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
-	"github.com/tomochain/tomochain/sdxx/tradingstate"
-	"github.com/tomochain/tomochain/sdxxlending"
 	"io/ioutil"
 	"math/big"
 	"path/filepath"
+
+	"github.com/tomochain/tomochain/sdxx/tradingstate"
+	"github.com/tomochain/tomochain/sdxxlending"
 
 	"github.com/tomochain/tomochain/sdxx"
 
@@ -277,7 +278,7 @@ func (b *LesApiBackend) GetOrderNonce(address common.Hash) (uint64, error) {
 	return 0, errors.New("cannot find sdxx service")
 }
 
-func (b *LesApiBackend) TomoxService() *sdxx.TomoX {
+func (b *LesApiBackend) SdxxService() *sdxx.SdxX {
 	return nil
 }
 

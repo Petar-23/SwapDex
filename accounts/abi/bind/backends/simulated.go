@@ -20,11 +20,12 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/tomochain/tomochain/consensus"
-	"github.com/tomochain/tomochain/core/rawdb"
 	"math/big"
 	"sync"
 	"time"
+
+	"github.com/tomochain/tomochain/consensus"
+	"github.com/tomochain/tomochain/core/rawdb"
 
 	"github.com/tomochain/tomochain"
 	"github.com/tomochain/tomochain/accounts/abi/bind"
@@ -216,7 +217,7 @@ func (b *SimulatedBackend) CallContractWithState(call tomochain.CallMsg, chain c
 	}
 	// Execute the call.
 	msg := callmsg{call}
-	feeCapacity := state.GetTRC21FeeCapacityFromState(statedb)
+	feeCapacity := state.GetSRC21FeeCapacityFromState(statedb)
 	if msg.To() != nil {
 		if value, ok := feeCapacity[*msg.To()]; ok {
 			msg.CallMsg.BalanceTokenFee = value
@@ -285,7 +286,7 @@ func (b *SimulatedBackend) EstimateGas(ctx context.Context, call tomochain.CallM
 
 		snapshot := b.pendingState.Snapshot()
 		_, _, failed, err := b.callContract(ctx, call, b.pendingBlock, b.pendingState)
-		fmt.Println("EstimateGas",err,failed)
+		fmt.Println("EstimateGas", err, failed)
 		b.pendingState.RevertToSnapshot(snapshot)
 
 		if err != nil || failed {
@@ -329,7 +330,7 @@ func (b *SimulatedBackend) callContract(ctx context.Context, call tomochain.Call
 	from.SetBalance(math.MaxBig256)
 	// Execute the call.
 	msg := callmsg{call}
-	feeCapacity := state.GetTRC21FeeCapacityFromState(statedb)
+	feeCapacity := state.GetSRC21FeeCapacityFromState(statedb)
 	if msg.To() != nil {
 		if value, ok := feeCapacity[*msg.To()]; ok {
 			msg.CallMsg.BalanceTokenFee = value

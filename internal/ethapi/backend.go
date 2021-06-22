@@ -19,9 +19,10 @@ package ethapi
 
 import (
 	"context"
+	"math/big"
+
 	"github.com/tomochain/tomochain/sdxx/tradingstate"
 	"github.com/tomochain/tomochain/sdxxlending"
-	"math/big"
 
 	"github.com/tomochain/tomochain/sdxx"
 
@@ -50,7 +51,7 @@ type Backend interface {
 	ChainDb() ethdb.Database
 	EventMux() *event.TypeMux
 	AccountManager() *accounts.Manager
-	TomoxService() *sdxx.TomoX
+	SdxxService() *sdxx.SdxX
 	LendingService() *sdxxlending.Lending
 
 	// BlockChain API
@@ -117,7 +118,7 @@ func GetAPIs(apiBackend Backend) []rpc.API {
 		}, {
 			Namespace: "sdxx",
 			Version:   "1.0",
-			Service:   NewPublicTomoXTransactionPoolAPI(apiBackend, nonceLock),
+			Service:   NewPublicSdxXTransactionPoolAPI(apiBackend, nonceLock),
 			Public:    true,
 		}, {
 			Namespace: "txpool",

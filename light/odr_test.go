@@ -20,11 +20,12 @@ import (
 	"bytes"
 	"context"
 	"errors"
-	"github.com/tomochain/tomochain/consensus"
-	"github.com/tomochain/tomochain/core/rawdb"
 	"math/big"
 	"testing"
 	"time"
+
+	"github.com/tomochain/tomochain/consensus"
+	"github.com/tomochain/tomochain/core/rawdb"
 
 	"github.com/tomochain/tomochain/common"
 	"github.com/tomochain/tomochain/common/math"
@@ -178,7 +179,7 @@ func odrContractCall(ctx context.Context, db ethdb.Database, bc *core.BlockChain
 
 		// Perform read-only call.
 		st.SetBalance(testBankAddress, math.MaxBig256)
-		feeCapacity := state.GetTRC21FeeCapacityFromState(st)
+		feeCapacity := state.GetSRC21FeeCapacityFromState(st)
 		var balanceTokenFee *big.Int
 		if value, ok := feeCapacity[testContractAddr]; ok {
 			balanceTokenFee = value

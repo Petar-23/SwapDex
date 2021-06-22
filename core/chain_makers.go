@@ -18,8 +18,9 @@ package core
 
 import (
 	"fmt"
-	"github.com/tomochain/tomochain/core/rawdb"
 	"math/big"
+
+	"github.com/tomochain/tomochain/core/rawdb"
 
 	"github.com/tomochain/tomochain/common"
 	"github.com/tomochain/tomochain/consensus"
@@ -98,7 +99,7 @@ func (b *BlockGen) AddTxWithChain(bc *BlockChain, tx *types.Transaction) {
 	if b.gasPool == nil {
 		b.SetCoinbase(common.Address{})
 	}
-	feeCapacity := state.GetTRC21FeeCapacityFromState(b.statedb)
+	feeCapacity := state.GetSRC21FeeCapacityFromState(b.statedb)
 	b.statedb.Prepare(tx.Hash(), common.Hash{}, len(b.txs))
 	receipt, gas, err, tokenFeeUsed := ApplyTransaction(b.config, feeCapacity, bc, &b.header.Coinbase, b.gasPool, b.statedb, nil, b.header, tx, &b.header.GasUsed, vm.Config{})
 	if err != nil {
@@ -108,10 +109,10 @@ func (b *BlockGen) AddTxWithChain(bc *BlockChain, tx *types.Transaction) {
 	b.receipts = append(b.receipts, receipt)
 	if tokenFeeUsed {
 		fee := new(big.Int).SetUint64(gas)
-		if b.header.Number.Cmp(common.TIPTRC21Fee) > 0 {
-			fee = fee.Mul(fee, common.TRC21GasPrice)
+		if b.header.Number.Cmp(common.TIPSRC21Fee) > 0 {
+			fee = fee.Mul(fee, common.SRC21GasPrice)
 		}
-		state.UpdateTRC21Fee(b.statedb, map[common.Address]*big.Int{*tx.To(): new(big.Int).Sub(feeCapacity[*tx.To()], new(big.Int).SetUint64(gas))}, fee)
+		state.UpdateSRC21Fee(b.statedb, map[common.Address]*big.Int{*tx.To(): new(big.Int).Sub(feeCapacity[*tx.To()], new(big.Int).SetUint64(gas))}, fee)
 	}
 }
 

@@ -18,8 +18,9 @@
 package ethdb
 
 import (
-	"github.com/tomochain/tomochain/common"
 	"io"
+
+	"github.com/tomochain/tomochain/common"
 )
 
 // KeyValueReader wraps the Has and Get method of a backing data store.
@@ -133,7 +134,7 @@ type Database interface {
 	io.Closer
 }
 
-// TomoxDatabase interface
-type TomoxDatabase interface {
+// SdxxDatabase interface
+type SdxxDatabase interface {
 	GetObject(hash common.Hash, val interface{}) (interface{}, error)
 }

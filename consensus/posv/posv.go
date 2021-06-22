@@ -21,9 +21,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/tomochain/tomochain/sdxx/tradingstate"
-	"github.com/tomochain/tomochain/sdxxlending/lendingstate"
-	"gopkg.in/karalabe/cookiejar.v2/collections/prque"
 	"io/ioutil"
 	"math/big"
 	"math/rand"
@@ -33,6 +30,10 @@ import (
 	"strconv"
 	"sync"
 	"time"
+
+	"github.com/tomochain/tomochain/sdxx/tradingstate"
+	"github.com/tomochain/tomochain/sdxxlending/lendingstate"
+	"gopkg.in/karalabe/cookiejar.v2/collections/prque"
 
 	lru "github.com/hashicorp/golang-lru"
 	"github.com/tomochain/tomochain/accounts"
@@ -265,7 +266,7 @@ type Posv struct {
 	HookPenaltyTIPSigning      func(chain consensus.ChainReader, header *types.Header, candidate []common.Address) ([]common.Address, error)
 	HookValidator              func(header *types.Header, signers []common.Address) ([]byte, error)
 	HookVerifyMNs              func(header *types.Header, signers []common.Address) error
-	GetTomoXService            func() TradingService
+	GetSdxXService             func() TradingService
 	GetLendingService          func() LendingService
 	HookGetSignersFromContract func(blockHash common.Hash) ([]common.Address, error)
 }

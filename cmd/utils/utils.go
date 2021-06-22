@@ -20,7 +20,7 @@ func RegisterEthService(stack *node.Node, cfg *eth.Config) {
 		})
 	} else {
 		err = stack.Register(func(ctx *node.ServiceContext) (node.Service, error) {
-			var sdxXServ *sdxx.TomoX
+			var sdxXServ *sdxx.SdxX
 			ctx.Service(&sdxXServ)
 			var lendingServ *sdxxlending.Lending
 			ctx.Service(&lendingServ)
@@ -63,12 +63,12 @@ func RegisterEthStatsService(stack *node.Node, url string) {
 	}
 }
 
-func RegisterTomoXService(stack *node.Node, cfg *sdxx.Config) {
+func RegisterSdxXService(stack *node.Node, cfg *sdxx.Config) {
 	sdxX := sdxx.New(cfg)
 	if err := stack.Register(func(n *node.ServiceContext) (node.Service, error) {
 		return sdxX, nil
 	}); err != nil {
-		Fatalf("Failed to register the TomoX service: %v", err)
+		Fatalf("Failed to register the SdxX service: %v", err)
 	}
 
 	// register sdxxlending service

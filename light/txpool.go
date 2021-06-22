@@ -360,10 +360,10 @@ func (pool *TxPool) validateTx(ctx context.Context, tx *types.Transaction) error
 			return err
 		}
 	}
-	// validate balance slot, token decimal for TomoX
-	if tx.IsTomoXApplyTransaction() {
+	// validate balance slot, token decimal for SdxX
+	if tx.IsSdxXApplyTransaction() {
 		copyState := pool.currentState(ctx).Copy()
-		if err := core.ValidateTomoXApplyTransaction(pool.chain, nil, copyState, common.BytesToAddress(tx.Data()[4:])); err != nil {
+		if err := core.ValidateSdxXApplyTransaction(pool.chain, nil, copyState, common.BytesToAddress(tx.Data()[4:])); err != nil {
 			return err
 		}
 	}

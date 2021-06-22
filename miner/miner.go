@@ -19,8 +19,9 @@ package miner
 
 import (
 	"fmt"
-	"github.com/tomochain/tomochain/sdxxlending"
 	"sync/atomic"
+
+	"github.com/tomochain/tomochain/sdxxlending"
 
 	"github.com/tomochain/tomochain/accounts"
 	"github.com/tomochain/tomochain/common"
@@ -42,7 +43,7 @@ type Backend interface {
 	BlockChain() *core.BlockChain
 	TxPool() *core.TxPool
 	ChainDb() ethdb.Database
-	GetTomoX() *sdxx.TomoX
+	GetSdxX() *sdxx.SdxX
 	OrderPool() *core.OrderPool
 	LendingPool() *core.LendingPool
 	GetSdxXLending() *sdxxlending.Lending

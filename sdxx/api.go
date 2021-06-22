@@ -18,25 +18,25 @@ var (
 	ErrOrderNonceTooHigh = errors.New("OrderNonce too high")
 )
 
-// PublicTomoXAPI provides the sdxX RPC service that can be
+// PublicSdxXAPI provides the sdxX RPC service that can be
 // use publicly without security implications.
-type PublicTomoXAPI struct {
-	t        *TomoX
+type PublicSdxXAPI struct {
+	t        *SdxX
 	mu       sync.Mutex
 	lastUsed map[string]time.Time // keeps track when a filter was polled for the last time.
 
 }
 
-// NewPublicTomoXAPI create a new RPC sdxX service.
-func NewPublicTomoXAPI(t *TomoX) *PublicTomoXAPI {
-	api := &PublicTomoXAPI{
+// NewPublicSdxXAPI create a new RPC sdxX service.
+func NewPublicSdxXAPI(t *SdxX) *PublicSdxXAPI {
+	api := &PublicSdxXAPI{
 		t:        t,
 		lastUsed: make(map[string]time.Time),
 	}
 	return api
 }
 
-// Version returns the TomoX sub-protocol version.
-func (api *PublicTomoXAPI) Version(ctx context.Context) string {
+// Version returns the SdxX sub-protocol version.
+func (api *PublicSdxXAPI) Version(ctx context.Context) string {
 	return ProtocolVersionStr
 }

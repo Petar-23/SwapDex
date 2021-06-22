@@ -1,10 +1,11 @@
 package sdxx
 
 import (
-	"github.com/tomochain/tomochain/contracts/sdxx/contract"
-	"github.com/tomochain/tomochain/log"
 	"math/big"
 	"strings"
+
+	"github.com/tomochain/tomochain/contracts/sdxx/contract"
+	"github.com/tomochain/tomochain/log"
 
 	"github.com/tomochain/tomochain"
 	"github.com/tomochain/tomochain/accounts/abi"
@@ -16,7 +17,7 @@ import (
 
 // GetTokenAbi return token abi
 func GetTokenAbi() (*abi.ABI, error) {
-	contractABI, err := abi.JSON(strings.NewReader(contract.TRC21ABI))
+	contractABI, err := abi.JSON(strings.NewReader(contract.SRC21ABI))
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +45,7 @@ func RunContract(chain consensus.ChainContext, statedb *state.StateDB, contractA
 	return unpackResult, nil
 }
 
-func (sdxx *TomoX) GetTokenDecimal(chain consensus.ChainContext, statedb *state.StateDB, tokenAddr common.Address) (*big.Int, error) {
+func (sdxx *SdxX) GetTokenDecimal(chain consensus.ChainContext, statedb *state.StateDB, tokenAddr common.Address) (*big.Int, error) {
 	if tokenDecimal, ok := sdxx.tokenDecimalCache.Get(tokenAddr); ok {
 		return tokenDecimal.(*big.Int), nil
 	}
@@ -73,6 +74,6 @@ func (sdxx *TomoX) GetTokenDecimal(chain consensus.ChainContext, statedb *state.
 }
 
 // FIXME: using in unit tests only
-func (sdxx *TomoX) SetTokenDecimal(token common.Address, decimal *big.Int) {
+func (sdxx *SdxX) SetTokenDecimal(token common.Address, decimal *big.Int) {
 	sdxx.tokenDecimalCache.Add(token, decimal)
 }

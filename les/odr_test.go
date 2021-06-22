@@ -19,10 +19,11 @@ package les
 import (
 	"bytes"
 	"context"
-	"github.com/tomochain/tomochain/core/rawdb"
 	"math/big"
 	"testing"
 	"time"
+
+	"github.com/tomochain/tomochain/core/rawdb"
 
 	"github.com/tomochain/tomochain/common"
 	"github.com/tomochain/tomochain/common/math"
@@ -128,7 +129,7 @@ func odrContractCall(ctx context.Context, db ethdb.Database, config *params.Chai
 			if err == nil {
 				from := statedb.GetOrNewStateObject(testBankAddress)
 				from.SetBalance(math.MaxBig256)
-				feeCapacity := state.GetTRC21FeeCapacityFromState(statedb)
+				feeCapacity := state.GetSRC21FeeCapacityFromState(statedb)
 				var balanceTokenFee *big.Int
 				if value, ok := feeCapacity[testContractAddr]; ok {
 					balanceTokenFee = value
@@ -148,7 +149,7 @@ func odrContractCall(ctx context.Context, db ethdb.Database, config *params.Chai
 			header := lc.GetHeaderByHash(bhash)
 			statedb := light.NewState(ctx, header, lc.Odr())
 			statedb.SetBalance(testBankAddress, math.MaxBig256)
-			feeCapacity := state.GetTRC21FeeCapacityFromState(statedb)
+			feeCapacity := state.GetSRC21FeeCapacityFromState(statedb)
 			var balanceTokenFee *big.Int
 			if value, ok := feeCapacity[testContractAddr]; ok {
 				balanceTokenFee = value

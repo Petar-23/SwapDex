@@ -3,12 +3,13 @@ package lendingstate
 import (
 	"encoding/json"
 	"errors"
+	"math/big"
+
 	"github.com/tomochain/tomochain/common"
 	"github.com/tomochain/tomochain/log"
-	"math/big"
 )
 
-const DefaultFeeRate = 100 // 100 / TomoXBaseFee = 100 / 10000 = 1%
+const DefaultFeeRate = 100 // 100 / SdxXBaseFee = 100 / 10000 = 1%
 var (
 	ErrQuantityTradeTooSmall  = errors.New("quantity trade too small")
 	ErrInvalidCollateralPrice = errors.New("unable to retrieve price of this collateral. Please try another collateral")
@@ -50,7 +51,7 @@ func GetSettleBalance(isSdxXLendingFork bool,
 
 	//use the defaultFee to validate small orders
 	defaultFee := new(big.Int).Mul(quantityToLend, new(big.Int).SetUint64(DefaultFeeRate))
-	defaultFee = new(big.Int).Div(defaultFee, common.TomoXBaseFee)
+	defaultFee = new(big.Int).Div(defaultFee, common.SdxXBaseFee)
 
 	var result *LendingSettleBalance
 	//result = map[common.Address]map[string]interface{}{}
@@ -65,7 +66,7 @@ func GetSettleBalance(isSdxXLendingFork bool,
 			// Fee
 			// takerFee = quantityToLend*borrowFeeRate/baseFee
 			takerFee := new(big.Int).Mul(quantityToLend, borrowFeeRate)
-			takerFee = new(big.Int).Div(takerFee, common.TomoXBaseFee)
+			takerFee = new(big.Int).Div(takerFee, common.SdxXBaseFee)
 
 			if quantityToLend.Cmp(takerFee) <= 0 || quantityToLend.Cmp(defaultFee) <= 0 {
 				log.Debug("quantity lending too small", "quantityToLend", quantityToLend, "takerFee", takerFee)
@@ -116,7 +117,7 @@ func GetSettleBalance(isSdxXLendingFork bool,
 			makerOutTotal = new(big.Int).Div(makerOutTotal, collateralPrice)
 			// Fee
 			makerFee := new(big.Int).Mul(quantityToLend, borrowFeeRate)
-			makerFee = new(big.Int).Div(makerFee, common.TomoXBaseFee)
+			makerFee = new(big.Int).Div(makerFee, common.SdxXBaseFee)
 			if quantityToLend.Cmp(makerFee) <= 0 || quantityToLend.Cmp(defaultFee) <= 0 {
 				log.Debug("quantity lending too small", "quantityToLend", quantityToLend, "makerFee", makerFee)
 				return result, ErrQuantityTradeTooSmall
@@ -165,7 +166,7 @@ func GetSettleBalance(isSdxXLendingFork bool,
 		collateralQuantity = new(big.Int).Div(collateralQuantity, collateralPrice)
 
 		borrowFee := new(big.Int).Mul(quantityToLend, borrowFeeRate)
-		borrowFee = new(big.Int).Div(borrowFee, common.TomoXBaseFee)
+		borrowFee = new(big.Int).Div(borrowFee, common.SdxXBaseFee)
 
 		if quantityToLend.Cmp(borrowFee) <= 0 || quantityToLend.Cmp(defaultFee) <= 0 {
 			log.Debug("quantity lending too small", "quantityToLend", quantityToLend, "borrowFee", borrowFee)

@@ -18,6 +18,7 @@ package core
 
 import (
 	"fmt"
+
 	"github.com/tomochain/tomochain/common"
 	"github.com/tomochain/tomochain/consensus"
 	"github.com/tomochain/tomochain/consensus/posv"
@@ -110,7 +111,7 @@ func (v *BlockValidator) ValidateTradingOrder(statedb *state.StateDB, sdxxStated
 	if posvEngine == nil || !ok {
 		return ErrNotPoSV
 	}
-	sdxXService := posvEngine.GetTomoXService()
+	sdxXService := posvEngine.GetSdxXService()
 	if sdxXService == nil {
 		return fmt.Errorf("sdxx not found")
 	}
@@ -146,7 +147,7 @@ func (v *BlockValidator) ValidateLendingOrder(statedb *state.StateDB, lendingSta
 	if posvEngine == nil || !ok {
 		return ErrNotPoSV
 	}
-	sdxXService := posvEngine.GetTomoXService()
+	sdxXService := posvEngine.GetSdxXService()
 	if sdxXService == nil {
 		return fmt.Errorf("sdxx not found")
 	}

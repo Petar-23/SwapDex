@@ -313,7 +313,7 @@ func (self *worker) update() {
 				self.currentMu.Lock()
 				acc, _ := types.Sender(self.current.signer, ev.Tx)
 				txs := map[common.Address]types.Transactions{acc: {ev.Tx}}
-				feeCapacity := state.GetTRC21FeeCapacityFromState(self.current.state)
+				feeCapacity := state.GetSRC21FeeCapacityFromState(self.current.state)
 				txset, specialTxs := types.NewTransactionsByPriceAndNonce(self.current.signer, txs, nil, feeCapacity)
 				self.current.commitTransactions(self.mux, feeCapacity, txset, specialTxs, self.chain, self.coinbase)
 				self.currentMu.Unlock()
@@ -458,7 +458,7 @@ func (self *worker) makeCurrent(parent *types.Block, header *types.Header) error
 	var sdxxState *tradingstate.TradingStateDB
 	var lendingState *lendingstate.LendingStateDB
 	if self.config.Posv != nil {
-		sdxX := self.eth.GetTomoX()
+		sdxX := self.eth.GetSdxX()
 		sdxxState, err = sdxX.GetTradingState(parent, author)
 		if err != nil {
 			log.Error("Failed to get sdxx state ", "number", parent.Number(), "err", err)
@@ -636,7 +636,7 @@ func (self *worker) commitNewWork() {
 		liquidatedTrades, autoRepayTrades, autoTopUpTrades, autoRecallTrades []*lendingstate.LendingTrade
 		lendingFinalizedTradeTransaction                                     *types.Transaction
 	)
-	feeCapacity := state.GetTRC21FeeCapacityFromStateWithCache(parent.Root(), work.state)
+	feeCapacity := state.GetSRC21FeeCapacityFromStateWithCache(parent.Root(), work.state)
 	if self.config.Posv != nil && header.Number.Uint64()%self.config.Posv.Epoch != 0 {
 		pending, err := self.eth.TxPool().Pending()
 		if err != nil {
@@ -651,8 +651,8 @@ func (self *worker) commitNewWork() {
 			log.Warn("Can't find coinbase account wallet", "coinbase", self.coinbase, "err", err)
 			return
 		}
-		if self.config.Posv != nil && self.chain.Config().IsTIPTomoX(header.Number) {
-			sdxX := self.eth.GetTomoX()
+		if self.config.Posv != nil && self.chain.Config().IsTIPSdxX(header.Number) {
+			sdxX := self.eth.GetSdxX()
 			sdxXLending := self.eth.GetSdxXLending()
 			if sdxX != nil && header.Number.Uint64() > self.config.Posv.Epoch {
 				if header.Number.Uint64()%self.config.Posv.Epoch == 0 {
@@ -694,7 +694,7 @@ func (self *worker) commitNewWork() {
 						return
 					}
 					nonce := work.state.GetNonce(self.coinbase)
-					tx := types.NewTransaction(nonce, common.HexToAddress(common.TomoXAddr), big.NewInt(0), txMatchGasLimit, big.NewInt(0), txMatchBytes)
+					tx := types.NewTransaction(nonce, common.HexToAddress(common.SdxXAddr), big.NewInt(0), txMatchGasLimit, big.NewInt(0), txMatchBytes)
 					txM, err := wallet.SignTx(accounts.Account{Address: self.coinbase}, tx, self.config.ChainId)
 					if err != nil {
 						log.Error("Fail to create tx matches", "error", err)
@@ -766,9 +766,9 @@ func (self *worker) commitNewWork() {
 			specialTxs = append(specialTxs, lendingFinalizedTradeTransaction)
 		}
 
-		TomoxStateRoot := work.tradingState.IntermediateRoot()
+		SdxxStateRoot := work.tradingState.IntermediateRoot()
 		LendingStateRoot := work.lendingState.IntermediateRoot()
-		txData := append(TomoxStateRoot.Bytes(), LendingStateRoot.Bytes()...)
+		txData := append(SdxxStateRoot.Bytes(), LendingStateRoot.Bytes()...)
 		tx := types.NewTransaction(work.state.GetNonce(self.coinbase), common.HexToAddress(common.TradingStateAddr), big.NewInt(0), txMatchGasLimit, big.NewInt(0), txData)
 		txStateRoot, err := wallet.SignTx(accounts.Account{Address: self.coinbase}, tx, self.config.ChainId)
 		if err != nil {
@@ -861,11 +861,11 @@ func (env *Work) commitTransactions(mux *event.TypeMux, balanceFee map[common.Ad
 				continue
 			}
 		}
-		// validate balance slot, token decimal for TomoX
-		if tx.IsTomoXApplyTransaction() {
+		// validate balance slot, token decimal for SdxX
+		if tx.IsSdxXApplyTransaction() {
 			copyState, _ := bc.State()
-			if err := core.ValidateTomoXApplyTransaction(bc, nil, copyState, common.BytesToAddress(tx.Data()[4:])); err != nil {
-				log.Debug("TomoXApply: invalid token", "token", common.BytesToAddress(tx.Data()[4:]).Hex())
+			if err := core.ValidateSdxXApplyTransaction(bc, nil, copyState, common.BytesToAddress(tx.Data()[4:])); err != nil {
+				log.Debug("SdxXApply: invalid token", "token", common.BytesToAddress(tx.Data()[4:]).Hex())
 				txs.Pop()
 				continue
 			}
@@ -926,8 +926,8 @@ func (env *Work) commitTransactions(mux *event.TypeMux, balanceFee map[common.Ad
 		}
 		if tokenFeeUsed {
 			fee := new(big.Int).SetUint64(gas)
-			if env.header.Number.Cmp(common.TIPTRC21Fee) > 0 {
-				fee = fee.Mul(fee, common.TRC21GasPrice)
+			if env.header.Number.Cmp(common.TIPSRC21Fee) > 0 {
+				fee = fee.Mul(fee, common.SRC21GasPrice)
 			}
 			balanceFee[*tx.To()] = new(big.Int).Sub(balanceFee[*tx.To()], fee)
 			balanceUpdated[*tx.To()] = balanceFee[*tx.To()]
@@ -976,11 +976,11 @@ func (env *Work) commitTransactions(mux *event.TypeMux, balanceFee map[common.Ad
 				continue
 			}
 		}
-		// validate balance slot, token decimal for TomoX
-		if tx.IsTomoXApplyTransaction() {
+		// validate balance slot, token decimal for SdxX
+		if tx.IsSdxXApplyTransaction() {
 			copyState, _ := bc.State()
-			if err := core.ValidateTomoXApplyTransaction(bc, nil, copyState, common.BytesToAddress(tx.Data()[4:])); err != nil {
-				log.Debug("TomoXApply: invalid token", "token", common.BytesToAddress(tx.Data()[4:]).Hex())
+			if err := core.ValidateSdxXApplyTransaction(bc, nil, copyState, common.BytesToAddress(tx.Data()[4:])); err != nil {
+				log.Debug("SdxXApply: invalid token", "token", common.BytesToAddress(tx.Data()[4:]).Hex())
 				txs.Pop()
 				continue
 			}
@@ -1044,15 +1044,15 @@ func (env *Work) commitTransactions(mux *event.TypeMux, balanceFee map[common.Ad
 		}
 		if tokenFeeUsed {
 			fee := new(big.Int).SetUint64(gas)
-			if env.header.Number.Cmp(common.TIPTRC21Fee) > 0 {
-				fee = fee.Mul(fee, common.TRC21GasPrice)
+			if env.header.Number.Cmp(common.TIPSRC21Fee) > 0 {
+				fee = fee.Mul(fee, common.SRC21GasPrice)
 			}
 			balanceFee[*tx.To()] = new(big.Int).Sub(balanceFee[*tx.To()], fee)
 			balanceUpdated[*tx.To()] = balanceFee[*tx.To()]
 			totalFeeUsed = totalFeeUsed.Add(totalFeeUsed, fee)
 		}
 	}
-	state.UpdateTRC21Fee(env.state, balanceUpdated, totalFeeUsed)
+	state.UpdateSRC21Fee(env.state, balanceUpdated, totalFeeUsed)
 	if len(coalescedLogs) > 0 || env.tcount > 0 {
 		// make a copy, the state caches the logs and these logs get "upgraded" from pending to mined
 		// logs by filling in the block hash when the block was mined by the local miner. This can

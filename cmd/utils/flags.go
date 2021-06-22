@@ -204,8 +204,8 @@ var (
 		Name:  "lightkdf",
 		Usage: "Reduce key-derivation RAM & CPU usage at some expense of KDF strength",
 	}
-	// TomoX settings
-	TomoXEnabledFlag = cli.BoolFlag{
+	// SdxX settings
+	SdxXEnabledFlag = cli.BoolFlag{
 		Name:  "sdxx",
 		Usage: "Enable the sdxX protocol",
 	}
@@ -532,27 +532,27 @@ var (
 		Usage: "Minimum POW accepted",
 		Value: whisper.DefaultMinimumPoW,
 	}
-	TomoXDataDirFlag = DirectoryFlag{
+	SdxXDataDirFlag = DirectoryFlag{
 		Name:  "sdxx.datadir",
-		Usage: "Data directory for the TomoX databases",
+		Usage: "Data directory for the SdxX databases",
 		Value: DirectoryString{filepath.Join(DataDirFlag.Value.String(), "sdxx")},
 	}
-	TomoXDBEngineFlag = cli.StringFlag{
+	SdxXDBEngineFlag = cli.StringFlag{
 		Name:  "sdxx.dbengine",
-		Usage: "Database engine for TomoX (leveldb, mongodb)",
+		Usage: "Database engine for SdxX (leveldb, mongodb)",
 		Value: "leveldb",
 	}
-	TomoXDBNameFlag = cli.StringFlag{
+	SdxXDBNameFlag = cli.StringFlag{
 		Name:  "sdxx.dbName",
-		Usage: "Database name for TomoX",
+		Usage: "Database name for SdxX",
 		Value: "tomodex",
 	}
-	TomoXDBConnectionUrlFlag = cli.StringFlag{
+	SdxXDBConnectionUrlFlag = cli.StringFlag{
 		Name:  "sdxx.dbConnectionUrl",
 		Usage: "ConnectionUrl to database if dbEngine is mongodb. Host:port. If there are multiple instances, separated by comma. Eg: localhost:27017,localhost:27018",
 		Value: "localhost:27017",
 	}
-	TomoXDBReplicaSetNameFlag = cli.StringFlag{
+	SdxXDBReplicaSetNameFlag = cli.StringFlag{
 		Name:  "sdxx.dbReplicaSetName",
 		Usage: "ReplicaSetName if Master-Slave is setup",
 	}
@@ -1044,39 +1044,39 @@ func SetShhConfig(ctx *cli.Context, stack *node.Node, cfg *whisper.Config) {
 	}
 }
 
-func SetTomoXConfig(ctx *cli.Context, cfg *sdxx.Config, tomoDataDir string) {
-	if ctx.GlobalIsSet(TomoXDataDirFlag.Name) {
-		cfg.DataDir = ctx.GlobalString(TomoXDataDirFlag.Name)
+func SetSdxXConfig(ctx *cli.Context, cfg *sdxx.Config, tomoDataDir string) {
+	if ctx.GlobalIsSet(SdxXDataDirFlag.Name) {
+		cfg.DataDir = ctx.GlobalString(SdxXDataDirFlag.Name)
 	} else {
 		// default sdxx datadir: DATADIR/sdxx
-		defaultTomoXDataDir := filepath.Join(tomoDataDir, "sdxx")
+		defaultSdxXDataDir := filepath.Join(tomoDataDir, "sdxx")
 
-		filesInTomoXDefaultDir, _ := WalkMatch(defaultTomoXDataDir, "*.ldb")
+		filesInSdxXDefaultDir, _ := WalkMatch(defaultSdxXDataDir, "*.ldb")
 		filesInNodeDefaultDir, _ := WalkMatch(node.DefaultDataDir(), "*.ldb")
-		if len(filesInTomoXDefaultDir) == 0 && len(filesInNodeDefaultDir) > 0 {
+		if len(filesInSdxXDefaultDir) == 0 && len(filesInNodeDefaultDir) > 0 {
 			cfg.DataDir = node.DefaultDataDir()
 		} else {
-			cfg.DataDir = defaultTomoXDataDir
+			cfg.DataDir = defaultSdxXDataDir
 		}
 	}
 	log.Info("SDX datadir", "path", cfg.DataDir)
-	if ctx.GlobalIsSet(TomoXDBEngineFlag.Name) {
-		cfg.DBEngine = ctx.GlobalString(TomoXDBEngineFlag.Name)
+	if ctx.GlobalIsSet(SdxXDBEngineFlag.Name) {
+		cfg.DBEngine = ctx.GlobalString(SdxXDBEngineFlag.Name)
 	} else {
-		cfg.DBEngine = TomoXDBEngineFlag.Value
+		cfg.DBEngine = SdxXDBEngineFlag.Value
 	}
-	if ctx.GlobalIsSet(TomoXDBNameFlag.Name) {
-		cfg.DBName = ctx.GlobalString(TomoXDBNameFlag.Name)
+	if ctx.GlobalIsSet(SdxXDBNameFlag.Name) {
+		cfg.DBName = ctx.GlobalString(SdxXDBNameFlag.Name)
 	} else {
-		cfg.DBName = TomoXDBNameFlag.Value
+		cfg.DBName = SdxXDBNameFlag.Value
 	}
-	if ctx.GlobalIsSet(TomoXDBConnectionUrlFlag.Name) {
-		cfg.ConnectionUrl = ctx.GlobalString(TomoXDBConnectionUrlFlag.Name)
+	if ctx.GlobalIsSet(SdxXDBConnectionUrlFlag.Name) {
+		cfg.ConnectionUrl = ctx.GlobalString(SdxXDBConnectionUrlFlag.Name)
 	} else {
-		cfg.ConnectionUrl = TomoXDBConnectionUrlFlag.Value
+		cfg.ConnectionUrl = SdxXDBConnectionUrlFlag.Value
 	}
-	if ctx.GlobalIsSet(TomoXDBReplicaSetNameFlag.Name) {
-		cfg.ReplicaSetName = ctx.GlobalString(TomoXDBReplicaSetNameFlag.Name)
+	if ctx.GlobalIsSet(SdxXDBReplicaSetNameFlag.Name) {
+		cfg.ReplicaSetName = ctx.GlobalString(SdxXDBReplicaSetNameFlag.Name)
 	}
 }
 

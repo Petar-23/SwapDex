@@ -19,13 +19,14 @@ package console
 import (
 	"bytes"
 	"errors"
-	"github.com/tomochain/tomochain/sdxx"
-	"github.com/tomochain/tomochain/sdxxlending"
 	"io/ioutil"
 	"os"
 	"strings"
 	"testing"
 	"time"
+
+	"github.com/tomochain/tomochain/sdxx"
+	"github.com/tomochain/tomochain/sdxxlending"
 
 	"github.com/tomochain/tomochain/common"
 	"github.com/tomochain/tomochain/consensus/ethash"
@@ -107,7 +108,7 @@ func newTester(t *testing.T, confOverride func(*eth.Config)) *tester {
 		confOverride(ethConf)
 	}
 	if err = stack.Register(func(ctx *node.ServiceContext) (node.Service, error) {
-		return eth.New(ctx, ethConf, &sdxx.TomoX{}, &sdxxlending.Lending{})
+		return eth.New(ctx, ethConf, &sdxx.SdxX{}, &sdxxlending.Lending{})
 	}); err != nil {
 		t.Fatalf("failed to register Ethereum protocol: %v", err)
 	}

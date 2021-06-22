@@ -21,12 +21,13 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/tomochain/tomochain/sdxx/tradingstate"
 	"io/ioutil"
 	"math/big"
 	"runtime"
 	"sync"
 	"time"
+
+	"github.com/tomochain/tomochain/sdxx/tradingstate"
 
 	"github.com/tomochain/tomochain/common"
 	"github.com/tomochain/tomochain/common/hexutil"
@@ -159,7 +160,7 @@ func (api *PrivateDebugAPI) traceChain(ctx context.Context, start, end *types.Bl
 				break
 			}
 			if statedb, err = state.New(start.Root(), database); err == nil {
-				sdxxState, err = tradingstate.New(start.Root(), tradingstate.NewDatabase(api.eth.TomoX.GetLevelDB()))
+				sdxxState, err = tradingstate.New(start.Root(), tradingstate.NewDatabase(api.eth.SdxX.GetLevelDB()))
 				if err == nil {
 					break
 				}
@@ -195,7 +196,7 @@ func (api *PrivateDebugAPI) traceChain(ctx context.Context, start, end *types.Bl
 			// Fetch and execute the next block trace tasks
 			for task := range tasks {
 				signer := types.MakeSigner(api.config, task.block.Number())
-				feeCapacity := state.GetTRC21FeeCapacityFromState(task.statedb)
+				feeCapacity := state.GetSRC21FeeCapacityFromState(task.statedb)
 				// Trace all the transactions contained within
 				for i, tx := range task.block.Transactions() {
 					var balacne *big.Int
@@ -286,7 +287,7 @@ func (api *PrivateDebugAPI) traceChain(ctx context.Context, start, end *types.Bl
 				}
 				traced += uint64(len(txs))
 			}
-			feeCapacity := state.GetTRC21FeeCapacityFromState(statedb)
+			feeCapacity := state.GetSRC21FeeCapacityFromState(statedb)
 			// Generate the next state snapshot fast without tracing
 			_, _, _, err := api.eth.blockchain.Processor().Process(block, statedb, sdxxState, vm.Config{}, feeCapacity)
 			if err != nil {
@@ -437,7 +438,7 @@ func (api *PrivateDebugAPI) traceBlock(ctx context.Context, block *types.Block, 
 
 			// Fetch and execute the next transaction trace tasks
 			for task := range jobs {
-				feeCapacity := state.GetTRC21FeeCapacityFromState(task.statedb)
+				feeCapacity := state.GetSRC21FeeCapacityFromState(task.statedb)
 				var balacne *big.Int
 				if txs[task.index].To() != nil {
 					if value, ok := feeCapacity[*txs[task.index].To()]; ok {
@@ -457,7 +458,7 @@ func (api *PrivateDebugAPI) traceBlock(ctx context.Context, block *types.Block, 
 		}()
 	}
 	// Feed the transactions into the tracers and return
-	feeCapacity := state.GetTRC21FeeCapacityFromState(statedb)
+	feeCapacity := state.GetSRC21FeeCapacityFromState(statedb)
 	var failed error
 	for i, tx := range txs {
 		// Send the trace task over for execution
@@ -514,7 +515,7 @@ func (api *PrivateDebugAPI) computeStateDB(block *types.Block, reexec uint64) (*
 			break
 		}
 		if statedb, err = state.New(block.Root(), database); err == nil {
-			sdxxState, err = tradingstate.New(block.Root(), tradingstate.NewDatabase(api.eth.TomoX.GetLevelDB()))
+			sdxxState, err = tradingstate.New(block.Root(), tradingstate.NewDatabase(api.eth.SdxX.GetLevelDB()))
 			if err == nil {
 				break
 			}
@@ -544,7 +545,7 @@ func (api *PrivateDebugAPI) computeStateDB(block *types.Block, reexec uint64) (*
 		if block = api.eth.blockchain.GetBlockByNumber(block.NumberU64() + 1); block == nil {
 			return nil, nil, fmt.Errorf("block #%d not found", block.NumberU64()+1)
 		}
-		feeCapacity := state.GetTRC21FeeCapacityFromState(statedb)
+		feeCapacity := state.GetSRC21FeeCapacityFromState(statedb)
 		_, _, _, err := api.eth.blockchain.Processor().Process(block, statedb, sdxxState, vm.Config{}, feeCapacity)
 		if err != nil {
 			return nil, nil, err
@@ -567,7 +568,7 @@ func (api *PrivateDebugAPI) computeStateDB(block *types.Block, reexec uint64) (*
 	}
 	size, _ := database.TrieDB().Size()
 	log.Info("Historical state regenerated", "block", block.NumberU64(), "elapsed", time.Since(start), "size", size)
-	return statedb,sdxxState, nil
+	return statedb, sdxxState, nil
 }
 
 // TraceTransaction returns the structured logs created during the execution of EVM
@@ -668,7 +669,7 @@ func (api *PrivateDebugAPI) computeTxEnv(blockHash common.Hash, txIndex int, ree
 		return nil, vm.Context{}, nil, err
 	}
 	// Recompute transactions up to the target index.
-	feeCapacity := state.GetTRC21FeeCapacityFromState(statedb)
+	feeCapacity := state.GetSRC21FeeCapacityFromState(statedb)
 	if common.TIPSigning.Cmp(block.Header().Number) == 0 {
 		statedb.DeleteAddress(common.HexToAddress(common.BlockSigners))
 	}
@@ -701,8 +702,8 @@ func (api *PrivateDebugAPI) computeTxEnv(blockHash common.Hash, txIndex int, ree
 
 		if tokenFeeUsed {
 			fee := new(big.Int).SetUint64(gas)
-			if block.Header().Number.Cmp(common.TIPTRC21Fee) > 0 {
-				fee = fee.Mul(fee, common.TRC21GasPrice)
+			if block.Header().Number.Cmp(common.TIPSRC21Fee) > 0 {
+				fee = fee.Mul(fee, common.SRC21GasPrice)
 			}
 			feeCapacity[*tx.To()] = new(big.Int).Sub(feeCapacity[*tx.To()], fee)
 			balanceUpdated[*tx.To()] = feeCapacity[*tx.To()]

@@ -110,10 +110,10 @@ type BlockChain struct {
 	chainConfig *params.ChainConfig // Chain & network configuration
 	cacheConfig *CacheConfig        // Cache configuration for pruning
 
-	db      ethdb.Database // Low level persistent database to store final content in
-	sdxxDb ethdb.TomoxDatabase
-	triegc  *prque.Prque  // Priority queue mapping block numbers to tries to gc
-	gcproc  time.Duration // Accumulates canonical block processing for trie dumping
+	db     ethdb.Database // Low level persistent database to store final content in
+	sdxxDb ethdb.SdxxDatabase
+	triegc *prque.Prque  // Priority queue mapping block numbers to tries to gc
+	gcproc time.Duration // Accumulates canonical block processing for trie dumping
 
 	hc            *HeaderChain
 	rmLogsFeed    event.Feed
@@ -253,13 +253,13 @@ func NewBlockChain(db ethdb.Database, cacheConfig *CacheConfig, chainConfig *par
 }
 
 // NewBlockChainEx extend old blockchain, add order state db
-func NewBlockChainEx(db ethdb.Database, sdxxDb ethdb.TomoxDatabase, cacheConfig *CacheConfig, chainConfig *params.ChainConfig, engine consensus.Engine, vmConfig vm.Config) (*BlockChain, error) {
+func NewBlockChainEx(db ethdb.Database, sdxxDb ethdb.SdxxDatabase, cacheConfig *CacheConfig, chainConfig *params.ChainConfig, engine consensus.Engine, vmConfig vm.Config) (*BlockChain, error) {
 	blockchain, err := NewBlockChain(db, cacheConfig, chainConfig, engine, vmConfig)
 	if err != nil {
 		return nil, err
 	}
 	if blockchain != nil {
-		blockchain.addTomoxDb(sdxxDb)
+		blockchain.addSdxxDb(sdxxDb)
 	}
 	return blockchain, nil
 }
@@ -268,7 +268,7 @@ func (bc *BlockChain) getProcInterrupt() bool {
 	return atomic.LoadInt32(&bc.procInterrupt) == 1
 }
 
-func (bc *BlockChain) addTomoxDb(sdxxDb ethdb.TomoxDatabase) {
+func (bc *BlockChain) addSdxxDb(sdxxDb ethdb.SdxxDatabase) {
 	bc.sdxxDb = sdxxDb
 }
 
@@ -301,9 +301,9 @@ func (bc *BlockChain) loadLastState() error {
 		engine, ok := bc.Engine().(*posv.Posv)
 		author, _ := bc.Engine().Author(currentBlock.Header())
 		if ok {
-			tradingService := engine.GetTomoXService()
+			tradingService := engine.GetSdxXService()
 			lendingService := engine.GetLendingService()
-			if bc.Config().IsTIPTomoX(currentBlock.Number()) && bc.chainConfig.Posv != nil && currentBlock.NumberU64() > bc.chainConfig.Posv.Epoch && tradingService != nil && lendingService != nil {
+			if bc.Config().IsTIPSdxX(currentBlock.Number()) && bc.chainConfig.Posv != nil && currentBlock.NumberU64() > bc.chainConfig.Posv.Epoch && tradingService != nil && lendingService != nil {
 				tradingRoot, err := tradingService.GetTradingStateRoot(currentBlock, author)
 				if err != nil {
 					repair = true
@@ -508,8 +508,8 @@ func (bc *BlockChain) StateAt(root common.Hash) (*state.StateDB, error) {
 func (bc *BlockChain) OrderStateAt(block *types.Block) (*tradingstate.TradingStateDB, error) {
 	engine, ok := bc.Engine().(*posv.Posv)
 	if ok {
-		sdxXService := engine.GetTomoXService()
-		if bc.Config().IsTIPTomoX(block.Number()) && bc.chainConfig.Posv != nil && block.NumberU64() > bc.chainConfig.Posv.Epoch && sdxXService != nil {
+		sdxXService := engine.GetSdxXService()
+		if bc.Config().IsTIPSdxX(block.Number()) && bc.chainConfig.Posv != nil && block.NumberU64() > bc.chainConfig.Posv.Epoch && sdxXService != nil {
 			author, _ := bc.Engine().Author(block.Header())
 			log.Debug("OrderStateAt", "blocknumber", block.Header().Number)
 			sdxxState, err := sdxXService.GetTradingState(block, author)
@@ -529,7 +529,7 @@ func (bc *BlockChain) LendingStateAt(block *types.Block) (*lendingstate.LendingS
 	engine, ok := bc.Engine().(*posv.Posv)
 	if ok {
 		lendingService := engine.GetLendingService()
-		if bc.Config().IsTIPTomoX(block.Number()) && bc.chainConfig.Posv != nil && block.NumberU64() > bc.chainConfig.Posv.Epoch && lendingService != nil {
+		if bc.Config().IsTIPSdxX(block.Number()) && bc.chainConfig.Posv != nil && block.NumberU64() > bc.chainConfig.Posv.Epoch && lendingService != nil {
 			author, _ := bc.Engine().Author(block.Header())
 			log.Debug("LendingStateAt", "blocknumber", block.Header().Number)
 			lendingState, err := lendingService.GetLendingState(block, author)
@@ -589,9 +589,9 @@ func (bc *BlockChain) repair(head **types.Block) error {
 				log.Info("Rewound blockchain to past state", "number", (*head).Number(), "hash", (*head).Hash())
 				engine, ok := bc.Engine().(*posv.Posv)
 				if ok {
-					tradingService := engine.GetTomoXService()
+					tradingService := engine.GetSdxXService()
 					lendingService := engine.GetLendingService()
-					if bc.Config().IsTIPTomoX((*head).Number()) && bc.chainConfig.Posv != nil && (*head).NumberU64() > bc.chainConfig.Posv.Epoch && tradingService != nil && lendingService != nil {
+					if bc.Config().IsTIPSdxX((*head).Number()) && bc.chainConfig.Posv != nil && (*head).NumberU64() > bc.chainConfig.Posv.Epoch && tradingService != nil && lendingService != nil {
 						author, _ := bc.Engine().Author((*head).Header())
 						tradingRoot, err := tradingService.GetTradingStateRoot(*head, author)
 						if err == nil {
@@ -742,8 +742,8 @@ func (bc *BlockChain) HasFullState(block *types.Block) bool {
 		return false
 	}
 	engine, _ := bc.Engine().(*posv.Posv)
-	if bc.Config().IsTIPTomoX(block.Number()) && bc.chainConfig.Posv != nil && engine != nil && block.NumberU64() > bc.chainConfig.Posv.Epoch {
-		tradingService := engine.GetTomoXService()
+	if bc.Config().IsTIPSdxX(block.Number()) && bc.chainConfig.Posv != nil && engine != nil && block.NumberU64() > bc.chainConfig.Posv.Epoch {
+		tradingService := engine.GetSdxXService()
 		lendingService := engine.GetLendingService()
 		author, _ := bc.Engine().Author(block.Header())
 		if tradingService != nil && !tradingService.HasTradingState(block, author) {
@@ -879,8 +879,8 @@ func (bc *BlockChain) SaveData() {
 		triedb := bc.stateCache.TrieDB()
 		var tradingService posv.TradingService
 		var lendingService posv.LendingService
-		if bc.Config().IsTIPTomoX(bc.CurrentBlock().Number()) && bc.chainConfig.Posv != nil && bc.CurrentBlock().NumberU64() > bc.chainConfig.Posv.Epoch && engine != nil {
-			tradingService = engine.GetTomoXService()
+		if bc.Config().IsTIPSdxX(bc.CurrentBlock().Number()) && bc.chainConfig.Posv != nil && bc.CurrentBlock().NumberU64() > bc.chainConfig.Posv.Epoch && engine != nil {
+			tradingService = engine.GetSdxXService()
 			if tradingService != nil && tradingService.GetStateCache() != nil {
 				tradingTriedb = tradingService.GetStateCache().TrieDB()
 			}
@@ -897,7 +897,7 @@ func (bc *BlockChain) SaveData() {
 				if err := triedb.Commit(recent.Root(), true); err != nil {
 					log.Error("Failed to commit recent state trie", "err", err)
 				}
-				if bc.Config().IsTIPTomoX(recent.Number()) && bc.chainConfig.Posv != nil && recent.NumberU64() > bc.chainConfig.Posv.Epoch && engine != nil {
+				if bc.Config().IsTIPSdxX(recent.Number()) && bc.chainConfig.Posv != nil && recent.NumberU64() > bc.chainConfig.Posv.Epoch && engine != nil {
 					author, _ := bc.Engine().Author(recent.Header())
 					if tradingService != nil {
 						tradingRoot, _ := tradingService.GetTradingStateRoot(recent, author)
@@ -1204,8 +1204,8 @@ func (bc *BlockChain) WriteBlockWithState(block *types.Block, receipts []*types.
 	var tradingService posv.TradingService
 	var lendingTrieDb *trie.Database
 	var lendingService posv.LendingService
-	if bc.Config().IsTIPTomoX(block.Number()) && bc.chainConfig.Posv != nil && block.NumberU64() > bc.chainConfig.Posv.Epoch && engine != nil {
-		tradingService = engine.GetTomoXService()
+	if bc.Config().IsTIPSdxX(block.Number()) && bc.chainConfig.Posv != nil && block.NumberU64() > bc.chainConfig.Posv.Epoch && engine != nil {
+		tradingService = engine.GetSdxXService()
 		if tradingService != nil {
 			tradingTrieDb = tradingService.GetStateCache().TrieDB()
 		}
@@ -1537,8 +1537,8 @@ func (bc *BlockChain) insertChain(chain types.Blocks) (int, []interface{}, []*ty
 		var tradingService posv.TradingService
 		var lendingService posv.LendingService
 		isSDKNode := false
-		if bc.Config().IsTIPTomoX(block.Number()) && bc.chainConfig.Posv != nil && engine != nil && block.NumberU64() > bc.chainConfig.Posv.Epoch {
-			tradingService = engine.GetTomoXService()
+		if bc.Config().IsTIPSdxX(block.Number()) && bc.chainConfig.Posv != nil && engine != nil && block.NumberU64() > bc.chainConfig.Posv.Epoch {
+			tradingService = engine.GetSdxXService()
 			lendingService = engine.GetLendingService()
 			if tradingService != nil && lendingService != nil {
 				isSDKNode = tradingService.IsSDKNode()
@@ -1610,7 +1610,7 @@ func (bc *BlockChain) insertChain(chain types.Blocks) (int, []interface{}, []*ty
 						bc.reportBlock(block, nil, err)
 						return i, events, coalescedLogs, err
 					}
-					log.Debug("TomoX Trading State Root", "number", block.NumberU64(), "parent", parentRoot.Hex(), "nextRoot", expectRoot.Hex())
+					log.Debug("SdxX Trading State Root", "number", block.NumberU64(), "parent", parentRoot.Hex(), "nextRoot", expectRoot.Hex())
 				}
 				if lendingState != nil && tradingState != nil {
 					gotRoot := lendingState.IntermediateRoot()
@@ -1621,11 +1621,11 @@ func (bc *BlockChain) insertChain(chain types.Blocks) (int, []interface{}, []*ty
 						bc.reportBlock(block, nil, err)
 						return i, events, coalescedLogs, err
 					}
-					log.Debug("TomoX Lending State Root", "number", block.NumberU64(), "parent", parentRoot.Hex(), "nextRoot", expectRoot.Hex())
+					log.Debug("SdxX Lending State Root", "number", block.NumberU64(), "parent", parentRoot.Hex(), "nextRoot", expectRoot.Hex())
 				}
 			}
 		}
-		feeCapacity := state.GetTRC21FeeCapacityFromStateWithCache(parent.Root(), statedb)
+		feeCapacity := state.GetSRC21FeeCapacityFromStateWithCache(parent.Root(), statedb)
 		// Process block using the parent state as reference point.
 		receipts, logs, usedGas, err := bc.processor.Process(block, statedb, tradingState, bc.vmConfig, feeCapacity)
 		if err != nil {
@@ -1673,7 +1673,7 @@ func (bc *BlockChain) insertChain(chain types.Blocks) (int, []interface{}, []*ty
 			// Only count canonical blocks for GC processing time
 			bc.gcproc += proctime
 			bc.UpdateBlocksHashCache(block)
-			if bc.chainConfig.IsTIPTomoX(block.Number()) && bc.chainConfig.Posv != nil && block.NumberU64() > bc.chainConfig.Posv.Epoch {
+			if bc.chainConfig.IsTIPSdxX(block.Number()) && bc.chainConfig.Posv != nil && block.NumberU64() > bc.chainConfig.Posv.Epoch {
 				bc.logExchangeData(block)
 				bc.logLendingData(block)
 			}
@@ -1830,8 +1830,8 @@ func (bc *BlockChain) getResultBlock(block *types.Block, verifiedM2 bool) (*Resu
 	var tradingService posv.TradingService
 	var lendingService posv.LendingService
 	isSDKNode := false
-	if bc.Config().IsTIPTomoX(block.Number()) && bc.chainConfig.Posv != nil && engine != nil && block.NumberU64() > bc.chainConfig.Posv.Epoch {
-		tradingService = engine.GetTomoXService()
+	if bc.Config().IsTIPSdxX(block.Number()) && bc.chainConfig.Posv != nil && engine != nil && block.NumberU64() > bc.chainConfig.Posv.Epoch {
+		tradingService = engine.GetSdxXService()
 		lendingService = engine.GetLendingService()
 		if tradingService != nil && lendingService != nil {
 			isSDKNode = tradingService.IsSDKNode()
@@ -1901,7 +1901,7 @@ func (bc *BlockChain) getResultBlock(block *types.Block, verifiedM2 bool) (*Resu
 					bc.reportBlock(block, nil, err)
 					return nil, err
 				}
-				log.Debug("TomoX Trading State Root", "number", block.NumberU64(), "parent", parentRoot.Hex(), "nextRoot", expectRoot.Hex())
+				log.Debug("SdxX Trading State Root", "number", block.NumberU64(), "parent", parentRoot.Hex(), "nextRoot", expectRoot.Hex())
 			}
 			if lendingState != nil && tradingState != nil {
 				gotRoot := lendingState.IntermediateRoot()
@@ -1912,11 +1912,11 @@ func (bc *BlockChain) getResultBlock(block *types.Block, verifiedM2 bool) (*Resu
 					bc.reportBlock(block, nil, err)
 					return nil, err
 				}
-				log.Debug("TomoX Lending State Root", "number", block.NumberU64(), "parent", parentRoot.Hex(), "nextRoot", expectRoot.Hex())
+				log.Debug("SdxX Lending State Root", "number", block.NumberU64(), "parent", parentRoot.Hex(), "nextRoot", expectRoot.Hex())
 			}
 		}
 	}
-	feeCapacity := state.GetTRC21FeeCapacityFromStateWithCache(parent.Root(), statedb)
+	feeCapacity := state.GetSRC21FeeCapacityFromStateWithCache(parent.Root(), statedb)
 	// Process block using the parent state as reference point.
 	receipts, logs, usedGas, err := bc.processor.ProcessBlockNoValidator(calculatedBlock, statedb, tradingState, bc.vmConfig, feeCapacity)
 	process := time.Since(bstart)
@@ -2016,7 +2016,7 @@ func (bc *BlockChain) insertBlock(block *types.Block) ([]interface{}, []*types.L
 		// Only count canonical blocks for GC processing time
 		bc.gcproc += result.proctime
 		bc.UpdateBlocksHashCache(block)
-		if bc.chainConfig.IsTIPTomoX(block.Number()) && bc.chainConfig.Posv != nil && block.NumberU64() > bc.chainConfig.Posv.Epoch {
+		if bc.chainConfig.IsTIPSdxX(block.Number()) && bc.chainConfig.Posv != nil && block.NumberU64() > bc.chainConfig.Posv.Epoch {
 			bc.logExchangeData(block)
 			bc.logLendingData(block)
 		}
@@ -2211,7 +2211,7 @@ func (bc *BlockChain) reorg(oldBlock, newBlock *types.Block) error {
 			}
 		}()
 	}
-	if bc.chainConfig.IsTIPTomoX(commonBlock.Number()) && bc.chainConfig.Posv != nil && commonBlock.NumberU64() > bc.chainConfig.Posv.Epoch {
+	if bc.chainConfig.IsTIPSdxX(commonBlock.Number()) && bc.chainConfig.Posv != nil && commonBlock.NumberU64() > bc.chainConfig.Posv.Epoch {
 		bc.reorgTxMatches(deletedTxs, newChain)
 	}
 	return nil
@@ -2516,7 +2516,7 @@ func (bc *BlockChain) logExchangeData(block *types.Block) {
 	if !ok || engine == nil {
 		return
 	}
-	sdxXService := engine.GetTomoXService()
+	sdxXService := engine.GetSdxXService()
 	if sdxXService == nil || !sdxXService.IsSDKNode() {
 		return
 	}
@@ -2580,7 +2580,7 @@ func (bc *BlockChain) reorgTxMatches(deletedTxs types.Transactions, newChain typ
 	if !ok || engine == nil {
 		return
 	}
-	sdxXService := engine.GetTomoXService()
+	sdxXService := engine.GetSdxXService()
 	lendingService := engine.GetLendingService()
 	if sdxXService == nil || !sdxXService.IsSDKNode() {
 		return
@@ -2618,7 +2618,7 @@ func (bc *BlockChain) logLendingData(block *types.Block) {
 	if !ok || engine == nil {
 		return
 	}
-	sdxXService := engine.GetTomoXService()
+	sdxXService := engine.GetSdxXService()
 	if sdxXService == nil || !sdxXService.IsSDKNode() {
 		return
 	}

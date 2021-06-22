@@ -80,7 +80,7 @@ type OrderPoolConfig struct {
 }
 
 // blockChain_sdxx add order state
-type blockChainTomox interface {
+type blockChainSdxx interface {
 	CurrentBlock() *types.Block
 	GetBlock(hash common.Hash, number uint64) *types.Block
 	OrderStateAt(block *types.Block) (*tradingstate.TradingStateDB, error)
@@ -130,7 +130,7 @@ func (config *OrderPoolConfig) sanitize() OrderPoolConfig {
 type OrderPool struct {
 	config      OrderPoolConfig
 	chainconfig *params.ChainConfig
-	chain       blockChainTomox
+	chain       blockChainSdxx
 
 	txFeed       event.Feed
 	scope        event.SubscriptionScope
@@ -140,8 +140,8 @@ type OrderPool struct {
 	mu           sync.RWMutex
 
 	currentRootState  *state.StateDB
-	currentOrderState *tradingstate.TradingStateDB    // Current order state in the blockchain head
-	pendingState      *tradingstate.TomoXManagedState // Pending state tracking virtual nonces
+	currentOrderState *tradingstate.TradingStateDB   // Current order state in the blockchain head
+	pendingState      *tradingstate.SdxXManagedState // Pending state tracking virtual nonces
 
 	locals  *orderAccountSet // Set of local transaction to exempt from eviction rules
 	journal *ordertxJournal  // Journal of local transaction to back up to disk
@@ -157,7 +157,7 @@ type OrderPool struct {
 
 // NewOrderPool creates a new transaction pool to gather, sort and filter inbound
 // transactions from the network.
-func NewOrderPool(chainconfig *params.ChainConfig, chain blockChainTomox) *OrderPool {
+func NewOrderPool(chainconfig *params.ChainConfig, chain blockChainSdxx) *OrderPool {
 	// Sanitize the input to ensure no vulnerable gas prices are set
 	config := (&DefaultOrderPoolConfig).sanitize()
 	log.Debug("NewOrderPool start...", "current block", chain.CurrentBlock().Header().Number)
@@ -278,7 +278,7 @@ func (pool *OrderPool) loop() {
 // reset retrieves the current state of the blockchain and ensures the content
 // of the transaction pool is valid with regard to the chain state.
 func (pool *OrderPool) reset(oldHead, newblock *types.Block) {
-	if !pool.chainconfig.IsTIPTomoX(pool.chain.CurrentBlock().Number()) || pool.chain.Config().Posv == nil || pool.chain.CurrentBlock().NumberU64() <= pool.chain.Config().Posv.Epoch {
+	if !pool.chainconfig.IsTIPSdxX(pool.chain.CurrentBlock().Number()) || pool.chain.Config().Posv == nil || pool.chain.CurrentBlock().NumberU64() <= pool.chain.Config().Posv.Epoch {
 		return
 	}
 	// If we're reorging an old state, reinject all dropped transactions
@@ -346,7 +346,7 @@ func (pool *OrderPool) SubscribeTxPreEvent(ch chan<- OrderTxPreEvent) event.Subs
 }
 
 // State returns the virtual managed state of the transaction pool.
-func (pool *OrderPool) State() *tradingstate.TomoXManagedState {
+func (pool *OrderPool) State() *tradingstate.SdxXManagedState {
 	pool.mu.RLock()
 	defer pool.mu.RUnlock()
 
@@ -440,7 +440,7 @@ func (pool *OrderPool) validateOrder(tx *types.OrderTransaction) error {
 	quantity := tx.Quantity()
 
 	cloneStateDb := pool.currentRootState.Copy()
-	cloneTomoXStateDb := pool.currentOrderState.Copy()
+	cloneSdxXStateDb := pool.currentOrderState.Copy()
 
 	if !tx.IsCancelledOrder() {
 		if quantity == nil || quantity.Cmp(big.NewInt(0)) <= 0 {
@@ -467,7 +467,7 @@ func (pool *OrderPool) validateOrder(tx *types.OrderTransaction) error {
 			if !ok {
 				return ErrNotPoSV
 			}
-			sdxXServ := posvEngine.GetTomoXService()
+			sdxXServ := posvEngine.GetSdxXService()
 			if sdxXServ == nil {
 				return fmt.Errorf("sdxx not found in order validation")
 			}
@@ -479,7 +479,7 @@ func (pool *OrderPool) validateOrder(tx *types.OrderTransaction) error {
 			if err != nil {
 				return fmt.Errorf("validateOrder: failed to get quoteDecimal. err: %v", err)
 			}
-			if err := tradingstate.VerifyBalance(cloneStateDb, cloneTomoXStateDb, tx, baseDecimal, quoteDecimal); err != nil {
+			if err := tradingstate.VerifyBalance(cloneStateDb, cloneSdxXStateDb, tx, baseDecimal, quoteDecimal); err != nil {
 				return err
 			}
 		}
@@ -504,7 +504,7 @@ func (pool *OrderPool) validateOrder(tx *types.OrderTransaction) error {
 		if tx.OrderID() == 0 {
 			return ErrInvalidCancelledOrder
 		}
-		originOrder := cloneTomoXStateDb.GetOrder(tradingstate.GetTradingOrderBookHash(tx.BaseToken(), tx.QuoteToken()), common.BigToHash(new(big.Int).SetUint64(tx.OrderID())))
+		originOrder := cloneSdxXStateDb.GetOrder(tradingstate.GetTradingOrderBookHash(tx.BaseToken(), tx.QuoteToken()), common.BigToHash(new(big.Int).SetUint64(tx.OrderID())))
 		if originOrder == tradingstate.EmptyOrder {
 			log.Debug("Order not found ", "OrderId", tx.OrderID(), "BaseToken", tx.BaseToken().Hex(), "QuoteToken", tx.QuoteToken().Hex())
 			return ErrInvalidCancelledOrder
@@ -729,7 +729,7 @@ func (pool *OrderPool) AddRemotes(txs []*types.OrderTransaction) []error {
 
 // addTx enqueues a single transaction into the pool if it is valid.
 func (pool *OrderPool) addTx(tx *types.OrderTransaction, local bool) error {
-	if !pool.chainconfig.IsTIPTomoX(pool.chain.CurrentBlock().Number()) {
+	if !pool.chainconfig.IsTIPSdxX(pool.chain.CurrentBlock().Number()) {
 		return nil
 	}
 	tx.CacheHash()

@@ -2,14 +2,15 @@ package lendingstate
 
 import (
 	"fmt"
+	"math/big"
+	"strconv"
+	"time"
+
 	"github.com/globalsign/mgo/bson"
 	"github.com/tomochain/tomochain/common"
 	"github.com/tomochain/tomochain/core/state"
 	"github.com/tomochain/tomochain/core/types"
 	"github.com/tomochain/tomochain/crypto/sha3"
-	"math/big"
-	"strconv"
-	"time"
 )
 
 const (
@@ -391,7 +392,7 @@ func VerifyBalance(isSdxXLendingFork bool, statedb *state.StateDB, lendingStateD
 				// check quantity: reject if it's too small
 				if lendTokenTOMOPrice != nil && lendTokenTOMOPrice.Sign() > 0 {
 					defaultFee := new(big.Int).Mul(quantity, new(big.Int).SetUint64(DefaultFeeRate))
-					defaultFee = new(big.Int).Div(defaultFee, common.TomoXBaseFee)
+					defaultFee = new(big.Int).Div(defaultFee, common.SdxXBaseFee)
 					defaultFeeInTOMO := common.Big0
 					if lendingToken.String() != common.TomoNativeAddress {
 						defaultFeeInTOMO = new(big.Int).Mul(defaultFee, lendTokenTOMOPrice)
@@ -412,7 +413,7 @@ func VerifyBalance(isSdxXLendingFork bool, statedb *state.StateDB, lendingStateD
 				item := lendingStateDb.GetLendingOrder(lendingBook, common.BigToHash(new(big.Int).SetUint64(lendingId)))
 				cancelFee := big.NewInt(0)
 				cancelFee = new(big.Int).Mul(item.Quantity, borrowingFeeRate)
-				cancelFee = new(big.Int).Div(cancelFee, common.TomoXBaseCancelFee)
+				cancelFee = new(big.Int).Div(cancelFee, common.SdxXBaseCancelFee)
 
 				actualBalance := GetTokenBalance(userAddress, lendingToken, statedb)
 				if actualBalance.Cmp(cancelFee) < 0 {
@@ -444,7 +445,7 @@ func VerifyBalance(isSdxXLendingFork bool, statedb *state.StateDB, lendingStateD
 				// Fee ==  quantityToLend/base lend token decimal *price*borrowFee/LendingCancelFee
 				cancelFee = new(big.Int).Div(item.Quantity, collateralPrice)
 				cancelFee = new(big.Int).Mul(cancelFee, borrowingFeeRate)
-				cancelFee = new(big.Int).Div(cancelFee, common.TomoXBaseCancelFee)
+				cancelFee = new(big.Int).Div(cancelFee, common.SdxXBaseCancelFee)
 				actualBalance := GetTokenBalance(userAddress, collateralToken, statedb)
 				if actualBalance.Cmp(cancelFee) < 0 {
 					return fmt.Errorf("VerifyBalance: borrower doesn't have enough collateralToken to pay cancel fee. User: %s. CollateralToken: %s . ExpectedBalance: %s . ActualBalance: %s",

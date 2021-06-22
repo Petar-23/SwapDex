@@ -107,7 +107,7 @@ type Ethereum struct {
 	netRPCService *ethapi.PublicNetAPI
 
 	lock    sync.RWMutex // Protects the variadic fields (e.g. gas price and etherbase)
-	TomoX   *sdxx.TomoX
+	SdxX    *sdxx.SdxX
 	Lending *sdxxlending.Lending
 }
 
@@ -118,7 +118,7 @@ func (s *Ethereum) AddLesServer(ls LesServer) {
 
 // New creates a new Ethereum object (including the
 // initialisation of the common Ethereum object)
-func New(ctx *node.ServiceContext, config *Config, sdxXServ *sdxx.TomoX, lendingServ *sdxxlending.Lending) (*Ethereum, error) {
+func New(ctx *node.ServiceContext, config *Config, sdxXServ *sdxx.SdxX, lendingServ *sdxxlending.Lending) (*Ethereum, error) {
 	if config.SyncMode == downloader.LightSync {
 		return nil, errors.New("can't run eth.Ethereum in light sync mode, use les.LightEthereum")
 	}
@@ -150,9 +150,9 @@ func New(ctx *node.ServiceContext, config *Config, sdxXServ *sdxx.TomoX, lending
 		bloomRequests:  make(chan chan *bloombits.Retrieval),
 		bloomIndexer:   NewBloomIndexer(chainDb, params.BloomBitsBlocks),
 	}
-	// Inject TomoX Service into main Eth Service.
+	// Inject SdxX Service into main Eth Service.
 	if sdxXServ != nil {
-		eth.TomoX = sdxXServ
+		eth.SdxX = sdxXServ
 	}
 	if lendingServ != nil {
 		eth.Lending = lendingServ
@@ -172,8 +172,8 @@ func New(ctx *node.ServiceContext, config *Config, sdxXServ *sdxx.TomoX, lending
 	)
 	if eth.chainConfig.Posv != nil {
 		c := eth.engine.(*posv.Posv)
-		c.GetTomoXService = func() posv.TradingService {
-			return eth.TomoX
+		c.GetSdxXService = func() posv.TradingService {
+			return eth.SdxX
 		}
 		c.GetLendingService = func() posv.LendingService {
 			return eth.Lending
@@ -939,8 +939,8 @@ func (s *Ethereum) GetPeer() int {
 	return len(s.protocolManager.peers.peers)
 }
 
-func (s *Ethereum) GetTomoX() *sdxx.TomoX {
-	return s.TomoX
+func (s *Ethereum) GetSdxX() *sdxx.SdxX {
+	return s.SdxX
 }
 
 func (s *Ethereum) OrderPool() *core.OrderPool {

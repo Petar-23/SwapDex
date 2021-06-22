@@ -237,12 +237,12 @@ func (c *ChainConfig) IsConstantinople(num *big.Int) bool {
 // - equal to or greater than the PetersburgBlock fork block,
 // - OR is nil, and Constantinople is active
 func (c *ChainConfig) IsPetersburg(num *big.Int) bool {
-	return isForked(common.TIPTomoXCancellationFee, num)
+	return isForked(common.TIPSdxXCancellationFee, num)
 }
 
 // IsIstanbul returns whether num is either equal to the Istanbul fork block or greater.
 func (c *ChainConfig) IsIstanbul(num *big.Int) bool {
-	return isForked(common.TIPTomoXCancellationFee, num)
+	return isForked(common.TIPSdxXCancellationFee, num)
 }
 
 func (c *ChainConfig) IsTIP2019(num *big.Int) bool {
@@ -257,11 +257,11 @@ func (c *ChainConfig) IsTIPRandomize(num *big.Int) bool {
 	return isForked(common.TIPRandomize, num)
 }
 
-func (c *ChainConfig) IsTIPTomoX(num *big.Int) bool {
+func (c *ChainConfig) IsTIPSdxX(num *big.Int) bool {
 	if common.IsTestnet {
-		return isForked(common.TIPTomoXTestnet, num)
+		return isForked(common.TIPSdxXTestnet, num)
 	} else {
-		return isForked(common.TIPTomoX, num)
+		return isForked(common.TIPSdxX, num)
 	}
 }
 
@@ -269,8 +269,8 @@ func (c *ChainConfig) IsTIPSdxXLending(num *big.Int) bool {
 	return isForked(common.TIPSdxXLending, num)
 }
 
-func (c *ChainConfig) IsTIPTomoXCancellationFee(num *big.Int) bool {
-	return isForked(common.TIPTomoXCancellationFee, num)
+func (c *ChainConfig) IsTIPSdxXCancellationFee(num *big.Int) bool {
+	return isForked(common.TIPSdxXCancellationFee, num)
 }
 
 // GasTable returns the gas table corresponding to the current phase (homestead or homestead reprice).

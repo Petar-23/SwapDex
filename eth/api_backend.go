@@ -21,11 +21,12 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/tomochain/tomochain/sdxx/tradingstate"
-	"github.com/tomochain/tomochain/sdxxlending"
 	"io/ioutil"
 	"math/big"
 	"path/filepath"
+
+	"github.com/tomochain/tomochain/sdxx/tradingstate"
+	"github.com/tomochain/tomochain/sdxxlending"
 
 	"github.com/tomochain/tomochain/sdxx"
 
@@ -426,7 +427,7 @@ func (b *EthApiBackend) AreTwoBlockSamePath(bh1 common.Hash, bh2 common.Hash) bo
 
 // GetOrderNonce get order nonce
 func (b *EthApiBackend) GetOrderNonce(address common.Hash) (uint64, error) {
-	sdxxService := b.eth.GetTomoX()
+	sdxxService := b.eth.GetSdxX()
 	if sdxxService != nil {
 		author, err := b.GetEngine().Author(b.CurrentBlock().Header())
 		if err != nil {
@@ -441,8 +442,8 @@ func (b *EthApiBackend) GetOrderNonce(address common.Hash) (uint64, error) {
 	return 0, errors.New("cannot find sdxx service")
 }
 
-func (b *EthApiBackend) TomoxService() *sdxx.TomoX {
-	return b.eth.TomoX
+func (b *EthApiBackend) SdxxService() *sdxx.SdxX {
+	return b.eth.SdxX
 }
 
 func (b *EthApiBackend) LendingService() *sdxxlending.Lending {

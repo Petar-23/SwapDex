@@ -19,12 +19,13 @@ package vm
 import (
 	"bytes"
 	"fmt"
-	"github.com/tomochain/tomochain/core/rawdb"
-	"github.com/tomochain/tomochain/params"
-	"github.com/tomochain/tomochain/sdxx/tradingstate"
 	"math/big"
 	"reflect"
 	"testing"
+
+	"github.com/tomochain/tomochain/core/rawdb"
+	"github.com/tomochain/tomochain/params"
+	"github.com/tomochain/tomochain/sdxx/tradingstate"
 
 	"github.com/tomochain/tomochain/common"
 )
@@ -358,17 +359,17 @@ var bn256PairingTests = []precompiledTest{
 var sdxxLastPriceTests = []precompiledTest{
 	{
 		input:    common.Bytes2Hex(append(common.Hex2BytesFixed(BTCAddress, 32), common.Hex2BytesFixed(USDTAddress, 32)...)),
-		expected: common.Bytes2Hex(common.LeftPadBytes(BTCUSDTLastPrice.Bytes(), TomoXPriceNumberOfBytesReturn)),
+		expected: common.Bytes2Hex(common.LeftPadBytes(BTCUSDTLastPrice.Bytes(), SdxXPriceNumberOfBytesReturn)),
 		name:     "BTCUSDT",
 	},
 	{
 		input:    common.Bytes2Hex(append(common.Hex2BytesFixed(BTCAddress, 30), common.Hex2BytesFixed(USDTAddress, 30)...)),
-		expected: common.Bytes2Hex(common.LeftPadBytes(common.Big0.Bytes(), TomoXPriceNumberOfBytesReturn)),
+		expected: common.Bytes2Hex(common.LeftPadBytes(common.Big0.Bytes(), SdxXPriceNumberOfBytesReturn)),
 		name:     "BTCUSDT_invalid_input_length",
 	},
 	{
 		input:    common.Bytes2Hex(append(common.Hex2BytesFixed(USDTAddress, 32), common.Hex2BytesFixed(BTCAddress, 32)...)),
-		expected: common.Bytes2Hex(common.LeftPadBytes(common.Big0.Bytes(), TomoXPriceNumberOfBytesReturn)),
+		expected: common.Bytes2Hex(common.LeftPadBytes(common.Big0.Bytes(), SdxXPriceNumberOfBytesReturn)),
 		name:     "USDTBTC",
 	},
 }
@@ -376,17 +377,17 @@ var sdxxLastPriceTests = []precompiledTest{
 var sdxxEpochPriceTests = []precompiledTest{
 	{
 		input:    common.Bytes2Hex(append(common.Hex2BytesFixed(BTCAddress, 32), common.Hex2BytesFixed(USDTAddress, 32)...)),
-		expected: common.Bytes2Hex(common.LeftPadBytes(BTCUSDTEpochPrice.Bytes(), TomoXPriceNumberOfBytesReturn)),
+		expected: common.Bytes2Hex(common.LeftPadBytes(BTCUSDTEpochPrice.Bytes(), SdxXPriceNumberOfBytesReturn)),
 		name:     "BTCUSDT",
 	},
 	{
 		input:    common.Bytes2Hex(append(common.Hex2BytesFixed(BTCAddress, 30), common.Hex2BytesFixed(USDTAddress, 30)...)),
-		expected: common.Bytes2Hex(common.LeftPadBytes(common.Big0.Bytes(), TomoXPriceNumberOfBytesReturn)),
+		expected: common.Bytes2Hex(common.LeftPadBytes(common.Big0.Bytes(), SdxXPriceNumberOfBytesReturn)),
 		name:     "BTCUSDT_invalid_input_length",
 	},
 	{
 		input:    common.Bytes2Hex(append(common.Hex2BytesFixed(USDTAddress, 32), common.Hex2BytesFixed(BTCAddress, 32)...)),
-		expected: common.Bytes2Hex(common.LeftPadBytes(common.Big0.Bytes(), TomoXPriceNumberOfBytesReturn)),
+		expected: common.Bytes2Hex(common.LeftPadBytes(common.Big0.Bytes(), SdxXPriceNumberOfBytesReturn)),
 		name:     "USDTBTC",
 	},
 }
@@ -394,17 +395,17 @@ var sdxxEpochPriceTests = []precompiledTest{
 var sdxxLastPriceWithEmptyTradingStateTests = []precompiledTest{
 	{
 		input:    common.Bytes2Hex(append(common.Hex2BytesFixed(BTCAddress, 32), common.Hex2BytesFixed(USDTAddress, 32)...)),
-		expected: common.Bytes2Hex(common.LeftPadBytes(common.Big0.Bytes(), TomoXPriceNumberOfBytesReturn)),
+		expected: common.Bytes2Hex(common.LeftPadBytes(common.Big0.Bytes(), SdxXPriceNumberOfBytesReturn)),
 		name:     "BTCUSDT",
 	},
 	{
 		input:    common.Bytes2Hex(append(common.Hex2BytesFixed(BTCAddress, 30), common.Hex2BytesFixed(USDTAddress, 30)...)),
-		expected: common.Bytes2Hex(common.LeftPadBytes(common.Big0.Bytes(), TomoXPriceNumberOfBytesReturn)),
+		expected: common.Bytes2Hex(common.LeftPadBytes(common.Big0.Bytes(), SdxXPriceNumberOfBytesReturn)),
 		name:     "BTCUSDT_invalid_input_length",
 	},
 	{
 		input:    common.Bytes2Hex(append(common.Hex2BytesFixed(USDTAddress, 32), common.Hex2BytesFixed(BTCAddress, 32)...)),
-		expected: common.Bytes2Hex(common.LeftPadBytes(common.Big0.Bytes(), TomoXPriceNumberOfBytesReturn)),
+		expected: common.Bytes2Hex(common.LeftPadBytes(common.Big0.Bytes(), SdxXPriceNumberOfBytesReturn)),
 		name:     "USDTBTC",
 	},
 }
@@ -412,17 +413,17 @@ var sdxxLastPriceWithEmptyTradingStateTests = []precompiledTest{
 var sdxxEpochPriceWithEmptyTradingStateTests = []precompiledTest{
 	{
 		input:    common.Bytes2Hex(append(common.Hex2BytesFixed(BTCAddress, 32), common.Hex2BytesFixed(USDTAddress, 32)...)),
-		expected: common.Bytes2Hex(common.LeftPadBytes(common.Big0.Bytes(), TomoXPriceNumberOfBytesReturn)),
+		expected: common.Bytes2Hex(common.LeftPadBytes(common.Big0.Bytes(), SdxXPriceNumberOfBytesReturn)),
 		name:     "BTCUSDT",
 	},
 	{
 		input:    common.Bytes2Hex(append(common.Hex2BytesFixed(BTCAddress, 30), common.Hex2BytesFixed(USDTAddress, 30)...)),
-		expected: common.Bytes2Hex(common.LeftPadBytes(common.Big0.Bytes(), TomoXPriceNumberOfBytesReturn)),
+		expected: common.Bytes2Hex(common.LeftPadBytes(common.Big0.Bytes(), SdxXPriceNumberOfBytesReturn)),
 		name:     "BTCUSDT_invalid_input_length",
 	},
 	{
 		input:    common.Bytes2Hex(append(common.Hex2BytesFixed(USDTAddress, 32), common.Hex2BytesFixed(BTCAddress, 32)...)),
-		expected: common.Bytes2Hex(common.LeftPadBytes(common.Big0.Bytes(), TomoXPriceNumberOfBytesReturn)),
+		expected: common.Bytes2Hex(common.LeftPadBytes(common.Big0.Bytes(), SdxXPriceNumberOfBytesReturn)),
 		name:     "USDTBTC",
 	},
 }
@@ -499,7 +500,7 @@ func testPrecompiled(addr string, test precompiledTest, t *testing.T) {
 	})
 }
 
-func testTomoxPrecompiled(addr string, test precompiledTest, t *testing.T) {
+func testSdxxPrecompiled(addr string, test precompiledTest, t *testing.T) {
 	db := rawdb.NewMemoryDatabase()
 	stateCache := tradingstate.NewDatabase(db)
 	tradingStateDB, _ := tradingstate.New(common.Hash{}, stateCache)
@@ -709,29 +710,29 @@ func TestPrecompiledBn256Pairing(t *testing.T) {
 	}
 }
 
-// Tests GetTomoXLastPrice
-func TestPrecompiledTomoXLastPrice(t *testing.T) {
+// Tests GetSdxXLastPrice
+func TestPrecompiledSdxXLastPrice(t *testing.T) {
 	for _, test := range sdxxLastPriceTests {
-		testTomoxPrecompiled("29", test, t)
+		testSdxxPrecompiled("29", test, t)
 	}
 }
 
-// Tests GetTomoXEpochPrice
-func TestPrecompiledTomoXEpochPrice(t *testing.T) {
+// Tests GetSdxXEpochPrice
+func TestPrecompiledSdxXEpochPrice(t *testing.T) {
 	for _, test := range sdxxEpochPriceTests {
-		testTomoxPrecompiled("2A", test, t)
+		testSdxxPrecompiled("2A", test, t)
 	}
 }
 
-// Tests GetTomoXLastPrice
-func TestPrecompiledTomoXLastPriceWithEmptyTradingState(t *testing.T) {
+// Tests GetSdxXLastPrice
+func TestPrecompiledSdxXLastPriceWithEmptyTradingState(t *testing.T) {
 	for _, test := range sdxxLastPriceWithEmptyTradingStateTests {
 		testPrecompiledWithEmptyTradingState("29", test, t)
 	}
 }
 
-// Tests GetTomoXEpochPrice
-func TestPrecompiledTomoXEpochPriceWithEmptyTradingState(t *testing.T) {
+// Tests GetSdxXEpochPrice
+func TestPrecompiledSdxXEpochPriceWithEmptyTradingState(t *testing.T) {
 	for _, test := range sdxxEpochPriceWithEmptyTradingStateTests {
 		testPrecompiledWithEmptyTradingState("2A", test, t)
 	}

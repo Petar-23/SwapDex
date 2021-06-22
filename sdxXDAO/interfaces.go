@@ -11,7 +11,7 @@ import (
 
 const defaultCacheLimit = 1024
 
-type sdxXDAO interface {
+type SdxXDAO interface {
 	// for both leveldb and mongodb
 	IsEmptyKey(key []byte) bool
 	Close() error
