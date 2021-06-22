@@ -20,9 +20,9 @@ More details can be found at our [technical white paper](https://Sdxchain.com/do
 
 Read more about us on:
 
-- our website: http://Sdxchain.com
-- our blogs and announcements: https://medium.com/Sdxchain
-- our documentation portal: https://docs.Sdxchain.com
+- our website: http://swapdex.net
+- our blogs and announcements: 
+- our documentation portal: 
 - our blockchain explorer: https://dexscan.net/
 
 ## Building the source
