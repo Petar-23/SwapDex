@@ -10,7 +10,7 @@ SdxChain is an innovative solution to the scalability problem with the Ethereum 
 Our mission is to be a leading force in building the Internet of Value, and its infrastructure.
 We are working to create an alternative, scalable financial system which is more secure, transparent, efficient, inclusive, and equitable for everyone.
 
-SdxChain relies on a system of 150 Masternodes with a Proof of Stake Voting consensus that can support near-zero fee, and 2-second transaction confirmation times.
+SdxChain relies on a system of 1500 Masternodes with a Proof of Stake Voting consensus that can support near-zero fee, and 2-second transaction confirmation times.
 Security, stability, and chain finality are guaranteed via novel techniques such as double validation, staking via smart-contracts, and "true" randomization processes.
 
 Sdxchain supports all EVM-compatible smart-contracts, protocols, and atomic cross-chain token transfers.
@@ -20,9 +20,8 @@ More details can be found at our [technical white paper](https://Sdxchain.com/do
 
 Read more about us on:
 
-- our website: http://Sdxchain.com
-- our blogs and announcements: https://medium.com/Sdxchain
-- our documentation portal: https://docs.Sdxchain.com
+- our website: http://swapdex.net
+
 - our blockchain explorer: https://dexscan.net/
 
 ## Building the source
@@ -38,24 +37,24 @@ $ cd Sdxchain
 $ make sdx
 ```
 
-Alternatively, you could quickly download our pre-complied binary from our [github release page](https://github.com/Sdxchain/Sdxchain/releases)
+Alternatively, you could quickly download our pre-complied binary from our [github release page](https://github.com/69th-byte/SmartDex-Chain/releases)
 
 ## Running `sdx`
 
 ### Running a sdx masternode
 
-Please refer to the [official documentation](https://docs.Sdxchain.com/get-started/run-node/) on how to run a node if your goal is to run a masternode.
+Please refer to the [official documentation](https://github.com/69th-byte/SmartDex-Chain/blob/master/Masternode.md) on how to run a node if your goal is to run a masternode.
 The recommanded ways of running a node and applying to become a masternode are explained in detail there.
 
 ### Attaching to the Sdxchain test network
 
-We published our test network 2.0 with full implementation of PoSV consensus at https://stats.testnet.Sdxchain.com.
+We published our test network 2.0 with full implementation of PoSV consensus.
 If you'd like to experiment with smart contract creation and DApps, you might be interested to give these a try on our Testnet.
 
 In order to connect to one of the masternodes on the Testnet, just run the command below:
 
 ```bash
-$ sdx attach https://rpc.testnet.Sdxchain.com
+$ sdx attach https://rpc.swapdex.net
 ```
 
 This will open the JavaScript console and let you query the blockchain directly via RPC.
@@ -69,12 +68,12 @@ export GENESIS_PATH=path/to/genesis.json
 ```
 - Testnet
 ```bash
-curl -L https://raw.githubusercontent.com/Sdxchain/Sdxchain/master/genesis/testnet.json -o $GENESIS_PATH
+curl -L https://raw.githubusercontent.com/69th-byte/SmartDex-Chain/master/testnet.json -o $GENESIS_PATH
 ```
 
 - Mainnet
 ```bash
-curl -L https://raw.githubusercontent.com/Sdxchain/Sdxchain/master/genesis/mainnet.json -o $GENESIS_PATH
+curl -L https://raw.githubusercontent.com/69th-byte/SmartDex-Chain/master/swapdex.json -o $GENESIS_PATH
 ```
 
 #### Create datadir
@@ -122,10 +121,10 @@ sdx account list --datadir ./  --keystore $KEYSTORE_DIR
    - $IDENTITY: the name of your node
    - $PASSWORD: the password file to unlock your account
    - $YOUR_COINBASE_ADDRESS: address of your account which generated in the previous step
-   - $NETWORK_ID: the networkId. Mainnet: 88. Testnet: 89
-   - $BOOTNODES: The comma separated list of bootnodes. Find them [here](https://docs.Sdxchain.com/general/networks/)
-   - $WS_SECRET: The password to send data to the stats website. Find them [here](https://docs.Sdxchain.com/general/networks/)
-   - $NETSTATS_HOST: The stats website to report to, regarding to your environment. Find them [here](https://docs.Sdxchain.com/general/networks/)
+   - $NETWORK_ID: the networkId. Mainnet: 7879. Testnet: 7880
+   - $BOOTNODES: The comma separated list of bootnodes. 
+   - $WS_SECRET: The password to send data to the stats website. 
+   - $NETSTATS_HOST: The stats website to report to, regarding to your environment.
    - $NETSTATS_PORT: The port used by the stats website (usually 443)
     
 ##### Let's start a node
@@ -153,7 +152,7 @@ sdx  --syncmode "full" \
 --identity: your full-node's name.
 --password: your account's password.
 --networkid: our network ID.
---sdx-testnet: required when the networkid is testnet(89).
+--sdx-testnet: required when the networkid is testnet(7880).
 --port: your full-node's listening port (default to 30303)
 --rpc, --rpccorsdomain, --rpcaddr, --rpcport, --rpcvhosts: your full-node will accept RPC requests at 8545 TCP.
 --ws, --wsaddr, --wsport, --wsorigins: your full-node will accept Websocket requests at 8546 TCP.
@@ -171,9 +170,6 @@ To see all flags usage
 sdx --help
 ```
 
-#### See your node on stats page
-   - Testnet: https://stats.testnet.Sdxchain.com
-   - Mainnet: http://stats.Sdxchain.com
 
 
 ## Contributing and technical discussion
