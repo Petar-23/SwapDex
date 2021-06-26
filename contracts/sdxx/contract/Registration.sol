@@ -13,7 +13,7 @@ contract RelayerRegistration {
     address public CONTRACT_OWNER;
     uint public MaximumRelayers;
     uint public MaximumTokenList;
-    address constant private tomoNative = 0x0000000000000000000000000000000000000001;
+    address constant private sdxNative = 0x0000000000000000000000000000000000000001;
 
     /// @dev Data types
     struct Relayer {
@@ -312,9 +312,9 @@ contract RelayerRegistration {
                 RELAYER_LIST[coinbase]._toTokens);
     }
 
-    function indexOf(address[] memory tomoPair, address target) internal pure returns (bool){
-        for (uint i = 0; i < tomoPair.length; i ++) {
-            if (tomoPair[i] == target) {
+    function indexOf(address[] memory sdxPair, address target) internal pure returns (bool){
+        for (uint i = 0; i < sdxPair.length; i ++) {
+            if (sdxPair[i] == target) {
                 return true;
             }
         }
@@ -325,30 +325,30 @@ contract RelayerRegistration {
         uint countPair = 0;
         uint countNonPair = 0;
 
-        address[] memory tomoPairs = new address[](fromTokens.length);
-        address[] memory nonTomoPairs = new address[](fromTokens.length);
+        address[] memory sdxPairs = new address[](fromTokens.length);
+        address[] memory nonSdxPairs = new address[](fromTokens.length);
 
         for (uint i = 0; i < toTokens.length; i++) {
-            bool b = SdxXListing.getTokenStatus(toTokens[i]) || (toTokens[i] == tomoNative);
-            b = b && (SdxXListing.getTokenStatus(fromTokens[i]) || fromTokens[i] == tomoNative);
+            bool b = SdxXListing.getTokenStatus(toTokens[i]) || (toTokens[i] == sdxNative);
+            b = b && (SdxXListing.getTokenStatus(fromTokens[i]) || fromTokens[i] == sdxNative);
             if (!b) {
                 return false;
             }
-            if (toTokens[i] == tomoNative) {
-                tomoPairs[countPair] = fromTokens[i];
+            if (toTokens[i] == sdxNative) {
+                sdxPairs[countPair] = fromTokens[i];
                 countPair++;
             } else {
-                if (fromTokens[i] == tomoNative) {
-                    tomoPairs[countPair] = toTokens[i];
+                if (fromTokens[i] == sdxNative) {
+                    sdxPairs[countPair] = toTokens[i];
                     countPair++;
                 }
-                nonTomoPairs[countNonPair] = toTokens[i];
+                nonSdxPairs[countNonPair] = toTokens[i];
                 countNonPair++;
             }
         }
 
         for (uint j = 0; j < countNonPair; j++) {
-            if (!indexOf(tomoPairs, nonTomoPairs[j])) {
+            if (!indexOf(sdxPairs, nonSdxPairs[j])) {
                 return false;
             }
         }
@@ -363,31 +363,31 @@ contract RelayerRegistration {
     ) internal view returns(bool){
         uint countPair = 0;
 
-        address[] memory tomoPairs = new address[](RELAYER_LIST[coinbase]._toTokens.length + 1);
+        address[] memory sdxPairs = new address[](RELAYER_LIST[coinbase]._toTokens.length + 1);
 
-        bool b = SdxXListing.getTokenStatus(toToken) || (toToken == tomoNative);
-        b = b && (SdxXListing.getTokenStatus(fromToken) || fromToken == tomoNative);
+        bool b = SdxXListing.getTokenStatus(toToken) || (toToken == sdxNative);
+        b = b && (SdxXListing.getTokenStatus(fromToken) || fromToken == sdxNative);
         if (!b) {
             return false;
         }
 
-        if (fromToken == tomoNative || toToken == tomoNative) {
+        if (fromToken == sdxNative || toToken == sdxNative) {
             return true;
         }
 
         // get tokens that paired with sdx
         for (uint i = 0; i < RELAYER_LIST[coinbase]._toTokens.length; i++) {
-            if (RELAYER_LIST[coinbase]._toTokens[i] == tomoNative) {
-                tomoPairs[countPair] = RELAYER_LIST[coinbase]._fromTokens[i];
+            if (RELAYER_LIST[coinbase]._toTokens[i] == sdxNative) {
+                sdxPairs[countPair] = RELAYER_LIST[coinbase]._fromTokens[i];
                 countPair++;
             } else {
-                if (RELAYER_LIST[coinbase]._fromTokens[i] == tomoNative) {
-                    tomoPairs[countPair] = RELAYER_LIST[coinbase]._toTokens[i];
+                if (RELAYER_LIST[coinbase]._fromTokens[i] == sdxNative) {
+                    sdxPairs[countPair] = RELAYER_LIST[coinbase]._toTokens[i];
                     countPair++;
                 }
             }
         }
-        if (!indexOf(tomoPairs, toToken)) {
+        if (!indexOf(sdxPairs, toToken)) {
             return false;
         }
         return true;

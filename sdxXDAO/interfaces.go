@@ -1,6 +1,6 @@
-// Copyright 2019 The Tomochain Authors
-// This file is part of the Core Tomochain infrastructure
-// https://tomochain.com
+// Copyright 2021 The Sdxchain Authors
+// This file is part of the Core Sdxchain infrastructure
+// https://swapdex.net
 // Package sdxxDAO provides an interface to work with sdxx database, including leveldb for masternode and mongodb for SDK node
 package sdxxDAO
 

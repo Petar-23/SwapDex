@@ -556,10 +556,10 @@ func (pool *LendingPool) validateBalance(cloneStateDb *state.StateDB, cloneLendi
 		}
 	}
 	if lendTokenTOMOPrice == nil || lendTokenTOMOPrice.Sign() == 0 {
-		if tx.LendingToken().String() == common.TomoNativeAddress {
+		if tx.LendingToken().String() == common.SdxNativeAddress {
 			lendTokenTOMOPrice = common.BasePrice
 		} else {
-			lendTokenTOMOPrice, err = lendingServ.GetMediumTradePriceBeforeEpoch(pool.chain, cloneStateDb, cloneTradingStateDb, tx.LendingToken(), common.HexToAddress(common.TomoNativeAddress))
+			lendTokenTOMOPrice, err = lendingServ.GetMediumTradePriceBeforeEpoch(pool.chain, cloneStateDb, cloneTradingStateDb, tx.LendingToken(), common.HexToAddress(common.SdxNativeAddress))
 			if err != nil {
 				return err
 			}

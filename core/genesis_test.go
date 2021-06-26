@@ -17,10 +17,11 @@
 package core
 
 import (
-	"github.com/tomochain/tomochain/core/rawdb"
 	"math/big"
 	"reflect"
 	"testing"
+
+	"github.com/tomochain/tomochain/core/rawdb"
 
 	"github.com/davecgh/go-spew/spew"
 	"github.com/tomochain/tomochain/common"
@@ -32,8 +33,8 @@ import (
 
 func TestDefaultGenesisBlock(t *testing.T) {
 	block := DefaultGenesisBlock().ToBlock(nil)
-	if block.Hash() != params.TomoMainnetGenesisHash {
-		t.Errorf("wrong mainnet genesis hash, got %v, want %v", block.Hash().String(), params.TomoMainnetGenesisHash.String())
+	if block.Hash() != params.SdxMainnetGenesisHash {
+		t.Errorf("wrong mainnet genesis hash, got %v, want %v", block.Hash().String(), params.SdxMainnetGenesisHash.String())
 	}
 	block = DefaultTestnetGenesisBlock().ToBlock(nil)
 	if block.Hash() != params.TestnetGenesisHash {
@@ -73,8 +74,8 @@ func TestSetupGenesis(t *testing.T) {
 			fn: func(db ethdb.Database) (*params.ChainConfig, common.Hash, error) {
 				return SetupGenesisBlock(db, nil)
 			},
-			wantHash:   params.TomoMainnetGenesisHash,
-			wantConfig: params.TomoMainnetChainConfig,
+			wantHash:   params.SdxMainnetGenesisHash,
+			wantConfig: params.SdxMainnetChainConfig,
 		},
 		{
 			name: "mainnet block in DB, genesis == nil",
@@ -82,8 +83,8 @@ func TestSetupGenesis(t *testing.T) {
 				DefaultGenesisBlock().MustCommit(db)
 				return SetupGenesisBlock(db, nil)
 			},
-			wantHash:   params.TomoMainnetGenesisHash,
-			wantConfig: params.TomoMainnetChainConfig,
+			wantHash:   params.SdxMainnetGenesisHash,
+			wantConfig: params.SdxMainnetChainConfig,
 		},
 		{
 			name: "custom block in DB, genesis == nil",

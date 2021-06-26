@@ -3,9 +3,6 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/tomochain/tomochain/core/rawdb"
-	"github.com/tomochain/tomochain/ethdb"
-	"github.com/tomochain/tomochain/ethdb/leveldb"
 	"os"
 	"os/signal"
 	"runtime"
@@ -13,7 +10,11 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/hashicorp/golang-lru"
+	"github.com/tomochain/tomochain/core/rawdb"
+	"github.com/tomochain/tomochain/ethdb"
+	"github.com/tomochain/tomochain/ethdb/leveldb"
+
+	lru "github.com/hashicorp/golang-lru"
 	"github.com/tomochain/tomochain/cmd/utils"
 	"github.com/tomochain/tomochain/common"
 	"github.com/tomochain/tomochain/core"
@@ -24,7 +25,7 @@ import (
 )
 
 var (
-	dir          = flag.String("dir", "", "directory to TomoChain chaindata")
+	dir          = flag.String("dir", "", "directory to SdxChain chaindata")
 	cacheSize    = flag.Int("size", 1000000, "LRU cache size")
 	sercureKey   = []byte("secure-key-")
 	nWorker      = runtime.NumCPU() / 2

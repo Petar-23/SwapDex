@@ -98,10 +98,10 @@ func (p *StateProcessor) Process(block *types.Block, statedb *state.StateDB, tra
 				return nil, nil, 0, fmt.Errorf("Block contains transaction with receiver in black-list: %v", tx.To().Hex())
 			}
 		}
-		// validate minFee slot for TomoZ
-		if tx.IsTomoZApplyTransaction() {
+		// validate minFee slot for SdxZ
+		if tx.IsSdxZApplyTransaction() {
 			copyState := statedb.Copy()
-			if err := ValidateTomoZApplyTransaction(p.bc, block.Number(), copyState, common.BytesToAddress(tx.Data()[4:])); err != nil {
+			if err := ValidateSdxZApplyTransaction(p.bc, block.Number(), copyState, common.BytesToAddress(tx.Data()[4:])); err != nil {
 				return nil, nil, 0, err
 			}
 		}
@@ -176,10 +176,10 @@ func (p *StateProcessor) ProcessBlockNoValidator(cBlock *CalculatedBlock, stated
 				return nil, nil, 0, fmt.Errorf("Block contains transaction with receiver in black-list: %v", tx.To().Hex())
 			}
 		}
-		// validate minFee slot for TomoZ
-		if tx.IsTomoZApplyTransaction() {
+		// validate minFee slot for SdxZ
+		if tx.IsSdxZApplyTransaction() {
 			copyState := statedb.Copy()
-			if err := ValidateTomoZApplyTransaction(p.bc, block.Number(), copyState, common.BytesToAddress(tx.Data()[4:])); err != nil {
+			if err := ValidateSdxZApplyTransaction(p.bc, block.Number(), copyState, common.BytesToAddress(tx.Data()[4:])); err != nil {
 				return nil, nil, 0, err
 			}
 		}

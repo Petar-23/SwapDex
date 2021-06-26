@@ -49,7 +49,7 @@ func (sdxx *SdxX) GetTokenDecimal(chain consensus.ChainContext, statedb *state.S
 	if tokenDecimal, ok := sdxx.tokenDecimalCache.Get(tokenAddr); ok {
 		return tokenDecimal.(*big.Int), nil
 	}
-	if tokenAddr.String() == common.TomoNativeAddress {
+	if tokenAddr.String() == common.SdxNativeAddress {
 		sdxx.tokenDecimalCache.Add(tokenAddr, common.BasePrice)
 		return common.BasePrice, nil
 	}

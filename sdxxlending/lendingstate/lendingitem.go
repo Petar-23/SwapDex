@@ -394,7 +394,7 @@ func VerifyBalance(isSdxXLendingFork bool, statedb *state.StateDB, lendingStateD
 					defaultFee := new(big.Int).Mul(quantity, new(big.Int).SetUint64(DefaultFeeRate))
 					defaultFee = new(big.Int).Div(defaultFee, common.SdxXBaseFee)
 					defaultFeeInTOMO := common.Big0
-					if lendingToken.String() != common.TomoNativeAddress {
+					if lendingToken.String() != common.SdxNativeAddress {
 						defaultFeeInTOMO = new(big.Int).Mul(defaultFee, lendTokenTOMOPrice)
 						defaultFeeInTOMO = new(big.Int).Div(defaultFeeInTOMO, lendingTokenDecimal)
 					} else {

@@ -39,7 +39,7 @@ const (
 	TradingStateAddr                 = "0x0000000000000000000000000000000000000092"
 	SdxXLendingAddress               = "0x0000000000000000000000000000000000000093"
 	SdxXLendingFinalizedTradeAddress = "0x0000000000000000000000000000000000000094"
-	TomoNativeAddress                = "0x0000000000000000000000000000000000000001"
+	SdxNativeAddress                 = "0x0000000000000000000000000000000000000001"
 	LendingLockAddress               = "0x0000000000000000000000000000000000000011"
 	VoteMethod                       = "0x6dd7d8ea"
 	UnvoteMethod                     = "0x02aa9be2"
@@ -47,7 +47,7 @@ const (
 	ResignMethod                     = "0xae6e43f5"
 	SignMethod                       = "0xe341eaa4"
 	SdxXApplyMethod                  = "0xc6b32f34"
-	TomoZApplyMethod                 = "0xc6b32f34"
+	SdxZApplyMethod                  = "0xc6b32f34"
 )
 
 var (

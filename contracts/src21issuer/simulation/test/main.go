@@ -20,7 +20,7 @@ var (
 	src21TokenAddr = common.HexToAddress("0x80430A33EaB86890a346bCf64F86CFeAC73287f3")
 )
 
-func airDropTokenToAccountNoTomo() {
+func airDropTokenToAccountNoSdx() {
 	client, err := ethclient.Dial(simulation.RpcEndpoint)
 	if err != nil {
 		fmt.Println(err, client)
@@ -64,7 +64,7 @@ func airDropTokenToAccountNoTomo() {
 		log.Fatal("can't execute transferAmount in tr21:", err)
 	}
 }
-func testTransferSRC21TokenWithAccountNoTomo() {
+func testTransferSRC21TokenWithAccountNoSdx() {
 	client, err := ethclient.Dial(simulation.RpcEndpoint)
 	if err != nil {
 		fmt.Println(err, client)
@@ -129,7 +129,7 @@ func testTransferSRC21TokenWithAccountNoTomo() {
 		log.Fatal("can't get balance token fee in  smart contract: ", err, "got", balanceIssuerFee, "wanted", remainFee)
 	}
 }
-func testTransferTrc21Fail() {
+func testTransferSrc21Fail() {
 	client, err := ethclient.Dial(simulation.RpcEndpoint)
 	if err != nil {
 		fmt.Println(err, client)
@@ -205,11 +205,11 @@ func main() {
 
 	start := time.Now()
 	for i := 0; i < 10000000; i++ {
-		airDropTokenToAccountNoTomo()
+		airDropTokenToAccountNoSdx()
 		fmt.Println("Finish airdrop token to a account")
-		testTransferSRC21TokenWithAccountNoTomo()
+		testTransferSRC21TokenWithAccountNoSdx()
 		fmt.Println("Finish transfer src21 token with a account no sdx")
-		testTransferTrc21Fail()
+		testTransferSrc21Fail()
 		fmt.Println("Finish testing ! Success transferAmount token trc20 with a account no sdx")
 	}
 	fmt.Println(common.PrettyDuration(time.Since(start)))

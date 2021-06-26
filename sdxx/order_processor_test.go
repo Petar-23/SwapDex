@@ -1,12 +1,13 @@
 package sdxx
 
 import (
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core/rawdb"
-	"github.com/tomochain/tomochain/sdxx/tradingstate"
 	"math/big"
 	"reflect"
 	"testing"
+
+	"github.com/tomochain/tomochain/common"
+	"github.com/tomochain/tomochain/core/rawdb"
+	"github.com/tomochain/tomochain/sdxx/tradingstate"
 )
 
 func Test_getCancelFeeV1(t *testing.T) {
@@ -103,9 +104,9 @@ func Test_getCancelFee(t *testing.T) {
 	sdxx.SetTokenDecimal(testTokenB, tokenBDecimal)
 
 	// set tokenAPrice = 1 SDX
-	tradingStateDb.SetMediumPriceBeforeEpoch(tradingstate.GetTradingOrderBookHash(testTokenA, common.HexToAddress(common.TomoNativeAddress)), common.BasePrice)
+	tradingStateDb.SetMediumPriceBeforeEpoch(tradingstate.GetTradingOrderBookHash(testTokenA, common.HexToAddress(common.SdxNativeAddress)), common.BasePrice)
 	// set tokenBPrice = 1 SDX
-	tradingStateDb.SetMediumPriceBeforeEpoch(tradingstate.GetTradingOrderBookHash(common.HexToAddress(common.TomoNativeAddress), testTokenB), tokenBDecimal)
+	tradingStateDb.SetMediumPriceBeforeEpoch(tradingstate.GetTradingOrderBookHash(common.HexToAddress(common.SdxNativeAddress), testTokenB), tokenBDecimal)
 
 	type CancelFeeArg struct {
 		feeRate *big.Int
@@ -127,7 +128,7 @@ func Test_getCancelFee(t *testing.T) {
 				feeRate: common.Big0,
 				order: &tradingstate.OrderItem{
 					BaseToken:  testTokenA,
-					QuoteToken: common.HexToAddress(common.TomoNativeAddress),
+					QuoteToken: common.HexToAddress(common.SdxNativeAddress),
 					Quantity:   new(big.Int).SetUint64(10000),
 					Side:       tradingstate.Ask,
 				},
@@ -142,7 +143,7 @@ func Test_getCancelFee(t *testing.T) {
 				feeRate: common.Big0,
 				order: &tradingstate.OrderItem{
 					BaseToken:  testTokenA,
-					QuoteToken: common.HexToAddress(common.TomoNativeAddress),
+					QuoteToken: common.HexToAddress(common.SdxNativeAddress),
 					Quantity:   new(big.Int).SetUint64(10000),
 					Side:       tradingstate.Bid,
 				},
@@ -156,7 +157,7 @@ func Test_getCancelFee(t *testing.T) {
 			CancelFeeArg{
 				feeRate: new(big.Int).SetUint64(10), // 10/10000= 0.1%
 				order: &tradingstate.OrderItem{
-					BaseToken:  common.HexToAddress(common.TomoNativeAddress),
+					BaseToken:  common.HexToAddress(common.SdxNativeAddress),
 					QuoteToken: testTokenA,
 					Quantity:   new(big.Int).SetUint64(10000),
 					Side:       tradingstate.Ask,
@@ -172,7 +173,7 @@ func Test_getCancelFee(t *testing.T) {
 				feeRate: new(big.Int).SetUint64(10), // 10/10000= 0.1%
 				order: &tradingstate.OrderItem{
 					Quantity:   new(big.Int).SetUint64(10000),
-					BaseToken:  common.HexToAddress(common.TomoNativeAddress),
+					BaseToken:  common.HexToAddress(common.SdxNativeAddress),
 					QuoteToken: testTokenA,
 					Side:       tradingstate.Bid,
 				},
@@ -188,7 +189,7 @@ func Test_getCancelFee(t *testing.T) {
 			CancelFeeArg{
 				feeRate: common.Big0,
 				order: &tradingstate.OrderItem{
-					BaseToken:  common.HexToAddress(common.TomoNativeAddress),
+					BaseToken:  common.HexToAddress(common.SdxNativeAddress),
 					QuoteToken: testTokenA,
 					Quantity:   new(big.Int).SetUint64(10000),
 					Side:       tradingstate.Ask,
@@ -203,7 +204,7 @@ func Test_getCancelFee(t *testing.T) {
 			CancelFeeArg{
 				feeRate: common.Big0,
 				order: &tradingstate.OrderItem{
-					BaseToken:  common.HexToAddress(common.TomoNativeAddress),
+					BaseToken:  common.HexToAddress(common.SdxNativeAddress),
 					QuoteToken: testTokenA,
 					Quantity:   new(big.Int).SetUint64(10000),
 					Side:       tradingstate.Bid,
@@ -218,7 +219,7 @@ func Test_getCancelFee(t *testing.T) {
 			CancelFeeArg{
 				feeRate: new(big.Int).SetUint64(10), // 10/10000= 0.1%
 				order: &tradingstate.OrderItem{
-					BaseToken:  common.HexToAddress(common.TomoNativeAddress),
+					BaseToken:  common.HexToAddress(common.SdxNativeAddress),
 					QuoteToken: testTokenA,
 					Quantity:   new(big.Int).SetUint64(10000),
 					Side:       tradingstate.Ask,
@@ -234,7 +235,7 @@ func Test_getCancelFee(t *testing.T) {
 				feeRate: new(big.Int).SetUint64(10), // 10/10000= 0.1%
 				order: &tradingstate.OrderItem{
 					Quantity:   new(big.Int).SetUint64(10000),
-					BaseToken:  common.HexToAddress(common.TomoNativeAddress),
+					BaseToken:  common.HexToAddress(common.SdxNativeAddress),
 					QuoteToken: testTokenA,
 					Side:       tradingstate.Bid,
 				},

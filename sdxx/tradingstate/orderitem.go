@@ -356,11 +356,11 @@ func VerifyPair(statedb *state.StateDB, exchangeAddress, baseToken, quoteToken c
 
 func VerifyBalance(statedb *state.StateDB, sdxxStateDb *TradingStateDB, order *types.OrderTransaction, baseDecimal, quoteDecimal *big.Int) error {
 	var quotePrice *big.Int
-	if order.QuoteToken().String() != common.TomoNativeAddress {
-		quotePrice = sdxxStateDb.GetLastPrice(GetTradingOrderBookHash(order.QuoteToken(), common.HexToAddress(common.TomoNativeAddress)))
+	if order.QuoteToken().String() != common.SdxNativeAddress {
+		quotePrice = sdxxStateDb.GetLastPrice(GetTradingOrderBookHash(order.QuoteToken(), common.HexToAddress(common.SdxNativeAddress)))
 		log.Debug("TryGet quotePrice QuoteToken/SDX", "quotePrice", quotePrice)
 		if quotePrice == nil || quotePrice.Sign() == 0 {
-			inversePrice := sdxxStateDb.GetLastPrice(GetTradingOrderBookHash(common.HexToAddress(common.TomoNativeAddress), order.QuoteToken()))
+			inversePrice := sdxxStateDb.GetLastPrice(GetTradingOrderBookHash(common.HexToAddress(common.SdxNativeAddress), order.QuoteToken()))
 			log.Debug("TryGet inversePrice SDX/QuoteToken", "inversePrice", inversePrice)
 			if inversePrice != nil && inversePrice.Sign() > 0 {
 				quotePrice = new(big.Int).Mul(common.BasePrice, quoteDecimal)

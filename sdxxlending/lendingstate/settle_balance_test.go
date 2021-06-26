@@ -1,10 +1,11 @@
 package lendingstate
 
 import (
-	"github.com/tomochain/tomochain/common"
 	"math/big"
 	"reflect"
 	"testing"
+
+	"github.com/tomochain/tomochain/common"
 )
 
 func TestCalculateInterestRate(t *testing.T) {
@@ -100,14 +101,14 @@ func TestGetSettleBalance(t *testing.T) {
 	lendQuantity, _ := new(big.Int).SetString("1000000000000000000000", 10)        // 1000
 	fee, _ := new(big.Int).SetString("10000000000000000000", 10)                   // 10
 	lendQuantityExcluded, _ := new(big.Int).SetString("990000000000000000000", 10) // 990
-	lendTokenNotTomo := common.HexToAddress("0x0000000000000000000000000000000000000033")
+	lendTokenNotSdx := common.HexToAddress("0x0000000000000000000000000000000000000033")
 	collateral := common.HexToAddress("0x0000000000000000000000000000000000000022")
 	collateralLocked, _ := new(big.Int).SetString("1000000000000000000000", 10) // 1000
 	collateralLocked = new(big.Int).Mul(big.NewInt(150), collateralLocked)
 	collateralLocked = new(big.Int).Div(collateralLocked, big.NewInt(100))
 
 	type GetSettleBalanceArg struct {
-		isSdxXLendingFork     bool
+		isSdxXLendingFork      bool
 		takerSide              string
 		lendTokenTOMOPrice     *big.Int
 		collateralPrice        *big.Int
@@ -171,7 +172,7 @@ func TestGetSettleBalance(t *testing.T) {
 				common.BasePrice,
 				big.NewInt(150),
 				big.NewInt(100), // 1%
-				common.HexToAddress(common.TomoNativeAddress),
+				common.HexToAddress(common.SdxNativeAddress),
 				common.Address{},
 				common.BasePrice,
 				common.BasePrice,
@@ -208,7 +209,7 @@ func TestGetSettleBalance(t *testing.T) {
 				common.BasePrice,
 				big.NewInt(150),
 				big.NewInt(100), // 1%
-				lendTokenNotTomo,
+				lendTokenNotSdx,
 				collateral,
 				common.BasePrice,
 				common.BasePrice,
@@ -217,7 +218,7 @@ func TestGetSettleBalance(t *testing.T) {
 			&LendingSettleBalance{
 				Taker: TradeResult{
 					Fee:      fee,
-					InToken:  lendTokenNotTomo,
+					InToken:  lendTokenNotSdx,
 					InTotal:  lendQuantityExcluded,
 					OutToken: collateral,
 					OutTotal: collateralLocked,
@@ -226,7 +227,7 @@ func TestGetSettleBalance(t *testing.T) {
 					Fee:      common.Big0,
 					InToken:  common.Address{},
 					InTotal:  common.Big0,
-					OutToken: lendTokenNotTomo,
+					OutToken: lendTokenNotSdx,
 					OutTotal: lendQuantity,
 				},
 				CollateralLockedAmount: collateralLocked,
@@ -243,7 +244,7 @@ func TestGetSettleBalance(t *testing.T) {
 				common.BasePrice,
 				big.NewInt(150),
 				big.NewInt(100), // 1%
-				lendTokenNotTomo,
+				lendTokenNotSdx,
 				collateral,
 				common.BasePrice,
 				common.BasePrice,
@@ -252,7 +253,7 @@ func TestGetSettleBalance(t *testing.T) {
 			&LendingSettleBalance{
 				Maker: TradeResult{
 					Fee:      fee,
-					InToken:  lendTokenNotTomo,
+					InToken:  lendTokenNotSdx,
 					InTotal:  lendQuantityExcluded,
 					OutToken: collateral,
 					OutTotal: collateralLocked,
@@ -261,7 +262,7 @@ func TestGetSettleBalance(t *testing.T) {
 					Fee:      common.Big0,
 					InToken:  common.Address{},
 					InTotal:  common.Big0,
-					OutToken: lendTokenNotTomo,
+					OutToken: lendTokenNotSdx,
 					OutTotal: lendQuantity,
 				},
 				CollateralLockedAmount: collateralLocked,
@@ -277,7 +278,7 @@ func TestGetSettleBalance(t *testing.T) {
 				common.BasePrice,
 				big.NewInt(150),
 				big.NewInt(100), // 1%
-				common.HexToAddress(common.TomoNativeAddress),
+				common.HexToAddress(common.SdxNativeAddress),
 				collateral,
 				common.BasePrice,
 				common.BasePrice,
@@ -288,12 +289,12 @@ func TestGetSettleBalance(t *testing.T) {
 					Fee:      common.Big0,
 					InToken:  common.Address{},
 					InTotal:  common.Big0,
-					OutToken: common.HexToAddress(common.TomoNativeAddress),
+					OutToken: common.HexToAddress(common.SdxNativeAddress),
 					OutTotal: lendQuantity,
 				},
 				Maker: TradeResult{
 					Fee:      fee,
-					InToken:  common.HexToAddress(common.TomoNativeAddress),
+					InToken:  common.HexToAddress(common.SdxNativeAddress),
 					InTotal:  lendQuantityExcluded,
 					OutToken: collateral,
 					OutTotal: collateralLocked,
@@ -312,7 +313,7 @@ func TestGetSettleBalance(t *testing.T) {
 				common.BasePrice,
 				big.NewInt(150),
 				big.NewInt(100), // 1%
-				common.HexToAddress(common.TomoNativeAddress),
+				common.HexToAddress(common.SdxNativeAddress),
 				collateral,
 				common.BasePrice,
 				common.BasePrice,
@@ -323,12 +324,12 @@ func TestGetSettleBalance(t *testing.T) {
 					Fee:      common.Big0,
 					InToken:  common.Address{},
 					InTotal:  common.Big0,
-					OutToken: common.HexToAddress(common.TomoNativeAddress),
+					OutToken: common.HexToAddress(common.SdxNativeAddress),
 					OutTotal: lendQuantity,
 				},
 				Taker: TradeResult{
 					Fee:      fee,
-					InToken:  common.HexToAddress(common.TomoNativeAddress),
+					InToken:  common.HexToAddress(common.SdxNativeAddress),
 					InTotal:  lendQuantityExcluded,
 					OutToken: collateral,
 					OutTotal: collateralLocked,

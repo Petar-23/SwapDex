@@ -142,7 +142,7 @@ func ValidateSdxXApplyTransaction(chain consensus.ChainContext, blockNumber *big
 
 // make sure that balance of token is at slot 0
 // make sure that minFee of token is at slot 1
-func ValidateTomoZApplyTransaction(chain consensus.ChainContext, blockNumber *big.Int, copyState *state.StateDB, tokenAddr common.Address) error {
+func ValidateSdxZApplyTransaction(chain consensus.ChainContext, blockNumber *big.Int, copyState *state.StateDB, tokenAddr common.Address) error {
 	if blockNumber == nil || blockNumber.Sign() <= 0 {
 		blockNumber = chain.CurrentHeader().Number
 	}
@@ -151,7 +151,7 @@ func ValidateTomoZApplyTransaction(chain consensus.ChainContext, blockNumber *bi
 	}
 	contractABI, err := GetTokenAbi(contract.SRC21ABI)
 	if err != nil {
-		return fmt.Errorf("ValidateTomoZApplyTransaction: cannot parse ABI. Err: %v", err)
+		return fmt.Errorf("ValidateSdxZApplyTransaction: cannot parse ABI. Err: %v", err)
 	}
 	// verify balance slot
 	if err := ValidateBalanceSlot(chain, copyState, tokenAddr, contractABI); err != nil {
@@ -166,8 +166,8 @@ func ValidateTomoZApplyTransaction(chain consensus.ChainContext, blockNumber *bi
 }
 
 func SetRandomBalance(copyState *state.StateDB, tokenAddr, addr common.Address, randomValue *big.Int) {
-	slotBalanceTrc21 := state.SlotSRC21Token["balances"]
-	balanceKey := state.GetLocMappingAtKey(addr.Hash(), slotBalanceTrc21)
+	slotBalanceSrc21 := state.SlotSRC21Token["balances"]
+	balanceKey := state.GetLocMappingAtKey(addr.Hash(), slotBalanceSrc21)
 	copyState.SetState(tokenAddr, common.BigToHash(balanceKey), common.BytesToHash(randomValue.Bytes()))
 }
 
@@ -193,8 +193,8 @@ func ValidateBalanceSlot(chain consensus.ChainContext, copyState *state.StateDB,
 
 func ValidateMinFeeSlot(chain consensus.ChainContext, copyState *state.StateDB, tokenAddr common.Address, contractABI *abi.ABI) error {
 	randomValue := new(big.Int).SetInt64(int64(rand.Intn(1000000000)))
-	slotMinFeeTrc21 := state.SlotSRC21Token["minFee"]
-	copyState.SetState(tokenAddr, common.BigToHash(new(big.Int).SetUint64(slotMinFeeTrc21)), common.BytesToHash(randomValue.Bytes()))
+	slotMinFeeSrc21 := state.SlotSRC21Token["minFee"]
+	copyState.SetState(tokenAddr, common.BigToHash(new(big.Int).SetUint64(slotMinFeeSrc21)), common.BytesToHash(randomValue.Bytes()))
 
 	result, err := RunContract(chain, copyState, tokenAddr, contractABI, minFeeFunction)
 	if err != nil || result == nil {

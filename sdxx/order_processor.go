@@ -236,11 +236,11 @@ func (sdxx *SdxX) processOrderList(coinbase common.Address, chain consensus.Chai
 			maxTradedQuantity = tradingstate.CloneBigInt(amount)
 		}
 		var quotePrice *big.Int
-		if oldestOrder.QuoteToken.String() != common.TomoNativeAddress {
-			quotePrice = tradingStateDB.GetLastPrice(tradingstate.GetTradingOrderBookHash(oldestOrder.QuoteToken, common.HexToAddress(common.TomoNativeAddress)))
+		if oldestOrder.QuoteToken.String() != common.SdxNativeAddress {
+			quotePrice = tradingStateDB.GetLastPrice(tradingstate.GetTradingOrderBookHash(oldestOrder.QuoteToken, common.HexToAddress(common.SdxNativeAddress)))
 			log.Debug("TryGet quotePrice QuoteToken/SDX", "quotePrice", quotePrice)
 			if quotePrice == nil || quotePrice.Sign() == 0 {
-				inversePrice := tradingStateDB.GetLastPrice(tradingstate.GetTradingOrderBookHash(common.HexToAddress(common.TomoNativeAddress), oldestOrder.QuoteToken))
+				inversePrice := tradingStateDB.GetLastPrice(tradingstate.GetTradingOrderBookHash(common.HexToAddress(common.SdxNativeAddress), oldestOrder.QuoteToken))
 				quoteTokenDecimal, err := sdxx.GetTokenDecimal(chain, statedb, oldestOrder.QuoteToken)
 				if err != nil || quoteTokenDecimal.Sign() == 0 {
 					return nil, nil, nil, fmt.Errorf("Fail to get tokenDecimal. Token: %v . Err: %v", oldestOrder.QuoteToken.String(), err)
@@ -371,7 +371,7 @@ func (sdxx *SdxX) getTradeQuantity(quotePrice *big.Int, coinbase common.Address,
 	if err != nil || quoteTokenDecimal.Sign() == 0 {
 		return tradingstate.Zero, false, nil, fmt.Errorf("Fail to get tokenDecimal. Token: %v . Err: %v", makerOrder.QuoteToken.String(), err)
 	}
-	if makerOrder.QuoteToken.String() == common.TomoNativeAddress {
+	if makerOrder.QuoteToken.String() == common.SdxNativeAddress {
 		quotePrice = quoteTokenDecimal
 	}
 	if takerOrder.ExchangeAddress.String() == makerOrder.ExchangeAddress.String() {

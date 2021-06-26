@@ -10,8 +10,8 @@ import (
 	"github.com/tomochain/tomochain/consensus"
 	"github.com/tomochain/tomochain/core/types"
 	"github.com/tomochain/tomochain/p2p"
+	sdxxDAO "github.com/tomochain/tomochain/sdxXDAO"
 	"github.com/tomochain/tomochain/sdxx/tradingstate"
-	"github.com/tomochain/tomochain/sdxxDAO"
 	"gopkg.in/karalabe/cookiejar.v2/collections/prque"
 
 	lru "github.com/hashicorp/golang-lru"
@@ -292,11 +292,11 @@ func (sdxx *SdxX) GetAveragePriceLastEpoch(chain consensus.ChainContext, statedb
 
 // return tokenQuantity (after convert from SDX to token), tokenPriceInTOMO, error
 func (sdxx *SdxX) ConvertTOMOToToken(chain consensus.ChainContext, statedb *state.StateDB, tradingStateDb *tradingstate.TradingStateDB, token common.Address, quantity *big.Int) (*big.Int, *big.Int, error) {
-	if token.String() == common.TomoNativeAddress {
+	if token.String() == common.SdxNativeAddress {
 		return quantity, common.BasePrice, nil
 	}
-	tokenPriceInTomo, err := sdxx.GetAveragePriceLastEpoch(chain, statedb, tradingStateDb, token, common.HexToAddress(common.TomoNativeAddress))
-	if err != nil || tokenPriceInTomo == nil || tokenPriceInTomo.Sign() <= 0 {
+	tokenPriceInSdx, err := sdxx.GetAveragePriceLastEpoch(chain, statedb, tradingStateDb, token, common.HexToAddress(common.SdxNativeAddress))
+	if err != nil || tokenPriceInSdx == nil || tokenPriceInSdx.Sign() <= 0 {
 		return common.Big0, common.Big0, err
 	}
 
@@ -305,8 +305,8 @@ func (sdxx *SdxX) ConvertTOMOToToken(chain consensus.ChainContext, statedb *stat
 		return common.Big0, common.Big0, fmt.Errorf("fail to get tokenDecimal. Token: %v . Err: %v", token.String(), err)
 	}
 	tokenQuantity := new(big.Int).Mul(quantity, tokenDecimal)
-	tokenQuantity = new(big.Int).Div(tokenQuantity, tokenPriceInTomo)
-	return tokenQuantity, tokenPriceInTomo, nil
+	tokenQuantity = new(big.Int).Div(tokenQuantity, tokenPriceInSdx)
+	return tokenQuantity, tokenPriceInSdx, nil
 }
 
 // there are 3 tasks need to complete to update data in SDK nodes after matching

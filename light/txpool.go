@@ -353,10 +353,10 @@ func (pool *TxPool) validateTx(ctx context.Context, tx *types.Transaction) error
 		return fmt.Errorf("Reject transaction with receiver in black-list: %v", tx.To().Hex())
 	}
 
-	// validate minFee slot for TomoZ
-	if tx.IsTomoZApplyTransaction() {
+	// validate minFee slot for SdxZ
+	if tx.IsSdxZApplyTransaction() {
 		copyState := pool.currentState(ctx).Copy()
-		if err := core.ValidateTomoZApplyTransaction(pool.chain, nil, copyState, common.BytesToAddress(tx.Data()[4:])); err != nil {
+		if err := core.ValidateSdxZApplyTransaction(pool.chain, nil, copyState, common.BytesToAddress(tx.Data()[4:])); err != nil {
 			return err
 		}
 	}

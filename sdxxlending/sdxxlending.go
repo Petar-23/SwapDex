@@ -11,9 +11,9 @@ import (
 	"github.com/tomochain/tomochain/consensus"
 	"github.com/tomochain/tomochain/core/types"
 	"github.com/tomochain/tomochain/p2p"
+	sdxxDAO "github.com/tomochain/tomochain/sdxXDAO"
 	"github.com/tomochain/tomochain/sdxx"
 	"github.com/tomochain/tomochain/sdxx/tradingstate"
-	"github.com/tomochain/tomochain/sdxxDAO"
 	"github.com/tomochain/tomochain/sdxxlending/lendingstate"
 	"gopkg.in/karalabe/cookiejar.v2/collections/prque"
 

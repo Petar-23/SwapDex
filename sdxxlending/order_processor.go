@@ -1021,10 +1021,10 @@ func (l *Lending) GetCollateralPrices(header *types.Header, chain consensus.Chai
 
 func (l *Lending) GetTOMOBasePrices(header *types.Header, chain consensus.ChainContext, statedb *state.StateDB, tradingStateDb *tradingstate.TradingStateDB, token common.Address) (*big.Int, error) {
 
-	tokenTOMOPriceFromContract, updatedBlock := lendingstate.GetCollateralPrice(statedb, token, common.HexToAddress(common.TomoNativeAddress))
+	tokenTOMOPriceFromContract, updatedBlock := lendingstate.GetCollateralPrice(statedb, token, common.HexToAddress(common.SdxNativeAddress))
 	tokenTOMOPriceUpdatedFromContract := updatedBlock.Uint64()/chain.Config().Posv.Epoch == header.Number.Uint64()/chain.Config().Posv.Epoch
 
-	if token == common.HexToAddress(common.TomoNativeAddress) {
+	if token == common.HexToAddress(common.SdxNativeAddress) {
 		return common.BasePrice, nil
 	} else if tokenTOMOPriceUpdatedFromContract {
 		// getting lendToken price from contract first
@@ -1032,7 +1032,7 @@ func (l *Lending) GetTOMOBasePrices(header *types.Header, chain consensus.ChainC
 		log.Debug("Getting token/SDX price from contract", "price", tokenTOMOPriceFromContract)
 		return tokenTOMOPriceFromContract, nil
 	} else {
-		tomoTokenPriceFromContract, updatedBlock := lendingstate.GetCollateralPrice(statedb, common.HexToAddress(common.TomoNativeAddress), token)
+		tomoTokenPriceFromContract, updatedBlock := lendingstate.GetCollateralPrice(statedb, common.HexToAddress(common.SdxNativeAddress), token)
 		tomoTokenPriceUpdatedFromContract := updatedBlock.Uint64()/chain.Config().Posv.Epoch == header.Number.Uint64()/chain.Config().Posv.Epoch
 		if tomoTokenPriceUpdatedFromContract && tomoTokenPriceFromContract != nil && tomoTokenPriceFromContract.Sign() > 0 {
 			// getting lendToken price from contract first
@@ -1043,11 +1043,11 @@ func (l *Lending) GetTOMOBasePrices(header *types.Header, chain consensus.ChainC
 			if err != nil || tokenDecimal == nil || tokenDecimal.Sign() == 0 {
 				return nil, err
 			}
-			tokenTomoPrice := new(big.Int).Mul(common.BasePrice, tokenDecimal)
-			tokenTomoPrice = new(big.Int).Div(tokenTomoPrice, tomoTokenPriceFromContract)
-			return tokenTomoPrice, nil
+			tokenSdxPrice := new(big.Int).Mul(common.BasePrice, tokenDecimal)
+			tokenSdxPrice = new(big.Int).Div(tokenSdxPrice, tomoTokenPriceFromContract)
+			return tokenSdxPrice, nil
 		}
-		tokenTOMOPrice, err := l.GetMediumTradePriceBeforeEpoch(chain, statedb, tradingStateDb, token, common.HexToAddress(common.TomoNativeAddress))
+		tokenTOMOPrice, err := l.GetMediumTradePriceBeforeEpoch(chain, statedb, tradingStateDb, token, common.HexToAddress(common.SdxNativeAddress))
 		if err != nil {
 			return nil, err
 		}

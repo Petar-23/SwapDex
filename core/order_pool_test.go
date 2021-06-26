@@ -2,17 +2,18 @@ package core
 
 import (
 	"context"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/crypto"
-	"github.com/tomochain/tomochain/ethclient"
-	"github.com/tomochain/tomochain/rpc"
 	"log"
 	"math/big"
 	"strconv"
 	"strings"
 	"testing"
 	"time"
+
+	"github.com/tomochain/tomochain/common"
+	"github.com/tomochain/tomochain/core/types"
+	"github.com/tomochain/tomochain/crypto"
+	"github.com/tomochain/tomochain/ethclient"
+	"github.com/tomochain/tomochain/rpc"
 )
 
 type OrderMsg struct {
@@ -89,7 +90,7 @@ func testSendOrder(t *testing.T, amount, price *big.Int, side string, status str
 		Price:           price,
 		ExchangeAddress: common.HexToAddress("0x0D3ab14BBaD3D99F4203bd7a11aCB94882050E7e"),
 		UserAddress:     crypto.PubkeyToAddress(privateKey.PublicKey),
-		BaseToken:       common.HexToAddress(common.TomoNativeAddress),
+		BaseToken:       common.HexToAddress(common.SdxNativeAddress),
 		QuoteToken:      BTCAddress,
 		Status:          status,
 		Side:            side,
@@ -124,7 +125,7 @@ func testSendOrderTOMOUSD(t *testing.T, amount, price *big.Int, side string, sta
 		Price:           price,
 		ExchangeAddress: common.HexToAddress("0x0D3ab14BBaD3D99F4203bd7a11aCB94882050E7e"),
 		UserAddress:     crypto.PubkeyToAddress(privateKey.PublicKey),
-		BaseToken:       common.HexToAddress(common.TomoNativeAddress),
+		BaseToken:       common.HexToAddress(common.SdxNativeAddress),
 		QuoteToken:      USDAddress,
 		Status:          status,
 		Side:            side,
@@ -194,7 +195,7 @@ func testSendOrderTOMOBTC(t *testing.T, amount, price *big.Int, side string, sta
 		Price:           price,
 		ExchangeAddress: common.HexToAddress("0x0D3ab14BBaD3D99F4203bd7a11aCB94882050E7e"),
 		UserAddress:     crypto.PubkeyToAddress(privateKey.PublicKey),
-		BaseToken:       common.HexToAddress(common.TomoNativeAddress),
+		BaseToken:       common.HexToAddress(common.SdxNativeAddress),
 		QuoteToken:      BTCAddress,
 		Status:          status,
 		Side:            side,

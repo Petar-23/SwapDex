@@ -41,7 +41,7 @@ func TestConsoleWelcome(t *testing.T) {
 	coinbase := "0x8605cdbbdb6d264aa742e77020dcbc58fcdce182"
 
 	// Start a sdx console, make sure it's cleaned up and terminate the console
-	sdx := runTomo(t,
+	sdx := runSdx(t,
 		"--sdxx.datadir", tmpdir(t)+"sdxx/"+time.Now().String(),
 		"--port", "0", "--maxpeers", "0", "--nodiscover", "--nat", "none",
 		"--etherbase", coinbase,
@@ -82,7 +82,7 @@ func TestIPCAttachWelcome(t *testing.T) {
 		defer os.RemoveAll(ws)
 		ipc = filepath.Join(ws, "sdx.ipc")
 	}
-	sdx := runTomo(t,
+	sdx := runSdx(t,
 		"--sdxx.datadir", tmpdir(t)+"sdxx/"+time.Now().String(),
 		"--port", "0", "--maxpeers", "0", "--nodiscover", "--nat", "none",
 		"--etherbase", coinbase, "--ipcpath", ipc)
@@ -97,7 +97,7 @@ func TestIPCAttachWelcome(t *testing.T) {
 func TestHTTPAttachWelcome(t *testing.T) {
 	coinbase := "0x8605cdbbdb6d264aa742e77020dcbc58fcdce182"
 	port := strconv.Itoa(trulyRandInt(1024, 65536)) // Yeah, sometimes this will fail, sorry :P
-	sdx := runTomo(t,
+	sdx := runSdx(t,
 		"--sdxx.datadir", tmpdir(t)+"sdxx/"+time.Now().String(),
 		"--port", "0", "--maxpeers", "0", "--nodiscover", "--nat", "none",
 		"--etherbase", coinbase, "--rpc", "--rpcport", port)
@@ -113,7 +113,7 @@ func TestWSAttachWelcome(t *testing.T) {
 	coinbase := "0x8605cdbbdb6d264aa742e77020dcbc58fcdce182"
 	port := strconv.Itoa(trulyRandInt(1024, 65536)) // Yeah, sometimes this will fail, sorry :P
 
-	sdx := runTomo(t,
+	sdx := runSdx(t,
 		"--sdxx.datadir", tmpdir(t)+"sdxx/"+time.Now().String(),
 		"--port", "0", "--maxpeers", "0", "--nodiscover", "--nat", "none",
 		"--etherbase", coinbase, "--ws", "--wsport", port)
@@ -127,7 +127,7 @@ func TestWSAttachWelcome(t *testing.T) {
 
 func testAttachWelcome(t *testing.T, sdx *testtomo, endpoint, apis string) {
 	// Attach to a running sdx note and terminate immediately
-	attach := runTomo(t, "attach", endpoint)
+	attach := runSdx(t, "attach", endpoint)
 	defer attach.ExpectExit()
 	attach.CloseStdin()
 

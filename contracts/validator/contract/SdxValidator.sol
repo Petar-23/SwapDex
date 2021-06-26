@@ -2,7 +2,7 @@ pragma solidity ^0.4.21;
 
 import "./libs/SafeMath.sol";
 
-contract TomoValidator {
+contract SdxValidator {
     using SafeMath for uint256;
 
     event Vote(address _voter, address _candidate, uint256 _cap);
@@ -83,7 +83,7 @@ contract TomoValidator {
         _;
     }
 
-    function TomoValidator (
+    function SdxValidator (
         address[] _candidates,
         uint256[] _caps,
         address _firstOwner,

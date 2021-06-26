@@ -43,13 +43,13 @@ func tmpDatadirWithKeystore(t *testing.T) string {
 }
 
 func TestAccountListEmpty(t *testing.T) {
-	sdx := runTomo(t, "account", "list")
+	sdx := runSdx(t, "account", "list")
 	sdx.ExpectExit()
 }
 
 func TestAccountList(t *testing.T) {
 	datadir := tmpDatadirWithKeystore(t)
-	sdx := runTomo(t, "account", "list", "--datadir", datadir)
+	sdx := runSdx(t, "account", "list", "--datadir", datadir)
 	defer sdx.ExpectExit()
 	if runtime.GOOS == "windows" {
 		sdx.Expect(`
@@ -67,7 +67,7 @@ Account #2: {289d485d9771714cce91d3393d764e1311907acc} keystore://{{.Datadir}}/k
 }
 
 func TestAccountNew(t *testing.T) {
-	sdx := runTomo(t, "account", "new", "--lightkdf")
+	sdx := runSdx(t, "account", "new", "--lightkdf")
 	defer sdx.ExpectExit()
 	sdx.Expect(`
 Your new account is locked with a password. Please give a password. Do not forget this password.
@@ -79,7 +79,7 @@ Repeat passphrase: {{.InputLine "foobar"}}
 }
 
 func TestAccountNewBadRepeat(t *testing.T) {
-	sdx := runTomo(t, "account", "new", "--lightkdf")
+	sdx := runSdx(t, "account", "new", "--lightkdf")
 	defer sdx.ExpectExit()
 	sdx.Expect(`
 Your new account is locked with a password. Please give a password. Do not forget this password.
@@ -92,7 +92,7 @@ Fatal: Passphrases do not match
 
 func TestAccountUpdate(t *testing.T) {
 	datadir := tmpDatadirWithKeystore(t)
-	sdx := runTomo(t, "account", "update",
+	sdx := runSdx(t, "account", "update",
 		"--datadir", datadir, "--lightkdf",
 		"f466859ead1932d743d622cb74fc058882e8648a")
 	defer sdx.ExpectExit()
@@ -107,7 +107,7 @@ Repeat passphrase: {{.InputLine "foobar2"}}
 }
 
 func TestWalletImport(t *testing.T) {
-	sdx := runTomo(t, "wallet", "import", "--lightkdf", "testdata/guswallet.json")
+	sdx := runSdx(t, "wallet", "import", "--lightkdf", "testdata/guswallet.json")
 	defer sdx.ExpectExit()
 	sdx.Expect(`
 !! Unsupported terminal, password will be echoed.
@@ -122,7 +122,7 @@ Address: {d4584b5f6229b7be90727b0fc8c6b91bb427821f}
 }
 
 func TestWalletImportBadPassword(t *testing.T) {
-	sdx := runTomo(t, "wallet", "import", "--lightkdf", "testdata/guswallet.json")
+	sdx := runSdx(t, "wallet", "import", "--lightkdf", "testdata/guswallet.json")
 	defer sdx.ExpectExit()
 	sdx.Expect(`
 !! Unsupported terminal, password will be echoed.
@@ -133,7 +133,7 @@ Fatal: could not decrypt key with given passphrase
 
 func TestUnlockFlag(t *testing.T) {
 	datadir := tmpDatadirWithKeystore(t)
-	sdx := runTomo(t,
+	sdx := runSdx(t,
 		"--datadir", datadir, "--nat", "none", "--nodiscover", "--maxpeers", "0", "--port", "0",
 		"--unlock", "f466859ead1932d743d622cb74fc058882e8648a",
 		"js", "testdata/empty.js")
@@ -157,7 +157,7 @@ Passphrase: {{.InputLine "foobar"}}
 
 func TestUnlockFlagWrongPassword(t *testing.T) {
 	datadir := tmpDatadirWithKeystore(t)
-	sdx := runTomo(t,
+	sdx := runSdx(t,
 		"--datadir", datadir, "--nat", "none", "--nodiscover", "--maxpeers", "0", "--port", "0",
 		"--unlock", "f466859ead1932d743d622cb74fc058882e8648a")
 	defer sdx.ExpectExit()
@@ -176,7 +176,7 @@ Fatal: Failed to unlock account f466859ead1932d743d622cb74fc058882e8648a (could 
 // https://github.com/tomochain/tomochain/issues/1785
 func TestUnlockFlagMultiIndex(t *testing.T) {
 	datadir := tmpDatadirWithKeystore(t)
-	sdx := runTomo(t,
+	sdx := runSdx(t,
 		"--datadir", datadir, "--nat", "none", "--nodiscover", "--maxpeers", "0", "--port", "0",
 		"--unlock", "0,2",
 		"js", "testdata/empty.js")
@@ -203,7 +203,7 @@ Passphrase: {{.InputLine "foobar"}}
 
 func TestUnlockFlagPasswordFile(t *testing.T) {
 	datadir := tmpDatadirWithKeystore(t)
-	sdx := runTomo(t,
+	sdx := runSdx(t,
 		"--datadir", datadir, "--nat", "none", "--nodiscover", "--maxpeers", "0", "--port", "0",
 		"--password", "testdata/passwords.txt", "--unlock", "0,2",
 		"js", "testdata/empty.js")
@@ -223,7 +223,7 @@ func TestUnlockFlagPasswordFile(t *testing.T) {
 
 func TestUnlockFlagPasswordFileWrongPassword(t *testing.T) {
 	datadir := tmpDatadirWithKeystore(t)
-	sdx := runTomo(t,
+	sdx := runSdx(t,
 		"--datadir", datadir, "--nat", "none", "--nodiscover", "--maxpeers", "0", "--port", "0",
 		"--password", "testdata/wrong-passwords.txt", "--unlock", "0,2")
 	defer sdx.ExpectExit()
@@ -234,7 +234,7 @@ Fatal: Failed to unlock account 0 (could not decrypt key with given passphrase)
 
 func TestUnlockFlagAmbiguous(t *testing.T) {
 	store := filepath.Join("..", "..", "accounts", "keystore", "testdata", "dupes")
-	sdx := runTomo(t,
+	sdx := runSdx(t,
 		"--keystore", store, "--nat", "none", "--nodiscover", "--maxpeers", "0", "--port", "0",
 		"--unlock", "f466859ead1932d743d622cb74fc058882e8648a",
 		"js", "testdata/empty.js")
@@ -272,7 +272,7 @@ In order to avoid this warning, you need to remove the following duplicate key f
 
 func TestUnlockFlagAmbiguousWrongPassword(t *testing.T) {
 	store := filepath.Join("..", "..", "accounts", "keystore", "testdata", "dupes")
-	sdx := runTomo(t,
+	sdx := runSdx(t,
 		"--keystore", store, "--nat", "none", "--nodiscover", "--maxpeers", "0", "--port", "0",
 		"--unlock", "f466859ead1932d743d622cb74fc058882e8648a")
 	defer sdx.ExpectExit()

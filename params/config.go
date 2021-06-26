@@ -24,14 +24,14 @@ import (
 )
 
 var (
-	TomoMainnetGenesisHash = common.HexToHash("9326145f8a2c8c00bbe13afc7d7f3d9c868b5ef39d89f2f4e9390e9720298624") // Sdx Mainnet genesis hash to enforce below configs on
-	MainnetGenesisHash     = common.HexToHash("8d13370621558f4ed0da587934473c0404729f28b0ff1d50e5fdd840457a2f17") // Mainnet genesis hash to enforce below configs on
-	TestnetGenesisHash     = common.HexToHash("dffc8ae3b45965404b4fd73ce7f0e13e822ac0fc23ce7e95b42bc5f1e57023a5") // Testnet genesis hash to enforce below configs on
+	SdxMainnetGenesisHash = common.HexToHash("9326145f8a2c8c00bbe13afc7d7f3d9c868b5ef39d89f2f4e9390e9720298624") // Sdx Mainnet genesis hash to enforce below configs on
+	MainnetGenesisHash    = common.HexToHash("8d13370621558f4ed0da587934473c0404729f28b0ff1d50e5fdd840457a2f17") // Mainnet genesis hash to enforce below configs on
+	TestnetGenesisHash    = common.HexToHash("dffc8ae3b45965404b4fd73ce7f0e13e822ac0fc23ce7e95b42bc5f1e57023a5") // Testnet genesis hash to enforce below configs on
 )
 
 var (
-	// TomoChain mainnet config
-	TomoMainnetChainConfig = &ChainConfig{
+	// SdxChain mainnet config
+	SdxMainnetChainConfig = &ChainConfig{
 		ChainId:        big.NewInt(7879),
 		HomesteadBlock: big.NewInt(1),
 		EIP150Block:    big.NewInt(2),
@@ -42,9 +42,9 @@ var (
 		Posv: &PosvConfig{
 			Period:              2,
 			Epoch:               900,
-			Reward:              250,
+			Reward:              6600,
 			RewardCheckpoint:    900,
-			Gap:                 5,
+			Gap:                 450,
 			FoudationWalletAddr: common.HexToAddress("0x0000000000000000000000000000000000000068"),
 		},
 	}

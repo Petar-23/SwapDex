@@ -16,25 +16,26 @@
 package validator
 
 import (
+	"math/big"
+
 	"github.com/tomochain/tomochain/accounts/abi/bind"
 	"github.com/tomochain/tomochain/common"
 	"github.com/tomochain/tomochain/contracts/validator/contract"
-	"math/big"
 )
 
 type Validator struct {
-	*contract.TomoValidatorSession
+	*contract.SdxValidatorSession
 	contractBackend bind.ContractBackend
 }
 
 func NewValidator(transactOpts *bind.TransactOpts, contractAddr common.Address, contractBackend bind.ContractBackend) (*Validator, error) {
-	validator, err := contract.NewTomoValidator(contractAddr, contractBackend)
+	validator, err := contract.NewSdxValidator(contractAddr, contractBackend)
 	if err != nil {
 		return nil, err
 	}
 
 	return &Validator{
-		&contract.TomoValidatorSession{
+		&contract.SdxValidatorSession{
 			Contract:     validator,
 			TransactOpts: *transactOpts,
 		},
@@ -52,7 +53,7 @@ func DeployValidator(transactOpts *bind.TransactOpts, contractBackend bind.Contr
 	// 150 masternodes
 	// Candidate Delay Withdraw 30 days = 1296000 blocks
 	// Voter Delay Withdraw 3 days = 129600 blocks
-	validatorAddr, _, _, err := contract.DeployTomoValidator(transactOpts, contractBackend, validatorAddress, caps, ownerAddress, minDeposit, minVoterCap, big.NewInt(1500), big.NewInt(1296000), big.NewInt(129600))
+	validatorAddr, _, _, err := contract.DeploySdxValidator(transactOpts, contractBackend, validatorAddress, caps, ownerAddress, minDeposit, minVoterCap, big.NewInt(1500), big.NewInt(1296000), big.NewInt(129600))
 	if err != nil {
 		return validatorAddr, nil, err
 	}

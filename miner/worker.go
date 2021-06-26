@@ -852,11 +852,11 @@ func (env *Work) commitTransactions(mux *event.TypeMux, balanceFee map[common.Ad
 			}
 		}
 
-		// validate minFee slot for TomoZ
-		if tx.IsTomoZApplyTransaction() {
+		// validate minFee slot for SdxZ
+		if tx.IsSdxZApplyTransaction() {
 			copyState, _ := bc.State()
-			if err := core.ValidateTomoZApplyTransaction(bc, nil, copyState, common.BytesToAddress(tx.Data()[4:])); err != nil {
-				log.Debug("TomoZApply: invalid token", "token", common.BytesToAddress(tx.Data()[4:]).Hex())
+			if err := core.ValidateSdxZApplyTransaction(bc, nil, copyState, common.BytesToAddress(tx.Data()[4:])); err != nil {
+				log.Debug("SdxZApply: invalid token", "token", common.BytesToAddress(tx.Data()[4:]).Hex())
 				txs.Pop()
 				continue
 			}
@@ -967,11 +967,11 @@ func (env *Work) commitTransactions(mux *event.TypeMux, balanceFee map[common.Ad
 			}
 		}
 
-		// validate minFee slot for TomoZ
-		if tx.IsTomoZApplyTransaction() {
+		// validate minFee slot for SdxZ
+		if tx.IsSdxZApplyTransaction() {
 			copyState, _ := bc.State()
-			if err := core.ValidateTomoZApplyTransaction(bc, nil, copyState, common.BytesToAddress(tx.Data()[4:])); err != nil {
-				log.Debug("TomoZApply: invalid token", "token", common.BytesToAddress(tx.Data()[4:]).Hex())
+			if err := core.ValidateSdxZApplyTransaction(bc, nil, copyState, common.BytesToAddress(tx.Data()[4:])); err != nil {
+				log.Debug("SdxZApply: invalid token", "token", common.BytesToAddress(tx.Data()[4:]).Hex())
 				txs.Pop()
 				continue
 			}

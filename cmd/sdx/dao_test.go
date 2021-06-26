@@ -17,12 +17,13 @@
 package main
 
 import (
-	"github.com/tomochain/tomochain/core/rawdb"
 	"io/ioutil"
 	"math/big"
 	"os"
 	"path/filepath"
 	"testing"
+
+	"github.com/tomochain/tomochain/core/rawdb"
 
 	"github.com/tomochain/tomochain/common"
 	"github.com/tomochain/tomochain/core"
@@ -88,7 +89,7 @@ func TestDAOForkBlockNewChain(t *testing.T) {
 		expectVote  bool
 	}{
 		// Test DAO Default Mainnet
-		// {"", params.TomoMainnetChainConfig.DAOForkBlock, false},
+		// {"", params.SdxMainnetChainConfig.DAOForkBlock, false},
 		// test DAO Init Old Privnet
 		{daoOldGenesis, nil, false},
 		// test DAO Default No Fork Privnet
@@ -111,11 +112,11 @@ func testDAOForkBlockNewChain(t *testing.T, test int, genesis string, expectBloc
 		if err := ioutil.WriteFile(json, []byte(genesis), 0600); err != nil {
 			t.Fatalf("test %d: failed to write genesis file: %v", test, err)
 		}
-		runTomo(t, "--datadir", datadir, "init", json).WaitExit()
+		runSdx(t, "--datadir", datadir, "init", json).WaitExit()
 	} else {
 		// Force chain initialization
 		args := []string{"--port", "0", "--maxpeers", "0", "--nodiscover", "--nat", "none", "--ipcdisable", "--datadir", datadir}
-		sdx := runTomo(t, append(args, []string{"--exec", "2+2", "console"}...)...)
+		sdx := runSdx(t, append(args, []string{"--exec", "2+2", "console"}...)...)
 		sdx.WaitExit()
 	}
 	// Retrieve the DAO config flag from the database
