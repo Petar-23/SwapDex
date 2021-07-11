@@ -9,7 +9,7 @@ The following are the <b> minimum recommended requirements </b> to run a Mastern
 1) Device/VPS running Ubuntu operating system with the following minimum specifications:
 
 * 16GB RAM
-* 120GB SSD *(higher the better - this size will increase as the chain ages so it is worth considering getting more storage to future-proof the storage requirements)*
+* 400GB SSD *(higher the better - this size will increase as the chain ages so it is worth considering getting more storage to future-proof the storage requirements)*
 * 6 Core CPU
 
 2) A MetaMask wallet with at least 10,001 SDX in the wallet. While you only need 10,000 SDX to stake, we recommend the wallet holding a little more to cover gas fees.
@@ -22,9 +22,9 @@ Where entries are provided in ``[Square Brackets]`` the description in the squar
 >Examples:
 >* identity "\[Name for node]\"
 >   * identity "MyNode"
->* etherbase 0x\[MSAA]
+>* etherbase "0x\[MSAA]"
 >   * etherbase "0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B"
->* unlock 0x\[MSAA]
+>* unlock "0x\[MSAA]"
 >   * unlock "0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B"
    
 Where entries are provided in ``"quotation marks"`` you need to keep the quotation marks.
