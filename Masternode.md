@@ -23,9 +23,9 @@ Where entries are provided in ``[Square Brackets]`` the description in the squar
 >* identity "\[Name for node]\"
 >   * identity "MyNode"
 >* etherbase 0x\[MSAA]
->   * etherbase 0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B
+>   * etherbase "0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B"
 >* unlock 0x\[MSAA]
->   * unlock 0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B
+>   * unlock "0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B"
    
 Where entries are provided in ``"quotation marks"`` you need to keep the quotation marks.
 There will be commands which require you confirm you want to proceed and times you are prompted to enter your password.
@@ -109,7 +109,7 @@ Please note there are a number of entries in the code below where you will need 
 If you enter tmux and forgot to copy your MSAA you can enter the command ``exit`` to end the tmux session to find your MSAA address.
 
 ``
-sdx  --syncmode "full" --networkid 7879 --port 10303 --rpc --rpccorsdomain "*" --rpcaddr 0.0.0.0 --rpcport 8501 --rpcvhosts "*"   --rpcapi "db,eth,net,web3,personal,debug" --gcmode "archive" --identity "[Name for node]" --etherbase 0x[MSAA] --unlock 0x[MSAA] --mine --gasprice 2500 --password pass.txt console
+sdx  --syncmode "full" --networkid 7879 --port 10303 --rpc --rpccorsdomain "*" --rpcaddr 0.0.0.0 --rpcport 8501 --rpcvhosts "*"   --rpcapi "db,eth,net,web3,personal,debug"  --identity "[Name for node]" --etherbase "0x[MSAA]" --unlock "0x[MSAA]" --mine --gasprice 2500 --password pass.txt console
 ``
 
 # Congratulations, you have now set up your own Masternode!
