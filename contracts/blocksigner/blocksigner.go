@@ -1,3 +1,4 @@
+// Copyright 2019 The Tomochain Authors
 // Copyright (c) 2021 Sdxchain
 //
 // This program is free software: you can redistribute it and/or modify
@@ -16,10 +17,11 @@
 package blocksigner
 
 import (
+	"math/big"
+
 	"github.com/tomochain/tomochain/accounts/abi/bind"
 	"github.com/tomochain/tomochain/common"
 	"github.com/tomochain/tomochain/contracts/blocksigner/contract"
-	"math/big"
 )
 
 type BlockSigner struct {

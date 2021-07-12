@@ -1,3 +1,4 @@
+// Copyright 2019 The Tomochain Authors
 // Copyright (c) 2021 Sdxchain
 //
 // This program is free software: you can redistribute it and/or modify

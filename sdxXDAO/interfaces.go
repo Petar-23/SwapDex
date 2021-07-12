@@ -1,3 +1,4 @@
+// Copyright 2019 The Tomochain Authors
 // Copyright 2021 The Sdxchain Authors
 // This file is part of the Core Sdxchain infrastructure
 // https://swapdex.net
