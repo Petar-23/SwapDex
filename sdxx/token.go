@@ -4,6 +4,7 @@ import (
 	"math/big"
 	"strings"
 
+	sdxchain "github.com/69th-byte/SmartDex-Chain"
 	"github.com/69th-byte/SmartDex-Chain/contracts/sdxx/contract"
 	"github.com/69th-byte/SmartDex-Chain/log"
 
