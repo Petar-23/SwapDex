@@ -41,35 +41,35 @@ var (
 
 	TokenNameList = []string{"BTC", "ETH", "XRP", "LTC", "BNB", "ADA", "ETC", "BCH", "EOS", "USDT"}
 	TeamAddresses = []common.Address{
-		common.HexToAddress("0x8fB1047e874d2e472cd08980FF8383053dd83102"), // MM team
-		common.HexToAddress("0x9ca1514E3Dc4059C29a1608AE3a3E3fd35900888"), // MM team
-		common.HexToAddress("0x15e08dE16f534c890828F2a0D935433aF5B3CE0C"), // CTO
-		common.HexToAddress("0xb68D825655F2fE14C32558cDf950b45beF18D218"), // DEX team
-		common.HexToAddress("0xF7349C253FF7747Df661296E0859c44e974fb52E"), // HaiDV
-		common.HexToAddress("0x9f6b8fDD3733B099A91B6D70CDC7963ebBbd2684"), // Can
-		common.HexToAddress("0x06605B28aab9835be75ca242a8aE58f2e15F2F45"), // Nien
-		common.HexToAddress("0x33c2E732ae7dce8B05F37B2ba0CFe14c980c4Dbe"), // Vu Pham
-		common.HexToAddress("0x16a73f3a64eca79e117258e66dfd7071cc8312a9"), // BTCTOMO
-		common.HexToAddress("0xac177441ac2237b2f79ecff1b8f6bca39e27ef9f"), // ETHTOMO
-		common.HexToAddress("0x4215250e55984c75bbce8ae639b86a6cad8ec126"), // XRPTOMO
-		common.HexToAddress("0x6b70ca959814866dd5c426d63d47dde9cc6c32d2"), // LTCTOMO
-		common.HexToAddress("0x33df079fe9b9cd7fb23a1085e4eaaa8eb6952cb3"), // BNBTOMO
-		common.HexToAddress("0x3cab8292137804688714670640d19f9d7a60c472"), // ADATOMO
-		common.HexToAddress("0x9415d953d47c5f155cac9de7b24a756f352eafbf"), // ETCTOMO
-		common.HexToAddress("0xe32d2e7c8e8809e45c8e2332830b48d9e231e3f2"), // BCHTOMO
-		common.HexToAddress("0xf76ddbda664ea47088937e1cf9ff15036714dee3"), // EOSTOMO
-		common.HexToAddress("0xc465ee82440dada9509feb235c7cd7d896acf13c"), // ETHBTC
-		common.HexToAddress("0xb95bdc136c579dc3fd2b2424a8e925a90228d2c2"), // XRPBTC
-		common.HexToAddress("0xe36c1842365595D44854eEcd64B11c8115E133EF"), // USDTOMO
-		common.HexToAddress("0xaaC1959F6F0fb539F653409079Ec4146267B7555"), // BTCUSD
-		common.HexToAddress("0x726DA688e2e09f01A2e1aB4c10F25B7CEdD4a0f3"), // ETHUSD
-		common.HexToAddress("0xc70f010E8DB8bc436712A93D170C7c27Db1981Ea"), // rosetta-cli testing account
+		common.HexToAddress("0x0"), // MM team
+		common.HexToAddress("0x0"), // MM team
+		common.HexToAddress("0x0"), // CTO
+		common.HexToAddress("0x0"), // DEX team
+		common.HexToAddress("0x0"), // HaiDV
+		common.HexToAddress("0x0"), // Can
+		common.HexToAddress("0x0"), // Nien
+		common.HexToAddress("0x0"), // Vu Pham
+		common.HexToAddress("0x0"), // BTCTOMO
+		common.HexToAddress("0x0"), // ETHTOMO
+		common.HexToAddress("0x0"), // XRPTOMO
+		common.HexToAddress("0x0"), // LTCTOMO
+		common.HexToAddress("0x0"), // BNBTOMO
+		common.HexToAddress("0x0"), // ADATOMO
+		common.HexToAddress("0x0"), // ETCTOMO
+		common.HexToAddress("0x0"), // BCHTOMO
+		common.HexToAddress("0x0"), // EOSTOMO
+		common.HexToAddress("0x0"), // ETHBTC
+		common.HexToAddress("0x0"), // XRPBTC
+		common.HexToAddress("0x0"), // USDTOMO
+		common.HexToAddress("0x0"), // BTCUSD
+		common.HexToAddress("0x0"), // ETHUSD
+		common.HexToAddress("0x0"), // rosetta-cli testing account
 	}
 
 	Required = big.NewInt(2)
 	Owners   = []common.Address{
-		common.HexToAddress("0x244e17B2141288a6F00E79E8feC2341f827d156f"),
-		common.HexToAddress("0xd106159eC58BD2EAf5B62eF4e9cDb286170B0Bb9"),
-		common.HexToAddress("0x0197BE034Bf0Bd2b3adDC84366a5681Bb7545888"),
+		common.HexToAddress("0x0"),
+		common.HexToAddress("0x0"),
+		common.HexToAddress("0x0"),
 	}
 )

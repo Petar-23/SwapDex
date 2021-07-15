@@ -41,28 +41,28 @@ var (
 
 	TokenNameList = []string{"BTC", "ETH", "XRP", "LTC", "BNB", "ADA", "ETC", "BCH", "EOS", "USDT"}
 	TeamAddresses = []common.Address{
-		common.HexToAddress("0xE3584D2D430eF34FF9fEeCBEBE6E0f6980082F05"), // Test1
-		common.HexToAddress("0x16a73f3a64eca79e117258e66dfd7071cc8312a9"), // BTCTOMO
-		common.HexToAddress("0xac177441ac2237b2f79ecff1b8f6bca39e27ef9f"), // ETHTOMO
-		common.HexToAddress("0x4215250e55984c75bbce8ae639b86a6cad8ec126"), // XRPTOMO
-		common.HexToAddress("0x6b70ca959814866dd5c426d63d47dde9cc6c32d2"), // LTCTOMO
-		common.HexToAddress("0x33df079fe9b9cd7fb23a1085e4eaaa8eb6952cb3"), // BNBTOMO
-		common.HexToAddress("0x3cab8292137804688714670640d19f9d7a60c472"), // ADATOMO
-		common.HexToAddress("0x9415d953d47c5f155cac9de7b24a756f352eafbf"), // ETCTOMO
-		common.HexToAddress("0xe32d2e7c8e8809e45c8e2332830b48d9e231e3f2"), // BCHTOMO
-		common.HexToAddress("0xf76ddbda664ea47088937e1cf9ff15036714dee3"), // EOSTOMO
-		common.HexToAddress("0xc465ee82440dada9509feb235c7cd7d896acf13c"), // ETHBTC
-		common.HexToAddress("0xb95bdc136c579dc3fd2b2424a8e925a90228d2c2"), // XRPBTC
-		common.HexToAddress("0xe36c1842365595D44854eEcd64B11c8115E133EF"), // TOMOUSDT
-		common.HexToAddress("0xaaC1959F6F0fb539F653409079Ec4146267B7555"), // BTCUSDT
-		common.HexToAddress("0x726DA688e2e09f01A2e1aB4c10F25B7CEdD4a0f3"), // ETHUSDT
+		common.HexToAddress("0x0"), // Test1
+		common.HexToAddress("0x0"), // BTCTOMO
+		common.HexToAddress("0x0"), // ETHTOMO
+		common.HexToAddress("0x0"), // XRPTOMO
+		common.HexToAddress("0x0"), // LTCTOMO
+		common.HexToAddress("0x0"), // BNBTOMO
+		common.HexToAddress("0x0"), // ADATOMO
+		common.HexToAddress("0x0"), // ETCTOMO
+		common.HexToAddress("0x0"), // BCHTOMO
+		common.HexToAddress("0x0"), // EOSTOMO
+		common.HexToAddress("0x0"), // ETHBTC
+		common.HexToAddress("0x0"), // XRPBTC
+		common.HexToAddress("0x0"), // TOMOUSDT
+		common.HexToAddress("0x0"), // BTCUSDT
+		common.HexToAddress("0x0"), // ETHUSDT
 
 	}
 
 	Required = big.NewInt(2)
 	Owners   = []common.Address{
-		common.HexToAddress("0x244e17B2141288a6F00E79E8feC2341f827d156f"),
-		common.HexToAddress("0xd106159eC58BD2EAf5B62eF4e9cDb286170B0Bb9"),
-		common.HexToAddress("0x0197BE034Bf0Bd2b3adDC84366a5681Bb7545888"),
+		common.HexToAddress("0x0"),
+		common.HexToAddress("0x0"),
+		common.HexToAddress("0x0"),
 	}
 )
