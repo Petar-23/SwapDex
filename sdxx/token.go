@@ -12,7 +12,6 @@ import (
 	"github.com/69th-byte/SmartDex-Chain/common"
 	"github.com/69th-byte/SmartDex-Chain/consensus"
 	"github.com/69th-byte/SmartDex-Chain/core/state"
-	"github.com/69th-byte/SmartDex-Chain"
 )
 
 // GetTokenAbi return token abi
@@ -32,7 +31,7 @@ func RunContract(chain consensus.ChainContext, statedb *state.StateDB, contractA
 	}
 	backend := (*backends.SimulatedBackend)(nil)
 	fakeCaller := common.HexToAddress("0x0000000000000000000000000000000000000001")
-	msg := tomochain.CallMsg{To: &contractAddr, Data: input, From: fakeCaller}
+	msg := sdxchain.CallMsg{To: &contractAddr, Data: input, From: fakeCaller}
 	result, err := backend.CallContractWithState(msg, chain, statedb)
 	if err != nil {
 		return nil, err

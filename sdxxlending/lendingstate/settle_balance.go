@@ -35,7 +35,7 @@ func (settleBalance *LendingSettleBalance) String() string {
 
 func GetSettleBalance(isSdxXLendingFork bool,
 	takerSide string,
-	lendTokenTOMOPrice,
+	lendTokenSDXPrice,
 	collateralPrice,
 	depositRate,
 	borrowFeeRate *big.Int,
@@ -72,15 +72,15 @@ func GetSettleBalance(isSdxXLendingFork bool,
 				log.Debug("quantity lending too small", "quantityToLend", quantityToLend, "takerFee", takerFee)
 				return result, ErrQuantityTradeTooSmall
 			}
-			if lendingToken.String() != common.SdxNativeAddress && lendTokenTOMOPrice != nil && lendTokenTOMOPrice.Cmp(common.Big0) > 0 {
-				exTakerReceivedFee := new(big.Int).Mul(takerFee, lendTokenTOMOPrice)
+			if lendingToken.String() != common.SdxNativeAddress && lendTokenSDXPrice != nil && lendTokenSDXPrice.Cmp(common.Big0) > 0 {
+				exTakerReceivedFee := new(big.Int).Mul(takerFee, lendTokenSDXPrice)
 				exTakerReceivedFee = new(big.Int).Div(exTakerReceivedFee, lendTokenDecimal)
 
-				defaultFeeInTOMO := new(big.Int).Mul(defaultFee, lendTokenTOMOPrice)
-				defaultFeeInTOMO = new(big.Int).Div(defaultFeeInTOMO, lendTokenDecimal)
+				defaultFeeInSDX := new(big.Int).Mul(defaultFee, lendTokenSDXPrice)
+				defaultFeeInSDX = new(big.Int).Div(defaultFeeInSDX, lendTokenDecimal)
 
-				if (exTakerReceivedFee.Cmp(common.RelayerLendingFee) <= 0 && exTakerReceivedFee.Sign() > 0) || defaultFeeInTOMO.Cmp(common.RelayerLendingFee) <= 0 {
-					log.Debug("takerFee too small", "quantityToLend", quantityToLend, "takerFee", takerFee, "exTakerReceivedFee", exTakerReceivedFee, "borrowFeeRate", borrowFeeRate, "defaultFeeInTOMO", defaultFeeInTOMO)
+				if (exTakerReceivedFee.Cmp(common.RelayerLendingFee) <= 0 && exTakerReceivedFee.Sign() > 0) || defaultFeeInSDX.Cmp(common.RelayerLendingFee) <= 0 {
+					log.Debug("takerFee too small", "quantityToLend", quantityToLend, "takerFee", takerFee, "exTakerReceivedFee", exTakerReceivedFee, "borrowFeeRate", borrowFeeRate, "defaultFeeInSDX", defaultFeeInSDX)
 					return result, ErrQuantityTradeTooSmall
 				}
 			} else if lendingToken.String() == common.SdxNativeAddress {
@@ -122,15 +122,15 @@ func GetSettleBalance(isSdxXLendingFork bool,
 				log.Debug("quantity lending too small", "quantityToLend", quantityToLend, "makerFee", makerFee)
 				return result, ErrQuantityTradeTooSmall
 			}
-			if lendingToken.String() != common.SdxNativeAddress && lendTokenTOMOPrice != nil && lendTokenTOMOPrice.Cmp(common.Big0) > 0 {
-				exMakerReceivedFee := new(big.Int).Mul(makerFee, lendTokenTOMOPrice)
+			if lendingToken.String() != common.SdxNativeAddress && lendTokenSDXPrice != nil && lendTokenSDXPrice.Cmp(common.Big0) > 0 {
+				exMakerReceivedFee := new(big.Int).Mul(makerFee, lendTokenSDXPrice)
 				exMakerReceivedFee = new(big.Int).Div(exMakerReceivedFee, lendTokenDecimal)
 
-				defaultFeeInTOMO := new(big.Int).Mul(defaultFee, lendTokenTOMOPrice)
-				defaultFeeInTOMO = new(big.Int).Div(defaultFeeInTOMO, lendTokenDecimal)
+				defaultFeeInSDX := new(big.Int).Mul(defaultFee, lendTokenSDXPrice)
+				defaultFeeInSDX = new(big.Int).Div(defaultFeeInSDX, lendTokenDecimal)
 
-				if (exMakerReceivedFee.Cmp(common.RelayerLendingFee) <= 0 && exMakerReceivedFee.Sign() > 0) || defaultFeeInTOMO.Cmp(common.RelayerLendingFee) <= 0 {
-					log.Debug("makerFee too small", "quantityToLend", quantityToLend, "makerFee", makerFee, "exMakerReceivedFee", exMakerReceivedFee, "borrowFeeRate", borrowFeeRate, "defaultFeeInTOMO", defaultFeeInTOMO)
+				if (exMakerReceivedFee.Cmp(common.RelayerLendingFee) <= 0 && exMakerReceivedFee.Sign() > 0) || defaultFeeInSDX.Cmp(common.RelayerLendingFee) <= 0 {
+					log.Debug("makerFee too small", "quantityToLend", quantityToLend, "makerFee", makerFee, "exMakerReceivedFee", exMakerReceivedFee, "borrowFeeRate", borrowFeeRate, "defaultFeeInSDX", defaultFeeInSDX)
 					return result, ErrQuantityTradeTooSmall
 				}
 			} else if lendingToken.String() == common.SdxNativeAddress {
@@ -172,16 +172,16 @@ func GetSettleBalance(isSdxXLendingFork bool,
 			log.Debug("quantity lending too small", "quantityToLend", quantityToLend, "borrowFee", borrowFee)
 			return result, ErrQuantityTradeTooSmall
 		}
-		if lendingToken.String() != common.SdxNativeAddress && lendTokenTOMOPrice != nil && lendTokenTOMOPrice.Cmp(common.Big0) > 0 {
+		if lendingToken.String() != common.SdxNativeAddress && lendTokenSDXPrice != nil && lendTokenSDXPrice.Cmp(common.Big0) > 0 {
 			// exReceivedFee: the fee amount which borrowingRelayer will receive
-			exReceivedFee := new(big.Int).Mul(borrowFee, lendTokenTOMOPrice)
+			exReceivedFee := new(big.Int).Mul(borrowFee, lendTokenSDXPrice)
 			exReceivedFee = new(big.Int).Div(exReceivedFee, lendTokenDecimal)
 
-			defaultFeeInTOMO := new(big.Int).Mul(defaultFee, lendTokenTOMOPrice)
-			defaultFeeInTOMO = new(big.Int).Div(defaultFeeInTOMO, lendTokenDecimal)
+			defaultFeeInSDX := new(big.Int).Mul(defaultFee, lendTokenSDXPrice)
+			defaultFeeInSDX = new(big.Int).Div(defaultFeeInSDX, lendTokenDecimal)
 
-			if (exReceivedFee.Cmp(common.RelayerLendingFee) <= 0 && exReceivedFee.Sign() > 0) || defaultFeeInTOMO.Cmp(common.RelayerLendingFee) <= 0 {
-				log.Debug("takerFee too small", "quantityToLend", quantityToLend, "borrowFee", borrowFee, "exReceivedFee", exReceivedFee, "borrowFeeRate", borrowFeeRate, "defaultFeeInTOMO", defaultFeeInTOMO)
+			if (exReceivedFee.Cmp(common.RelayerLendingFee) <= 0 && exReceivedFee.Sign() > 0) || defaultFeeInSDX.Cmp(common.RelayerLendingFee) <= 0 {
+				log.Debug("takerFee too small", "quantityToLend", quantityToLend, "borrowFee", borrowFee, "exReceivedFee", exReceivedFee, "borrowFeeRate", borrowFeeRate, "defaultFeeInSDX", defaultFeeInSDX)
 				return result, ErrQuantityTradeTooSmall
 			}
 		} else if lendingToken.String() == common.SdxNativeAddress {

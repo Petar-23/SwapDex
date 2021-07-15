@@ -545,7 +545,7 @@ var (
 	SdxXDBNameFlag = cli.StringFlag{
 		Name:  "sdxx.dbName",
 		Usage: "Database name for SdxX",
-		Value: "tomodex",
+		Value: "sdxdex",
 	}
 	SdxXDBConnectionUrlFlag = cli.StringFlag{
 		Name:  "sdxx.dbConnectionUrl",
@@ -1044,12 +1044,12 @@ func SetShhConfig(ctx *cli.Context, stack *node.Node, cfg *whisper.Config) {
 	}
 }
 
-func SetSdxXConfig(ctx *cli.Context, cfg *sdxx.Config, tomoDataDir string) {
+func SetSdxXConfig(ctx *cli.Context, cfg *sdxx.Config, sdxDataDir string) {
 	if ctx.GlobalIsSet(SdxXDataDirFlag.Name) {
 		cfg.DataDir = ctx.GlobalString(SdxXDataDirFlag.Name)
 	} else {
 		// default sdxx datadir: DATADIR/sdxx
-		defaultSdxXDataDir := filepath.Join(tomoDataDir, "sdxx")
+		defaultSdxXDataDir := filepath.Join(sdxDataDir, "sdxx")
 
 		filesInSdxXDefaultDir, _ := WalkMatch(defaultSdxXDataDir, "*.ldb")
 		filesInNodeDefaultDir, _ := WalkMatch(node.DefaultDataDir(), "*.ldb")

@@ -636,11 +636,11 @@ func (sdxx *SdxX) ProcessCancelOrder(header *types.Header, tradingStateDB *tradi
 	}
 	log.Debug("ProcessCancelOrder", "baseToken", originOrder.BaseToken, "quoteToken", originOrder.QuoteToken)
 	feeRate := tradingstate.GetExRelayerFee(originOrder.ExchangeAddress, statedb)
-	tokenCancelFee, tokenPriceInTOMO := common.Big0, common.Big0
+	tokenCancelFee, tokenPriceInSDX := common.Big0, common.Big0
 	if !chain.Config().IsTIPSdxXCancellationFee(header.Number) {
 		tokenCancelFee = getCancelFeeV1(baseTokenDecimal, feeRate, &originOrder)
 	} else {
-		tokenCancelFee, tokenPriceInTOMO = sdxx.getCancelFee(chain, statedb, tradingStateDB, &originOrder, feeRate)
+		tokenCancelFee, tokenPriceInSDX = sdxx.getCancelFee(chain, statedb, tradingStateDB, &originOrder, feeRate)
 	}
 	if tokenBalance.Cmp(tokenCancelFee) < 0 {
 		log.Debug("User not enough balance when cancel order", "Side", originOrder.Side, "balance", tokenBalance, "fee", tokenCancelFee)
@@ -672,11 +672,11 @@ func (sdxx *SdxX) ProcessCancelOrder(header *types.Header, tradingStateDB *tradi
 	}
 	// update cancel fee
 	extraData, _ := json.Marshal(struct {
-		CancelFee        string
-		TokenPriceInTOMO string
+		CancelFee       string
+		TokenPriceInSDX string
 	}{
-		CancelFee:        tokenCancelFee.Text(10),
-		TokenPriceInTOMO: tokenPriceInTOMO.Text(10),
+		CancelFee:       tokenCancelFee.Text(10),
+		TokenPriceInSDX: tokenPriceInSDX.Text(10),
 	})
 	order.ExtraData = string(extraData)
 
@@ -708,23 +708,23 @@ func getCancelFeeV1(baseTokenDecimal *big.Int, feeRate *big.Int, order *tradings
 	return cancelFee
 }
 
-// return tokenQuantity, tokenPriceInTOMO
+// return tokenQuantity, tokenPriceInSDX
 func (sdxx *SdxX) getCancelFee(chain consensus.ChainContext, statedb *state.StateDB, tradingStateDb *tradingstate.TradingStateDB, order *tradingstate.OrderItem, feeRate *big.Int) (*big.Int, *big.Int) {
 	if feeRate == nil || feeRate.Sign() == 0 {
 		return common.Big0, common.Big0
 	}
 	cancelFee := big.NewInt(0)
-	tokenPriceInTOMO := big.NewInt(0)
+	tokenPriceInSDX := big.NewInt(0)
 	var err error
 	if order.Side == tradingstate.Ask {
-		cancelFee, tokenPriceInTOMO, err = sdxx.ConvertTOMOToToken(chain, statedb, tradingStateDb, order.BaseToken, common.RelayerCancelFee)
+		cancelFee, tokenPriceInSDX, err = sdxx.ConvertSDXToToken(chain, statedb, tradingStateDb, order.BaseToken, common.RelayerCancelFee)
 	} else {
-		cancelFee, tokenPriceInTOMO, err = sdxx.ConvertTOMOToToken(chain, statedb, tradingStateDb, order.QuoteToken, common.RelayerCancelFee)
+		cancelFee, tokenPriceInSDX, err = sdxx.ConvertSDXToToken(chain, statedb, tradingStateDb, order.QuoteToken, common.RelayerCancelFee)
 	}
 	if err != nil {
 		return common.Big0, common.Big0
 	}
-	return cancelFee, tokenPriceInTOMO
+	return cancelFee, tokenPriceInSDX
 }
 
 func (sdxx *SdxX) UpdateMediumPriceBeforeEpoch(epochNumber uint64, tradingStateDB *tradingstate.TradingStateDB, statedb *state.StateDB) error {
@@ -758,7 +758,7 @@ func (sdxx *SdxX) UpdateMediumPriceBeforeEpoch(epochNumber uint64, tradingStateD
 
 // put average price of epoch to mongodb for tracking liquidation trades
 // epochPriceResult: a map of epoch average price, key is orderbook hash , value is epoch average price
-// orderbook hash genereted from baseToken, quoteToken at tomochain/sdxx/tradingstate/common.go:214
+// orderbook hash genereted from baseToken, quoteToken at sdxchain/sdxx/tradingstate/common.go:214
 func (sdxx *SdxX) LogEpochPrice(epochNumber uint64, epochPriceResult map[common.Hash]*big.Int) error {
 	db := sdxx.GetMongoDB()
 	db.InitBulk()

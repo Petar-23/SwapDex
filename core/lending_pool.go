@@ -539,27 +539,27 @@ func (pool *LendingPool) validateBalance(cloneStateDb *state.StateDB, cloneLendi
 	// collateralPrice: price of collateral by LendingToken
 	// Eg: LendingToken: USD, CollateralToken: BTC
 	// collateralPrice = BTC/USD (eg: 8000 USD)
-	// lendTokenTOMOPrice: price of lendingToken in SDX quote
-	var lendTokenTOMOPrice, collateralPrice, collateralTokenDecimal *big.Int
+	// lendTokenSDXPrice: price of lendingToken in SDX quote
+	var lendTokenSDXPrice, collateralPrice, collateralTokenDecimal *big.Int
 	if collateralToken.String() != lendingstate.EmptyAddress {
 		collateralTokenDecimal, err = sdxXServ.GetTokenDecimal(pool.chain, cloneStateDb, collateralToken)
 		if err != nil {
 			return fmt.Errorf("validateOrder: failed to get collateralTokenDecimal. err: %v", err)
 		}
-		lendTokenTOMOPrice, collateralPrice, err = lendingServ.GetCollateralPrices(pool.chain.CurrentHeader(), pool.chain, cloneStateDb, cloneTradingStateDb, collateralToken, tx.LendingToken())
+		lendTokenSDXPrice, collateralPrice, err = lendingServ.GetCollateralPrices(pool.chain.CurrentHeader(), pool.chain, cloneStateDb, cloneTradingStateDb, collateralToken, tx.LendingToken())
 		if err != nil {
 			return err
 		}
-		if lendTokenTOMOPrice == nil || lendTokenTOMOPrice.Sign() <= 0 || collateralPrice == nil || collateralPrice.Sign() <= 0 {
-			log.Debug("ValidateLending: ErrInvalidCollateralPrice", "lendTokenTOMOPrice", lendTokenTOMOPrice, "collateralPrice", collateralPrice)
+		if lendTokenSDXPrice == nil || lendTokenSDXPrice.Sign() <= 0 || collateralPrice == nil || collateralPrice.Sign() <= 0 {
+			log.Debug("ValidateLending: ErrInvalidCollateralPrice", "lendTokenSDXPrice", lendTokenSDXPrice, "collateralPrice", collateralPrice)
 			return lendingstate.ErrInvalidCollateralPrice
 		}
 	}
-	if lendTokenTOMOPrice == nil || lendTokenTOMOPrice.Sign() == 0 {
+	if lendTokenSDXPrice == nil || lendTokenSDXPrice.Sign() == 0 {
 		if tx.LendingToken().String() == common.SdxNativeAddress {
-			lendTokenTOMOPrice = common.BasePrice
+			lendTokenSDXPrice = common.BasePrice
 		} else {
-			lendTokenTOMOPrice, err = lendingServ.GetMediumTradePriceBeforeEpoch(pool.chain, cloneStateDb, cloneTradingStateDb, tx.LendingToken(), common.HexToAddress(common.SdxNativeAddress))
+			lendTokenSDXPrice, err = lendingServ.GetMediumTradePriceBeforeEpoch(pool.chain, cloneStateDb, cloneTradingStateDb, tx.LendingToken(), common.HexToAddress(common.SdxNativeAddress))
 			if err != nil {
 				return err
 			}
@@ -579,7 +579,7 @@ func (pool *LendingPool) validateBalance(cloneStateDb *state.StateDB, cloneLendi
 		tx.Quantity(),
 		lendingTokenDecimal,
 		collateralTokenDecimal,
-		lendTokenTOMOPrice,
+		lendTokenSDXPrice,
 		collateralPrice,
 		tx.Term(),
 		tx.LendingId(),

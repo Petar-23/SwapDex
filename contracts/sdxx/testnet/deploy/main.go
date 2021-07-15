@@ -106,7 +106,7 @@ func main() {
 	// SDX Collateral
 	nonce = nonce + 1
 	lendingRelayerRegistration.TransactOpts.Nonce = big.NewInt(int64(nonce))
-	_, err = lendingRelayerRegistration.AddCollateral(simulation.TOMONative, simulation.CollateralDepositRate, simulation.CollateralLiquidationRate, simulation.CollateralRecallRate)
+	_, err = lendingRelayerRegistration.AddCollateral(simulation.SDXNative, simulation.CollateralDepositRate, simulation.CollateralLiquidationRate, simulation.CollateralRecallRate)
 
 	if err != nil {
 		log.Fatal("Lending add collateral", err)
@@ -131,7 +131,7 @@ func main() {
 	// SDX lending base
 	nonce = nonce + 1
 	lendingRelayerRegistration.TransactOpts.Nonce = big.NewInt(int64(nonce))
-	_, err = lendingRelayerRegistration.AddBaseToken(simulation.TOMONative)
+	_, err = lendingRelayerRegistration.AddBaseToken(simulation.SDXNative)
 	if err != nil {
 		log.Fatal("Lending add base token SDX", err)
 	}
@@ -178,42 +178,42 @@ func main() {
 	/*
 		for _, token := range tokenList {
 			fromTokens = append(fromTokens, token["address"].(common.Address))
-			toTokens = append(toTokens, simulation.TOMONative)
+			toTokens = append(toTokens, simulation.SDXNative)
 		}
 	*/
 
 	// SDX/BTC
-	fromTokens = append(fromTokens, simulation.TOMONative)
+	fromTokens = append(fromTokens, simulation.SDXNative)
 	toTokens = append(toTokens, tokenList[0]["address"].(common.Address))
 
 	// SDX/USDT
-	fromTokens = append(fromTokens, simulation.TOMONative)
+	fromTokens = append(fromTokens, simulation.SDXNative)
 	toTokens = append(toTokens, tokenList[9]["address"].(common.Address))
 
 	// ETH/SDX
 	fromTokens = append(fromTokens, tokenList[1]["address"].(common.Address))
-	toTokens = append(toTokens, simulation.TOMONative)
+	toTokens = append(toTokens, simulation.SDXNative)
 
 	//fromTokens = append(fromTokens, tokenList[2]["address"].(common.Address))
-	//toTokens = append(toTokens, simulation.TOMONative)
+	//toTokens = append(toTokens, simulation.SDXNative)
 
 	//fromTokens = append(fromTokens, tokenList[3]["address"].(common.Address))
-	//toTokens = append(toTokens, simulation.TOMONative)
+	//toTokens = append(toTokens, simulation.SDXNative)
 
 	//fromTokens = append(fromTokens, tokenList[4]["address"].(common.Address))
-	//toTokens = append(toTokens, simulation.TOMONative)
+	//toTokens = append(toTokens, simulation.SDXNative)
 
 	//fromTokens = append(fromTokens, tokenList[5]["address"].(common.Address))
-	//toTokens = append(toTokens, simulation.TOMONative)
+	//toTokens = append(toTokens, simulation.SDXNative)
 
 	//fromTokens = append(fromTokens, tokenList[6]["address"].(common.Address))
-	//toTokens = append(toTokens, simulation.TOMONative)
+	//toTokens = append(toTokens, simulation.SDXNative)
 
 	//fromTokens = append(fromTokens, tokenList[7]["address"].(common.Address))
-	//toTokens = append(toTokens, simulation.TOMONative)
+	//toTokens = append(toTokens, simulation.SDXNative)
 
 	//fromTokens = append(fromTokens, tokenList[8]["address"].(common.Address))
-	//toTokens = append(toTokens, simulation.TOMONative)
+	//toTokens = append(toTokens, simulation.SDXNative)
 
 	// ETH/BTC
 	fromTokens = append(fromTokens, tokenList[1]["address"].(common.Address))
@@ -282,22 +282,22 @@ func main() {
 	collaterals = append(collaterals, common.HexToAddress("0x0"))
 
 	// SDX 1 min
-	baseTokens = append(baseTokens, simulation.TOMONative)
+	baseTokens = append(baseTokens, simulation.SDXNative)
 	terms = append(terms, big.NewInt(60))
 	collaterals = append(collaterals, common.HexToAddress("0x0"))
 
 	// SDX 1 day
-	baseTokens = append(baseTokens, simulation.TOMONative)
+	baseTokens = append(baseTokens, simulation.SDXNative)
 	terms = append(terms, big.NewInt(86400))
 	collaterals = append(collaterals, common.HexToAddress("0x0"))
 
 	// SDX 7 days
-	baseTokens = append(baseTokens, simulation.TOMONative)
+	baseTokens = append(baseTokens, simulation.SDXNative)
 	terms = append(terms, big.NewInt(7*86400))
 	collaterals = append(collaterals, common.HexToAddress("0x0"))
 
 	// SDX 30 days
-	baseTokens = append(baseTokens, simulation.TOMONative)
+	baseTokens = append(baseTokens, simulation.SDXNative)
 	terms = append(terms, big.NewInt(30*86400))
 	collaterals = append(collaterals, common.HexToAddress("0x0"))
 
@@ -340,7 +340,7 @@ func initSRC21(auth *bind.TransactOpts, client *ethclient.Client, nonce uint64, 
 		tokenCap := simulation.SRC21TokenCap
 		if tokenName == "ADA" {
 			d = 0
-			tokenCap = new(big.Int).Div(simulation.SRC21TokenCap, simulation.BaseTOMO)
+			tokenCap = new(big.Int).Div(simulation.SRC21TokenCap, simulation.BaseSDX)
 		}
 		if tokenName == "USDT" {
 			d = 6

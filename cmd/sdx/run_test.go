@@ -34,7 +34,7 @@ func tmpdir(t *testing.T) string {
 	return dir
 }
 
-type testtomo struct {
+type testsdx struct {
 	*cmdtest.TestCmd
 
 	// template variables for expect
@@ -63,8 +63,8 @@ func TestMain(m *testing.M) {
 
 // spawns sdx with the given command line args. If the args don't set --datadir, the
 // child g gets a temporary data directory.
-func runSdx(t *testing.T, args ...string) *testtomo {
-	tt := &testtomo{}
+func runSdx(t *testing.T, args ...string) *testsdx {
+	tt := &testsdx{}
 	tt.TestCmd = cmdtest.NewTestCmd(t, tt)
 	for i, arg := range args {
 		switch {

@@ -51,7 +51,7 @@ func TestConsoleWelcome(t *testing.T) {
 	sdx.SetTemplateFunc("goos", func() string { return runtime.GOOS })
 	sdx.SetTemplateFunc("goarch", func() string { return runtime.GOARCH })
 	sdx.SetTemplateFunc("gover", runtime.Version)
-	sdx.SetTemplateFunc("tomover", func() string { return params.Version })
+	sdx.SetTemplateFunc("sdxver", func() string { return params.Version })
 	sdx.SetTemplateFunc("niltime", func() string { return time.Unix(1544771829, 0).Format(time.RFC1123) })
 	sdx.SetTemplateFunc("apis", func() string { return ipcAPIs })
 
@@ -59,7 +59,7 @@ func TestConsoleWelcome(t *testing.T) {
 	sdx.Expect(`
 Welcome to the Sdx JavaScript console!
 
-instance: sdx/v{{tomover}}/{{goos}}-{{goarch}}/{{gover}}
+instance: sdx/v{{sdxver}}/{{goos}}-{{goarch}}/{{gover}}
 coinbase: {{.Etherbase}}
 at block: 0 ({{niltime}})
  datadir: {{.Datadir}}
@@ -125,7 +125,7 @@ func TestWSAttachWelcome(t *testing.T) {
 	sdx.ExpectExit()
 }
 
-func testAttachWelcome(t *testing.T, sdx *testtomo, endpoint, apis string) {
+func testAttachWelcome(t *testing.T, sdx *testsdx, endpoint, apis string) {
 	// Attach to a running sdx note and terminate immediately
 	attach := runSdx(t, "attach", endpoint)
 	defer attach.ExpectExit()
@@ -135,7 +135,7 @@ func testAttachWelcome(t *testing.T, sdx *testtomo, endpoint, apis string) {
 	attach.SetTemplateFunc("goos", func() string { return runtime.GOOS })
 	attach.SetTemplateFunc("goarch", func() string { return runtime.GOARCH })
 	attach.SetTemplateFunc("gover", runtime.Version)
-	attach.SetTemplateFunc("tomover", func() string { return params.Version })
+	attach.SetTemplateFunc("sdxver", func() string { return params.Version })
 	attach.SetTemplateFunc("etherbase", func() string { return sdx.Etherbase })
 	attach.SetTemplateFunc("niltime", func() string { return time.Unix(1544771829, 0).Format(time.RFC1123) })
 	attach.SetTemplateFunc("ipc", func() bool { return strings.HasPrefix(endpoint, "ipc") })
@@ -146,7 +146,7 @@ func testAttachWelcome(t *testing.T, sdx *testtomo, endpoint, apis string) {
 	attach.Expect(`
 Welcome to the Sdx JavaScript console!
 
-instance: sdx/v{{tomover}}/{{goos}}-{{goarch}}/{{gover}}
+instance: sdx/v{{sdxver}}/{{goos}}-{{goarch}}/{{gover}}
 coinbase: {{etherbase}}
 at block: 0 ({{niltime}}){{if ipc}}
  datadir: {{datadir}}{{end}}

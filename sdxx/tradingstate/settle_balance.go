@@ -53,20 +53,20 @@ func GetSettleBalance(quotePrice *big.Int, takerSide string, takerFeeRate *big.I
 			return result, ErrQuantityTradeTooSmall
 		}
 		if quoteToken.String() != common.SdxNativeAddress && quotePrice != nil && quotePrice.Cmp(common.Big0) > 0 {
-			// defaultFeeInTOMO
-			defaultFeeInTOMO := new(big.Int).Mul(defaultFee, quotePrice)
-			defaultFeeInTOMO = new(big.Int).Div(defaultFeeInTOMO, quoteTokenDecimal)
+			// defaultFeeInSDX
+			defaultFeeInSDX := new(big.Int).Mul(defaultFee, quotePrice)
+			defaultFeeInSDX = new(big.Int).Div(defaultFeeInSDX, quoteTokenDecimal)
 
 			exMakerReceivedFee := new(big.Int).Mul(makerFee, quotePrice)
 			exMakerReceivedFee = new(big.Int).Div(exMakerReceivedFee, quoteTokenDecimal)
-			if (exMakerReceivedFee.Cmp(common.RelayerFee) <= 0 && exMakerReceivedFee.Sign() > 0) || defaultFeeInTOMO.Cmp(common.RelayerFee) <= 0 {
-				log.Debug("makerFee too small", "quoteTokenQuantity", quoteTokenQuantity, "makerFee", makerFee, "exMakerReceivedFee", exMakerReceivedFee, "quotePrice", quotePrice, "defaultFeeInTOMO", defaultFeeInTOMO)
+			if (exMakerReceivedFee.Cmp(common.RelayerFee) <= 0 && exMakerReceivedFee.Sign() > 0) || defaultFeeInSDX.Cmp(common.RelayerFee) <= 0 {
+				log.Debug("makerFee too small", "quoteTokenQuantity", quoteTokenQuantity, "makerFee", makerFee, "exMakerReceivedFee", exMakerReceivedFee, "quotePrice", quotePrice, "defaultFeeInSDX", defaultFeeInSDX)
 				return result, ErrQuantityTradeTooSmall
 			}
 			exTakerReceivedFee := new(big.Int).Mul(takerFee, quotePrice)
 			exTakerReceivedFee = new(big.Int).Div(exTakerReceivedFee, quoteTokenDecimal)
-			if (exTakerReceivedFee.Cmp(common.RelayerFee) <= 0 && exTakerReceivedFee.Sign() > 0) || defaultFeeInTOMO.Cmp(common.RelayerFee) <= 0 {
-				log.Debug("takerFee too small", "quoteTokenQuantity", quoteTokenQuantity, "takerFee", takerFee, "exTakerReceivedFee", exTakerReceivedFee, "quotePrice", quotePrice, "defaultFeeInTOMO", defaultFeeInTOMO)
+			if (exTakerReceivedFee.Cmp(common.RelayerFee) <= 0 && exTakerReceivedFee.Sign() > 0) || defaultFeeInSDX.Cmp(common.RelayerFee) <= 0 {
+				log.Debug("takerFee too small", "quoteTokenQuantity", quoteTokenQuantity, "takerFee", takerFee, "exTakerReceivedFee", exTakerReceivedFee, "quotePrice", quotePrice, "defaultFeeInSDX", defaultFeeInSDX)
 				return result, ErrQuantityTradeTooSmall
 			}
 		} else if quoteToken.String() == common.SdxNativeAddress {
@@ -109,21 +109,21 @@ func GetSettleBalance(quotePrice *big.Int, takerSide string, takerFeeRate *big.I
 			return result, ErrQuantityTradeTooSmall
 		}
 		if quoteToken.String() != common.SdxNativeAddress && quotePrice != nil && quotePrice.Cmp(common.Big0) > 0 {
-			// defaultFeeInTOMO
-			defaultFeeInTOMO := new(big.Int).Mul(defaultFee, quotePrice)
-			defaultFeeInTOMO = new(big.Int).Div(defaultFeeInTOMO, quoteTokenDecimal)
+			// defaultFeeInSDX
+			defaultFeeInSDX := new(big.Int).Mul(defaultFee, quotePrice)
+			defaultFeeInSDX = new(big.Int).Div(defaultFeeInSDX, quoteTokenDecimal)
 
 			exMakerReceivedFee := new(big.Int).Mul(makerFee, quotePrice)
 			exMakerReceivedFee = new(big.Int).Div(exMakerReceivedFee, quoteTokenDecimal)
 			log.Debug("exMakerReceivedFee", "quoteTokenQuantity", quoteTokenQuantity, "makerFee", makerFee, "exMakerReceivedFee", exMakerReceivedFee, "quotePrice", quotePrice)
-			if (exMakerReceivedFee.Cmp(common.RelayerFee) <= 0 && exMakerReceivedFee.Sign() > 0) || defaultFeeInTOMO.Cmp(common.RelayerFee) <= 0 {
-				log.Debug("makerFee too small", "quoteTokenQuantity", quoteTokenQuantity, "makerFee", makerFee, "exMakerReceivedFee", exMakerReceivedFee, "quotePrice", quotePrice, "defaultMakerFeeInTOMO", defaultFeeInTOMO)
+			if (exMakerReceivedFee.Cmp(common.RelayerFee) <= 0 && exMakerReceivedFee.Sign() > 0) || defaultFeeInSDX.Cmp(common.RelayerFee) <= 0 {
+				log.Debug("makerFee too small", "quoteTokenQuantity", quoteTokenQuantity, "makerFee", makerFee, "exMakerReceivedFee", exMakerReceivedFee, "quotePrice", quotePrice, "defaultMakerFeeInSDX", defaultFeeInSDX)
 				return result, ErrQuantityTradeTooSmall
 			}
 			exTakerReceivedFee := new(big.Int).Mul(takerFee, quotePrice)
 			exTakerReceivedFee = new(big.Int).Div(exTakerReceivedFee, quoteTokenDecimal)
-			if (exTakerReceivedFee.Cmp(common.RelayerFee) <= 0 && exTakerReceivedFee.Sign() > 0) || defaultFeeInTOMO.Cmp(common.RelayerFee) <= 0 {
-				log.Debug("takerFee too small", "quoteTokenQuantity", quoteTokenQuantity, "takerFee", takerFee, "exTakerReceivedFee", exTakerReceivedFee, "quotePrice", quotePrice, "defaultFeeInTOMO", defaultFeeInTOMO)
+			if (exTakerReceivedFee.Cmp(common.RelayerFee) <= 0 && exTakerReceivedFee.Sign() > 0) || defaultFeeInSDX.Cmp(common.RelayerFee) <= 0 {
+				log.Debug("takerFee too small", "quoteTokenQuantity", quoteTokenQuantity, "takerFee", takerFee, "exTakerReceivedFee", exTakerReceivedFee, "quotePrice", quotePrice, "defaultFeeInSDX", defaultFeeInSDX)
 				return result, ErrQuantityTradeTooSmall
 			}
 		} else if quoteToken.String() == common.SdxNativeAddress {

@@ -110,7 +110,7 @@ func TestGetSettleBalance(t *testing.T) {
 	type GetSettleBalanceArg struct {
 		isSdxXLendingFork      bool
 		takerSide              string
-		lendTokenTOMOPrice     *big.Int
+		lendTokenSDXPrice      *big.Int
 		collateralPrice        *big.Int
 		depositRate            *big.Int
 		borrowFeeRate          *big.Int
@@ -341,7 +341,7 @@ func TestGetSettleBalance(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := GetSettleBalance(tt.args.isSdxXLendingFork, tt.args.takerSide, tt.args.lendTokenTOMOPrice, tt.args.collateralPrice, tt.args.depositRate, tt.args.borrowFeeRate, tt.args.lendingToken, tt.args.collateralToken, tt.args.lendTokenDecimal, tt.args.collateralTokenDecimal, tt.args.quantityToLend)
+			got, err := GetSettleBalance(tt.args.isSdxXLendingFork, tt.args.takerSide, tt.args.lendTokenSDXPrice, tt.args.collateralPrice, tt.args.depositRate, tt.args.borrowFeeRate, tt.args.lendingToken, tt.args.collateralToken, tt.args.lendTokenDecimal, tt.args.collateralTokenDecimal, tt.args.quantityToLend)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("GetSettleBalance() error = %v, wantErr %v", err, tt.wantErr)
 				return

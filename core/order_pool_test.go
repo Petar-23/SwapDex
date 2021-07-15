@@ -109,7 +109,7 @@ func testSendOrder(t *testing.T, amount, price *big.Int, side string, status str
 	}
 }
 
-func testSendOrderTOMOUSD(t *testing.T, amount, price *big.Int, side string, status string, orderID uint64) {
+func testSendOrderSDXUSD(t *testing.T, amount, price *big.Int, side string, status string, orderID uint64) {
 
 	client, err := ethclient.Dial("http://127.0.0.1:8501")
 	if err != nil {
@@ -179,7 +179,7 @@ func testSendOrderBTCUSD(t *testing.T, amount, price *big.Int, side string, stat
 	}
 }
 
-func testSendOrderTOMOBTC(t *testing.T, amount, price *big.Int, side string, status string, orderID uint64) {
+func testSendOrderSDXBTC(t *testing.T, amount, price *big.Int, side string, status string, orderID uint64) {
 
 	client, err := ethclient.Dial("http://127.0.0.1:8501")
 	if err != nil {
@@ -259,7 +259,7 @@ func TestSendSellOrder(t *testing.T) {
 func TestFilled(t *testing.T) {
 	////BTC/SDX
 	//BTCUSDPrice := new(big.Int).Mul(big.NewInt(1000000000000000000), big.NewInt(5000))
-	//testSendOrderTOMOUSD(t, new(big.Int).Mul(big.NewInt(1000000000000000000), big.NewInt(5000)), BTCUSDPrice, "BUY", "NEW", 0)
+	//testSendOrderSDXUSD(t, new(big.Int).Mul(big.NewInt(1000000000000000000), big.NewInt(5000)), BTCUSDPrice, "BUY", "NEW", 0)
 	//ETH/BTC
 
 	BTCUSDPrice := new(big.Int).Mul(_1E8, big.NewInt(10000)) // 10000
@@ -270,32 +270,32 @@ func TestFilled(t *testing.T) {
 	time.Sleep(2 * time.Second)
 	testSendOrderBTCUSD(t, new(big.Int).Mul(big.NewInt(2), _1E18), BTCUSDPrice, "SELL", "NEW", 0)
 
-	TOMOBTCPrice := new(big.Int).Mul(big.NewInt(10000000000000), big.NewInt(6)) // 0.00006
+	SDXBTCPrice := new(big.Int).Mul(big.NewInt(10000000000000), big.NewInt(6)) // 0.00006
 	time.Sleep(2 * time.Second)
-	testSendOrderTOMOBTC(t, new(big.Int).Mul(big.NewInt(600000), _1E18), TOMOBTCPrice, "BUY", "NEW", 0)
+	testSendOrderSDXBTC(t, new(big.Int).Mul(big.NewInt(600000), _1E18), SDXBTCPrice, "BUY", "NEW", 0)
 	time.Sleep(2 * time.Second)
-	testSendOrderTOMOBTC(t, new(big.Int).Mul(big.NewInt(600000), _1E18), TOMOBTCPrice, "BUY", "NEW", 0)
+	testSendOrderSDXBTC(t, new(big.Int).Mul(big.NewInt(600000), _1E18), SDXBTCPrice, "BUY", "NEW", 0)
 	time.Sleep(2 * time.Second)
-	testSendOrderTOMOBTC(t, new(big.Int).Mul(big.NewInt(1200000), _1E18), TOMOBTCPrice, "SELL", "NEW", 0)
+	testSendOrderSDXBTC(t, new(big.Int).Mul(big.NewInt(1200000), _1E18), SDXBTCPrice, "SELL", "NEW", 0)
 
-	TOMOUSDPrice := new(big.Int).Mul(_1E7, big.NewInt(6)) // 0.6
+	SDXUSDPrice := new(big.Int).Mul(_1E7, big.NewInt(6)) // 0.6
 	time.Sleep(2 * time.Second)
-	testSendOrderTOMOUSD(t, new(big.Int).Mul(big.NewInt(600000), _1E18), TOMOUSDPrice, "BUY", "NEW", 0)
+	testSendOrderSDXUSD(t, new(big.Int).Mul(big.NewInt(600000), _1E18), SDXUSDPrice, "BUY", "NEW", 0)
 	time.Sleep(2 * time.Second)
-	testSendOrderTOMOUSD(t, new(big.Int).Mul(big.NewInt(600000), _1E18), TOMOUSDPrice, "BUY", "NEW", 0)
+	testSendOrderSDXUSD(t, new(big.Int).Mul(big.NewInt(600000), _1E18), SDXUSDPrice, "BUY", "NEW", 0)
 	time.Sleep(2 * time.Second)
-	testSendOrderTOMOUSD(t, new(big.Int).Mul(big.NewInt(1200000), _1E18), TOMOUSDPrice, "SELL", "NEW", 0)
+	testSendOrderSDXUSD(t, new(big.Int).Mul(big.NewInt(1200000), _1E18), SDXUSDPrice, "SELL", "NEW", 0)
 
 }
 
 func TestX10Filled(t *testing.T) {
-	TOMOUSDPrice := new(big.Int).Mul(_1E7, big.NewInt(60)) // 6
+	SDXUSDPrice := new(big.Int).Mul(_1E7, big.NewInt(60)) // 6
 	time.Sleep(2 * time.Second)
-	testSendOrderTOMOUSD(t, new(big.Int).Mul(big.NewInt(600000), _1E18), TOMOUSDPrice, "BUY", "NEW", 0)
+	testSendOrderSDXUSD(t, new(big.Int).Mul(big.NewInt(600000), _1E18), SDXUSDPrice, "BUY", "NEW", 0)
 	time.Sleep(2 * time.Second)
-	testSendOrderTOMOUSD(t, new(big.Int).Mul(big.NewInt(600000), _1E18), TOMOUSDPrice, "BUY", "NEW", 0)
+	testSendOrderSDXUSD(t, new(big.Int).Mul(big.NewInt(600000), _1E18), SDXUSDPrice, "BUY", "NEW", 0)
 	time.Sleep(2 * time.Second)
-	testSendOrderTOMOUSD(t, new(big.Int).Mul(big.NewInt(1200000), _1E18), TOMOUSDPrice, "SELL", "NEW", 0)
+	testSendOrderSDXUSD(t, new(big.Int).Mul(big.NewInt(1200000), _1E18), SDXUSDPrice, "SELL", "NEW", 0)
 
 }
 func TestPartialFilled(t *testing.T) {
@@ -306,10 +306,10 @@ func TestNoMatch(t *testing.T) {
 }
 
 func TestCancelOrder(t *testing.T) {
-	TOMOBTCPrice := new(big.Int).Mul(big.NewInt(10000000000000), big.NewInt(6)) // 0.00006
-	testSendOrder(t, new(big.Int).Mul(big.NewInt(600000), _1E18), TOMOBTCPrice, "BUY", "NEW", 0)
+	SDXBTCPrice := new(big.Int).Mul(big.NewInt(10000000000000), big.NewInt(6)) // 0.00006
+	testSendOrder(t, new(big.Int).Mul(big.NewInt(600000), _1E18), SDXBTCPrice, "BUY", "NEW", 0)
 	time.Sleep(5 * time.Second)
-	testSendOrder(t, new(big.Int).Mul(big.NewInt(600000), _1E18), TOMOBTCPrice, "BUY", "CANCELLED", 3)
+	testSendOrder(t, new(big.Int).Mul(big.NewInt(600000), _1E18), SDXBTCPrice, "BUY", "CANCELLED", 3)
 	time.Sleep(5 * time.Second)
 	//testSendOrder(t, new(big.Int).SetUint64(48), new(big.Int).SetUint64(15), "SELL", "NEW", 0)
 }

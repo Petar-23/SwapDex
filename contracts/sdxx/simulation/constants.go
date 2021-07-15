@@ -9,21 +9,21 @@ import (
 )
 
 var (
-	BaseTOMO    = big.NewInt(0).Mul(big.NewInt(10), big.NewInt(100000000000000000)) // 1 SDX
+	BaseSDX     = big.NewInt(0).Mul(big.NewInt(10), big.NewInt(100000000000000000)) // 1 SDX
 	RpcEndpoint = "http://127.0.0.1:8501/"
 	MainKey, _  = crypto.HexToECDSA(os.Getenv("MAIN_ADDRESS_KEY"))
 	MainAddr    = crypto.PubkeyToAddress(MainKey.PublicKey) //0x17F2beD710ba50Ed27aEa52fc4bD7Bda5ED4a037
 
 	// SRC21 Token
-	MinSRC21Apply  = big.NewInt(0).Mul(big.NewInt(10), BaseTOMO) // 10 SDX
-	SRC21TokenCap  = big.NewInt(0).Mul(big.NewInt(1000000000000), BaseTOMO)
+	MinSRC21Apply  = big.NewInt(0).Mul(big.NewInt(10), BaseSDX) // 10 SDX
+	SRC21TokenCap  = big.NewInt(0).Mul(big.NewInt(1000000000000), BaseSDX)
 	SRC21TokenFee  = big.NewInt(0)
-	SdxXListingFee = big.NewInt(0).Mul(big.NewInt(1000), BaseTOMO) // 1000 SDX
+	SdxXListingFee = big.NewInt(0).Mul(big.NewInt(1000), BaseSDX) // 1000 SDX
 
 	// SDXX
 	MaxRelayers               = big.NewInt(200)
 	MaxTokenList              = big.NewInt(200)
-	MinDeposit                = big.NewInt(0).Mul(big.NewInt(25000), BaseTOMO) // 25000 SDX
+	MinDeposit                = big.NewInt(0).Mul(big.NewInt(25000), BaseSDX) // 25000 SDX
 	CollateralDepositRate     = big.NewInt(150)
 	CollateralLiquidationRate = big.NewInt(110)
 	CollateralRecallRate      = big.NewInt(200)
@@ -37,7 +37,7 @@ var (
 	OwnerRelayerKey, _ = crypto.HexToECDSA(os.Getenv("RELAYER_OWNER_KEY"))
 	OwnerRelayerAddr   = crypto.PubkeyToAddress(OwnerRelayerKey.PublicKey) //0x703c4b2bD70c169f5717101CaeE543299Fc946C7
 
-	TOMONative = common.HexToAddress("0x0000000000000000000000000000000000000001")
+	SDXNative = common.HexToAddress("0x0000000000000000000000000000000000000001")
 
 	TokenNameList = []string{"BTC", "ETH", "XRP", "LTC", "BNB", "ADA", "ETC", "BCH", "EOS", "USDT"}
 	TeamAddresses = []common.Address{
@@ -49,18 +49,18 @@ var (
 		common.HexToAddress("0x0"), // Can
 		common.HexToAddress("0x0"), // Nien
 		common.HexToAddress("0x0"), // Vu Pham
-		common.HexToAddress("0x0"), // BTCTOMO
-		common.HexToAddress("0x0"), // ETHTOMO
-		common.HexToAddress("0x0"), // XRPTOMO
-		common.HexToAddress("0x0"), // LTCTOMO
-		common.HexToAddress("0x0"), // BNBTOMO
-		common.HexToAddress("0x0"), // ADATOMO
-		common.HexToAddress("0x0"), // ETCTOMO
-		common.HexToAddress("0x0"), // BCHTOMO
-		common.HexToAddress("0x0"), // EOSTOMO
+		common.HexToAddress("0x0"), // BTCSDX
+		common.HexToAddress("0x0"), // ETHSDX
+		common.HexToAddress("0x0"), // XRPSDX
+		common.HexToAddress("0x0"), // LTCSDX
+		common.HexToAddress("0x0"), // BNBSDX
+		common.HexToAddress("0x0"), // ADASDX
+		common.HexToAddress("0x0"), // ETCSDX
+		common.HexToAddress("0x0"), // BCHSDX
+		common.HexToAddress("0x0"), // EOSSDX
 		common.HexToAddress("0x0"), // ETHBTC
 		common.HexToAddress("0x0"), // XRPBTC
-		common.HexToAddress("0x0"), // USDTOMO
+		common.HexToAddress("0x0"), // USDSDX
 		common.HexToAddress("0x0"), // BTCUSD
 		common.HexToAddress("0x0"), // ETHUSD
 		common.HexToAddress("0x0"), // rosetta-cli testing account

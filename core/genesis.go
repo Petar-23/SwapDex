@@ -388,6 +388,6 @@ func decodePrealloc(data string) GenesisAlloc {
 
 func DecodeMainnet() GenesisAlloc {
 	mainnetAlloc := GenesisAlloc{}
-	json.Unmarshal([]byte(tomoAllocData), &mainnetAlloc)
+	json.Unmarshal([]byte(sdxAllocData), &mainnetAlloc)
 	return mainnetAlloc
 }

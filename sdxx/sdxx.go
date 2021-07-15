@@ -290,8 +290,8 @@ func (sdxx *SdxX) GetAveragePriceLastEpoch(chain consensus.ChainContext, statedb
 	return nil, nil
 }
 
-// return tokenQuantity (after convert from SDX to token), tokenPriceInTOMO, error
-func (sdxx *SdxX) ConvertTOMOToToken(chain consensus.ChainContext, statedb *state.StateDB, tradingStateDb *tradingstate.TradingStateDB, token common.Address, quantity *big.Int) (*big.Int, *big.Int, error) {
+// return tokenQuantity (after convert from SDX to token), tokenPriceInSDX, error
+func (sdxx *SdxX) ConvertSDXToToken(chain consensus.ChainContext, statedb *state.StateDB, tradingStateDb *tradingstate.TradingStateDB, token common.Address, quantity *big.Int) (*big.Int, *big.Int, error) {
 	if token.String() == common.SdxNativeAddress {
 		return quantity, common.BasePrice, nil
 	}

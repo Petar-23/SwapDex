@@ -128,7 +128,7 @@ func Test_getCancelFee(t *testing.T) {
 
 		// zero fee test: LEND
 		{
-			"TokenA/TOMOzero fee test: LEND",
+			"TokenA/SDXzero fee test: LEND",
 			CancelFeeArg{
 				borrowFeeRate: common.Big0,
 				order: &lendingstate.LendingItem{

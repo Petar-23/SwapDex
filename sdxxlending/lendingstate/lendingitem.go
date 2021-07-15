@@ -349,7 +349,7 @@ func (l *LendingItem) VerifyLendingSignature() error {
 
 func VerifyBalance(isSdxXLendingFork bool, statedb *state.StateDB, lendingStateDb *LendingStateDB,
 	orderType, side, status string, userAddress, relayer, lendingToken, collateralToken common.Address,
-	quantity, lendingTokenDecimal, collateralTokenDecimal, lendTokenTOMOPrice, collateralPrice *big.Int,
+	quantity, lendingTokenDecimal, collateralTokenDecimal, lendTokenSDXPrice, collateralPrice *big.Int,
 	term uint64, lendingId uint64, lendingTradeId uint64) error {
 	borrowingFeeRate := GetFee(statedb, relayer)
 	switch orderType {
@@ -390,17 +390,17 @@ func VerifyBalance(isSdxXLendingFork bool, statedb *state.StateDB, lendingStateD
 					return fmt.Errorf("VerifyBalance: investor doesn't have enough lendingToken. User: %s. Token: %s. Expected: %v. Have: %v", userAddress.Hex(), lendingToken.Hex(), quantity, balance)
 				}
 				// check quantity: reject if it's too small
-				if lendTokenTOMOPrice != nil && lendTokenTOMOPrice.Sign() > 0 {
+				if lendTokenSDXPrice != nil && lendTokenSDXPrice.Sign() > 0 {
 					defaultFee := new(big.Int).Mul(quantity, new(big.Int).SetUint64(DefaultFeeRate))
 					defaultFee = new(big.Int).Div(defaultFee, common.SdxXBaseFee)
-					defaultFeeInTOMO := common.Big0
+					defaultFeeInSDX := common.Big0
 					if lendingToken.String() != common.SdxNativeAddress {
-						defaultFeeInTOMO = new(big.Int).Mul(defaultFee, lendTokenTOMOPrice)
-						defaultFeeInTOMO = new(big.Int).Div(defaultFeeInTOMO, lendingTokenDecimal)
+						defaultFeeInSDX = new(big.Int).Mul(defaultFee, lendTokenSDXPrice)
+						defaultFeeInSDX = new(big.Int).Div(defaultFeeInSDX, lendingTokenDecimal)
 					} else {
-						defaultFeeInTOMO = defaultFee
+						defaultFeeInSDX = defaultFee
 					}
-					if defaultFeeInTOMO.Cmp(common.RelayerLendingFee) <= 0 {
+					if defaultFeeInSDX.Cmp(common.RelayerLendingFee) <= 0 {
 						return ErrQuantityTradeTooSmall
 					}
 
@@ -428,7 +428,7 @@ func VerifyBalance(isSdxXLendingFork bool, statedb *state.StateDB, lendingStateD
 			switch status {
 			case LendingStatusNew:
 				depositRate, _, _ := GetCollateralDetail(statedb, collateralToken)
-				settleBalanceResult, err := GetSettleBalance(isSdxXLendingFork, Borrowing, lendTokenTOMOPrice, collateralPrice, depositRate, borrowingFeeRate, lendingToken, collateralToken, lendingTokenDecimal, collateralTokenDecimal, quantity)
+				settleBalanceResult, err := GetSettleBalance(isSdxXLendingFork, Borrowing, lendTokenSDXPrice, collateralPrice, depositRate, borrowingFeeRate, lendingToken, collateralToken, lendingTokenDecimal, collateralTokenDecimal, quantity)
 				if err != nil {
 					return err
 				}

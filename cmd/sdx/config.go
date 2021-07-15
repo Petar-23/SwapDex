@@ -89,7 +89,7 @@ type Bootnodes struct {
 	Testnet []string
 }
 
-type tomoConfig struct {
+type sdxConfig struct {
 	Eth         eth.Config
 	Shh         whisper.Config
 	Node        node.Config
@@ -102,7 +102,7 @@ type tomoConfig struct {
 	NAT         string
 }
 
-func loadConfig(file string, cfg *tomoConfig) error {
+func loadConfig(file string, cfg *sdxConfig) error {
 	f, err := os.Open(file)
 	if err != nil {
 		return err
@@ -126,9 +126,9 @@ func defaultNodeConfig() node.Config {
 	return cfg
 }
 
-func makeConfigNode(ctx *cli.Context) (*node.Node, tomoConfig) {
+func makeConfigNode(ctx *cli.Context) (*node.Node, sdxConfig) {
 	// Load defaults.
-	cfg := tomoConfig{
+	cfg := sdxConfig{
 		Eth:         eth.DefaultConfig,
 		Shh:         whisper.DefaultConfig,
 		SdxX:        sdxx.DefaultConfig,
@@ -238,7 +238,7 @@ func enableWhisper(ctx *cli.Context) bool {
 	return false
 }
 
-func makeFullNode(ctx *cli.Context) (*node.Node, tomoConfig) {
+func makeFullNode(ctx *cli.Context) (*node.Node, sdxConfig) {
 	stack, cfg := makeConfigNode(ctx)
 
 	// Register SdxX's OrderBook service if requested.
