@@ -19,10 +19,10 @@ package leveldb
 import (
 	"testing"
 
+	"github.com/69th-byte/SmartDex-Chain/ethdb"
+	"github.com/69th-byte/SmartDex-Chain/ethdb/dbtest"
 	"github.com/syndtr/goleveldb/leveldb"
 	"github.com/syndtr/goleveldb/leveldb/storage"
-	"github.com/tomochain/tomochain/ethdb"
-	"github.com/tomochain/tomochain/ethdb/dbtest"
 )
 
 func TestLevelDB(t *testing.T) {

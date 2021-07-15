@@ -5,8 +5,8 @@ import (
 	"errors"
 	"math/big"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/log"
+	"github.com/69th-byte/SmartDex-Chain/common"
+	"github.com/69th-byte/SmartDex-Chain/log"
 )
 
 const DefaultFeeRate = 10 // 10 / SdxXBaseFee = 10 / 10000 = 0.1%

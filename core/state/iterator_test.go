@@ -20,8 +20,8 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/ethdb"
+	"github.com/69th-byte/SmartDex-Chain/common"
+	"github.com/69th-byte/SmartDex-Chain/ethdb"
 )
 
 // Tests that the node iterator indeed walks over the entire database contents.

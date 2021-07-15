@@ -18,11 +18,11 @@ package core
 
 import (
 	"container/list"
-	"github.com/tomochain/tomochain/core/rawdb"
+	"github.com/69th-byte/SmartDex-Chain/core/rawdb"
 
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/ethdb"
-	"github.com/tomochain/tomochain/event"
+	"github.com/69th-byte/SmartDex-Chain/core/types"
+	"github.com/69th-byte/SmartDex-Chain/ethdb"
+	"github.com/69th-byte/SmartDex-Chain/event"
 )
 
 // Implement our EthTest Manager

@@ -22,8 +22,8 @@ import (
 	"strings"
 	"text/tabwriter"
 
-	"github.com/tomochain/tomochain/cmd/utils"
-	swarm "github.com/tomochain/tomochain/swarm/api/client"
+	"github.com/69th-byte/SmartDex-Chain/cmd/utils"
+	swarm "github.com/69th-byte/SmartDex-Chain/swarm/api/client"
 	"gopkg.in/urfave/cli.v1"
 )
 

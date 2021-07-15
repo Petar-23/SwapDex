@@ -24,10 +24,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core/state"
-	"github.com/tomochain/tomochain/core/vm"
-	"github.com/tomochain/tomochain/params"
+	"github.com/69th-byte/SmartDex-Chain/common"
+	"github.com/69th-byte/SmartDex-Chain/core/state"
+	"github.com/69th-byte/SmartDex-Chain/core/vm"
+	"github.com/69th-byte/SmartDex-Chain/params"
 )
 
 type account struct{}

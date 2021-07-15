@@ -22,9 +22,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/metrics"
-	"github.com/tomochain/tomochain/swarm/storage"
+	"github.com/69th-byte/SmartDex-Chain/log"
+	"github.com/69th-byte/SmartDex-Chain/metrics"
+	"github.com/69th-byte/SmartDex-Chain/swarm/storage"
 )
 
 //metrics variables

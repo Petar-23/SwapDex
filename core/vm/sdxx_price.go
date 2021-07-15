@@ -1,10 +1,10 @@
 package vm
 
 import (
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/params"
-	"github.com/tomochain/tomochain/sdxx/tradingstate"
+	"github.com/69th-byte/SmartDex-Chain/common"
+	"github.com/69th-byte/SmartDex-Chain/log"
+	"github.com/69th-byte/SmartDex-Chain/params"
+	"github.com/69th-byte/SmartDex-Chain/sdxx/tradingstate"
 )
 
 const SdxXPriceNumberOfBytesReturn = 32

@@ -23,11 +23,11 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/consensus"
-	"github.com/tomochain/tomochain/consensus/ethash"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/log"
+	"github.com/69th-byte/SmartDex-Chain/common"
+	"github.com/69th-byte/SmartDex-Chain/consensus"
+	"github.com/69th-byte/SmartDex-Chain/consensus/ethash"
+	"github.com/69th-byte/SmartDex-Chain/core/types"
+	"github.com/69th-byte/SmartDex-Chain/log"
 )
 
 type hashrate struct {

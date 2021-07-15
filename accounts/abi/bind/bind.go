@@ -17,7 +17,7 @@
 // Package bind generates Ethereum contract Go bindings.
 //
 // Detailed usage document and tutorial available on the go-ethereum Wiki page:
-// https://github.com/tomochain/tomochain/wiki/Native-DApps:-Go-bindings-to-Ethereum-contracts
+// https://github.com/69th-byte/SmartDex-Chain/wiki/Native-DApps:-Go-bindings-to-Ethereum-contracts
 package bind
 
 import (
@@ -28,7 +28,7 @@ import (
 	"text/template"
 	"unicode"
 
-	"github.com/tomochain/tomochain/accounts/abi"
+	"github.com/69th-byte/SmartDex-Chain/accounts/abi"
 	"golang.org/x/tools/imports"
 )
 

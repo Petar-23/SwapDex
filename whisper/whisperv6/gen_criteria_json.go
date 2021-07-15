@@ -5,7 +5,7 @@ package whisperv6
 import (
 	"encoding/json"
 
-	"github.com/tomochain/tomochain/common/hexutil"
+	"github.com/69th-byte/SmartDex-Chain/common/hexutil"
 )
 
 var _ = (*criteriaOverride)(nil)

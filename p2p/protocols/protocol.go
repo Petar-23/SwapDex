@@ -34,7 +34,7 @@ import (
 	"reflect"
 	"sync"
 
-	"github.com/tomochain/tomochain/p2p"
+	"github.com/69th-byte/SmartDex-Chain/p2p"
 )
 
 // error codes used by this  protocol scheme

@@ -19,8 +19,8 @@ package les
 import (
 	"time"
 
-	"github.com/tomochain/tomochain/common/bitutil"
-	"github.com/tomochain/tomochain/light"
+	"github.com/69th-byte/SmartDex-Chain/common/bitutil"
+	"github.com/69th-byte/SmartDex-Chain/light"
 )
 
 const (

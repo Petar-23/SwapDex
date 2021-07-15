@@ -20,7 +20,7 @@ package ethdb
 import (
 	"io"
 
-	"github.com/tomochain/tomochain/common"
+	"github.com/69th-byte/SmartDex-Chain/common"
 )
 
 // KeyValueReader wraps the Has and Get method of a backing data store.

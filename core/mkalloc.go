@@ -34,8 +34,8 @@ import (
 	"sort"
 	"strconv"
 
-	"github.com/tomochain/tomochain/core"
-	"github.com/tomochain/tomochain/rlp"
+	"github.com/69th-byte/SmartDex-Chain/core"
+	"github.com/69th-byte/SmartDex-Chain/rlp"
 )
 
 type allocItem struct{ Addr, Balance *big.Int }

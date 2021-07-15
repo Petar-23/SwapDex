@@ -7,8 +7,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core/rawdb"
+	"github.com/69th-byte/SmartDex-Chain/common"
+	"github.com/69th-byte/SmartDex-Chain/core/rawdb"
 )
 
 func TestSdxxTrieTest(t *testing.T) {

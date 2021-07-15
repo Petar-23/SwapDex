@@ -22,8 +22,8 @@ import (
 	"io"
 	"net"
 
-	"github.com/tomochain/tomochain/crypto"
-	"github.com/tomochain/tomochain/rlp"
+	"github.com/69th-byte/SmartDex-Chain/crypto"
+	"github.com/69th-byte/SmartDex-Chain/rlp"
 )
 
 // Entry is implemented by known node record entry types.

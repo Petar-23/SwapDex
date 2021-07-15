@@ -21,9 +21,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/tomochain/tomochain/eth/downloader"
-	"github.com/tomochain/tomochain/p2p"
-	"github.com/tomochain/tomochain/p2p/discover"
+	"github.com/69th-byte/SmartDex-Chain/eth/downloader"
+	"github.com/69th-byte/SmartDex-Chain/p2p"
+	"github.com/69th-byte/SmartDex-Chain/p2p/discover"
 )
 
 // Tests that fast sync gets disabled as soon as a real block is successfully

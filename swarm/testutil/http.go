@@ -22,9 +22,9 @@ import (
 	"os"
 	"testing"
 
-	"github.com/tomochain/tomochain/swarm/api"
-	httpapi "github.com/tomochain/tomochain/swarm/api/http"
-	"github.com/tomochain/tomochain/swarm/storage"
+	"github.com/69th-byte/SmartDex-Chain/swarm/api"
+	httpapi "github.com/69th-byte/SmartDex-Chain/swarm/api/http"
+	"github.com/69th-byte/SmartDex-Chain/swarm/storage"
 )
 
 func NewTestSwarmServer(t *testing.T) *TestSwarmServer {

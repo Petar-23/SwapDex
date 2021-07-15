@@ -25,17 +25,17 @@ import (
 	"math/big"
 	"strings"
 
-	"github.com/tomochain/tomochain/core/rawdb"
+	"github.com/69th-byte/SmartDex-Chain/core/rawdb"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/common/hexutil"
-	"github.com/tomochain/tomochain/common/math"
-	"github.com/tomochain/tomochain/core/state"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/ethdb"
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/params"
-	"github.com/tomochain/tomochain/rlp"
+	"github.com/69th-byte/SmartDex-Chain/common"
+	"github.com/69th-byte/SmartDex-Chain/common/hexutil"
+	"github.com/69th-byte/SmartDex-Chain/common/math"
+	"github.com/69th-byte/SmartDex-Chain/core/state"
+	"github.com/69th-byte/SmartDex-Chain/core/types"
+	"github.com/69th-byte/SmartDex-Chain/ethdb"
+	"github.com/69th-byte/SmartDex-Chain/log"
+	"github.com/69th-byte/SmartDex-Chain/params"
+	"github.com/69th-byte/SmartDex-Chain/rlp"
 )
 
 //go:generate gencodec -type Genesis -field-override genesisSpecMarshaling -out gen_genesis.go

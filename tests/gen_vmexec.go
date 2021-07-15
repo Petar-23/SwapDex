@@ -7,9 +7,9 @@ import (
 	"errors"
 	"math/big"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/common/hexutil"
-	"github.com/tomochain/tomochain/common/math"
+	"github.com/69th-byte/SmartDex-Chain/common"
+	"github.com/69th-byte/SmartDex-Chain/common/hexutil"
+	"github.com/69th-byte/SmartDex-Chain/common/math"
 )
 
 var _ = (*vmExecMarshaling)(nil)

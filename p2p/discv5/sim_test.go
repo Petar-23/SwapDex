@@ -28,7 +28,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/tomochain/tomochain/common"
+	"github.com/69th-byte/SmartDex-Chain/common"
 )
 
 // In this test, nodes try to randomly resolve each other.

@@ -29,16 +29,16 @@ import (
 
 	"gopkg.in/urfave/cli.v1"
 
+	"github.com/69th-byte/SmartDex-Chain/cmd/utils"
+	"github.com/69th-byte/SmartDex-Chain/common"
+	"github.com/69th-byte/SmartDex-Chain/eth"
+	"github.com/69th-byte/SmartDex-Chain/internal/debug"
+	"github.com/69th-byte/SmartDex-Chain/log"
+	"github.com/69th-byte/SmartDex-Chain/node"
+	"github.com/69th-byte/SmartDex-Chain/params"
+	"github.com/69th-byte/SmartDex-Chain/sdxx"
+	whisper "github.com/69th-byte/SmartDex-Chain/whisper/whisperv6"
 	"github.com/naoina/toml"
-	"github.com/tomochain/tomochain/cmd/utils"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/eth"
-	"github.com/tomochain/tomochain/internal/debug"
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/node"
-	"github.com/tomochain/tomochain/params"
-	"github.com/tomochain/tomochain/sdxx"
-	whisper "github.com/tomochain/tomochain/whisper/whisperv6"
 )
 
 var (

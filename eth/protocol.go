@@ -21,11 +21,11 @@ import (
 	"io"
 	"math/big"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/event"
-	"github.com/tomochain/tomochain/rlp"
+	"github.com/69th-byte/SmartDex-Chain/common"
+	"github.com/69th-byte/SmartDex-Chain/core"
+	"github.com/69th-byte/SmartDex-Chain/core/types"
+	"github.com/69th-byte/SmartDex-Chain/event"
+	"github.com/69th-byte/SmartDex-Chain/rlp"
 )
 
 // Constants to match up protocol versions and messages

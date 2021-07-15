@@ -23,9 +23,9 @@ import (
 	"testing"
 	"time"
 
+	"github.com/69th-byte/SmartDex-Chain/p2p/discover"
+	"github.com/69th-byte/SmartDex-Chain/p2p/netutil"
 	"github.com/davecgh/go-spew/spew"
-	"github.com/tomochain/tomochain/p2p/discover"
-	"github.com/tomochain/tomochain/p2p/netutil"
 )
 
 func init() {

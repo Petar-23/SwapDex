@@ -1,7 +1,7 @@
 package eth
 
 import (
-	"github.com/tomochain/tomochain/params"
+	"github.com/69th-byte/SmartDex-Chain/params"
 	"math/big"
 	"testing"
 )

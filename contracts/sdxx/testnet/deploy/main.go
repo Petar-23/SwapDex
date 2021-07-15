@@ -7,11 +7,11 @@ import (
 	"math/big"
 	"time"
 
-	"github.com/tomochain/tomochain/accounts/abi/bind"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/contracts/sdxx"
-	simulation "github.com/tomochain/tomochain/contracts/sdxx/testnet"
-	"github.com/tomochain/tomochain/ethclient"
+	"github.com/69th-byte/SmartDex-Chain/accounts/abi/bind"
+	"github.com/69th-byte/SmartDex-Chain/common"
+	"github.com/69th-byte/SmartDex-Chain/contracts/sdxx"
+	simulation "github.com/69th-byte/SmartDex-Chain/contracts/sdxx/testnet"
+	"github.com/69th-byte/SmartDex-Chain/ethclient"
 )
 
 func main() {

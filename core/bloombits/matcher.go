@@ -26,8 +26,8 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/tomochain/tomochain/common/bitutil"
-	"github.com/tomochain/tomochain/crypto"
+	"github.com/69th-byte/SmartDex-Chain/common/bitutil"
+	"github.com/69th-byte/SmartDex-Chain/crypto"
 )
 
 // bloomIndexes represents the bit indexes inside the bloom filter that belong

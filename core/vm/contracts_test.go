@@ -23,11 +23,11 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/tomochain/tomochain/core/rawdb"
-	"github.com/tomochain/tomochain/params"
-	"github.com/tomochain/tomochain/sdxx/tradingstate"
+	"github.com/69th-byte/SmartDex-Chain/core/rawdb"
+	"github.com/69th-byte/SmartDex-Chain/params"
+	"github.com/69th-byte/SmartDex-Chain/sdxx/tradingstate"
 
-	"github.com/tomochain/tomochain/common"
+	"github.com/69th-byte/SmartDex-Chain/common"
 )
 
 // precompiledTest defines the input/output pairs for precompiled contract tests.

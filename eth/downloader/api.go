@@ -20,9 +20,9 @@ import (
 	"context"
 	"sync"
 
-	ethereum "github.com/tomochain/tomochain"
-	"github.com/tomochain/tomochain/event"
-	"github.com/tomochain/tomochain/rpc"
+	ethereum "github.com/69th-byte/SmartDex-Chain"
+	"github.com/69th-byte/SmartDex-Chain/event"
+	"github.com/69th-byte/SmartDex-Chain/rpc"
 )
 
 // PublicDownloaderAPI provides an API which gives information about the current synchronisation status.

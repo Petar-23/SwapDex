@@ -26,11 +26,11 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/swarm/api"
-	swarm "github.com/tomochain/tomochain/swarm/api/client"
-	"github.com/tomochain/tomochain/swarm/storage"
-	"github.com/tomochain/tomochain/swarm/testutil"
+	"github.com/69th-byte/SmartDex-Chain/common"
+	"github.com/69th-byte/SmartDex-Chain/swarm/api"
+	swarm "github.com/69th-byte/SmartDex-Chain/swarm/api/client"
+	"github.com/69th-byte/SmartDex-Chain/swarm/storage"
+	"github.com/69th-byte/SmartDex-Chain/swarm/testutil"
 )
 
 func TestBzzGetPath(t *testing.T) {

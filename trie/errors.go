@@ -19,7 +19,7 @@ package trie
 import (
 	"fmt"
 
-	"github.com/tomochain/tomochain/common"
+	"github.com/69th-byte/SmartDex-Chain/common"
 )
 
 // MissingNodeError is returned by the trie functions (TryGet, TryUpdate, TryDelete)

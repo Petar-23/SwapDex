@@ -19,8 +19,8 @@ package miner
 import (
 	"testing"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core/types"
+	"github.com/69th-byte/SmartDex-Chain/common"
+	"github.com/69th-byte/SmartDex-Chain/core/types"
 )
 
 // noopHeaderRetriever is an implementation of headerRetriever that always

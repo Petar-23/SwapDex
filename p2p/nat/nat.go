@@ -26,7 +26,7 @@ import (
 	"time"
 
 	"github.com/jackpal/go-nat-pmp"
-	"github.com/tomochain/tomochain/log"
+	"github.com/69th-byte/SmartDex-Chain/log"
 )
 
 // An implementation of nat.Interface can map local ports to ports

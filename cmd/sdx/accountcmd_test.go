@@ -173,7 +173,7 @@ Fatal: Failed to unlock account f466859ead1932d743d622cb74fc058882e8648a (could 
 `)
 }
 
-// https://github.com/tomochain/tomochain/issues/1785
+// https://github.com/69th-byte/SmartDex-Chain/issues/1785
 func TestUnlockFlagMultiIndex(t *testing.T) {
 	datadir := tmpDatadirWithKeystore(t)
 	sdx := runSdx(t,

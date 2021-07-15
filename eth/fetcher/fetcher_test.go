@@ -18,19 +18,19 @@ package fetcher
 
 import (
 	"errors"
-	"github.com/tomochain/tomochain/core/rawdb"
+	"github.com/69th-byte/SmartDex-Chain/core/rawdb"
 	"math/big"
 	"sync"
 	"sync/atomic"
 	"testing"
 	"time"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/consensus/ethash"
-	"github.com/tomochain/tomochain/core"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/crypto"
-	"github.com/tomochain/tomochain/params"
+	"github.com/69th-byte/SmartDex-Chain/common"
+	"github.com/69th-byte/SmartDex-Chain/consensus/ethash"
+	"github.com/69th-byte/SmartDex-Chain/core"
+	"github.com/69th-byte/SmartDex-Chain/core/types"
+	"github.com/69th-byte/SmartDex-Chain/crypto"
+	"github.com/69th-byte/SmartDex-Chain/params"
 )
 
 var (

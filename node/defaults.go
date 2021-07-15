@@ -22,8 +22,8 @@ import (
 	"path/filepath"
 	"runtime"
 
-	"github.com/tomochain/tomochain/p2p"
-	"github.com/tomochain/tomochain/p2p/nat"
+	"github.com/69th-byte/SmartDex-Chain/p2p"
+	"github.com/69th-byte/SmartDex-Chain/p2p/nat"
 )
 
 const (

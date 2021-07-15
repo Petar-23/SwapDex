@@ -23,11 +23,11 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/ethdb"
-	"github.com/tomochain/tomochain/event"
-	"github.com/tomochain/tomochain/log"
+	"github.com/69th-byte/SmartDex-Chain/common"
+	"github.com/69th-byte/SmartDex-Chain/core/types"
+	"github.com/69th-byte/SmartDex-Chain/ethdb"
+	"github.com/69th-byte/SmartDex-Chain/event"
+	"github.com/69th-byte/SmartDex-Chain/log"
 )
 
 // ChainIndexerBackend defines the methods needed to process chain segments in

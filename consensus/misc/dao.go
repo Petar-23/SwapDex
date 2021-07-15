@@ -21,9 +21,9 @@ import (
 	"errors"
 	"math/big"
 
-	"github.com/tomochain/tomochain/core/state"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/params"
+	"github.com/69th-byte/SmartDex-Chain/core/state"
+	"github.com/69th-byte/SmartDex-Chain/core/types"
+	"github.com/69th-byte/SmartDex-Chain/params"
 )
 
 var (

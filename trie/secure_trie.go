@@ -19,8 +19,8 @@ package trie
 import (
 	"fmt"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/log"
+	"github.com/69th-byte/SmartDex-Chain/common"
+	"github.com/69th-byte/SmartDex-Chain/log"
 )
 
 // SecureTrie wraps a trie with key hashing. In a secure trie, all

@@ -17,12 +17,12 @@
 package core
 
 import (
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core/state"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/core/vm"
-	"github.com/tomochain/tomochain/sdxx/tradingstate"
-	"github.com/tomochain/tomochain/sdxxlending/lendingstate"
+	"github.com/69th-byte/SmartDex-Chain/common"
+	"github.com/69th-byte/SmartDex-Chain/core/state"
+	"github.com/69th-byte/SmartDex-Chain/core/types"
+	"github.com/69th-byte/SmartDex-Chain/core/vm"
+	"github.com/69th-byte/SmartDex-Chain/sdxx/tradingstate"
+	"github.com/69th-byte/SmartDex-Chain/sdxxlending/lendingstate"
 	"math/big"
 )
 

@@ -22,14 +22,14 @@ import (
 	"math/rand"
 	"strings"
 
-	ethereum "github.com/tomochain/tomochain"
-	"github.com/tomochain/tomochain/accounts/abi"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/consensus"
-	"github.com/tomochain/tomochain/contracts/sdxx/contract"
-	"github.com/tomochain/tomochain/core/state"
-	"github.com/tomochain/tomochain/core/vm"
-	"github.com/tomochain/tomochain/log"
+	ethereum "github.com/69th-byte/SmartDex-Chain"
+	"github.com/69th-byte/SmartDex-Chain/accounts/abi"
+	"github.com/69th-byte/SmartDex-Chain/common"
+	"github.com/69th-byte/SmartDex-Chain/consensus"
+	"github.com/69th-byte/SmartDex-Chain/contracts/sdxx/contract"
+	"github.com/69th-byte/SmartDex-Chain/core/state"
+	"github.com/69th-byte/SmartDex-Chain/core/vm"
+	"github.com/69th-byte/SmartDex-Chain/log"
 )
 
 const (

@@ -8,16 +8,15 @@ import (
 	"encoding/binary"
 	"errors"
 	"fmt"
+	"github.com/69th-byte/SmartDex-Chain/common"
+	"github.com/69th-byte/SmartDex-Chain/log"
 	"math"
 	"math/big"
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/common"
 	"strconv"
 
+	"github.com/69th-byte/SmartDex-Chain/crypto"
 	"github.com/btcsuite/btcd/btcec"
-	"github.com/tomochain/tomochain/crypto"
 )
-
 
 type Bulletproof struct {
 	proofData []byte
@@ -26,6 +25,7 @@ type Bulletproof struct {
 var EC CryptoParams
 var VecLength = 512 // support maximum 8 spending value, each 64 bit (gwei is unit)
 var curve elliptic.Curve = crypto.S256()
+
 /*
 Implementation of BulletProofs
 */
@@ -33,11 +33,11 @@ type ECPoint struct {
 	X, Y *big.Int
 }
 
-func (p* ECPoint) toECPubKey() *ecdsa.PublicKey {
+func (p *ECPoint) toECPubKey() *ecdsa.PublicKey {
 	return &ecdsa.PublicKey{curve, p.X, p.Y}
 }
 
-func toECPoint(key* ecdsa.PublicKey) *ECPoint {
+func toECPoint(key *ecdsa.PublicKey) *ECPoint {
 	return &ECPoint{key.X, key.Y}
 }
 
@@ -761,7 +761,7 @@ func deserializePointArray(input []byte, numPoint uint32) ([]ECPoint, error) {
 	ret := make([]ECPoint, numPoint)
 	offset := numPointSize
 	for i := 0; i < int(numPoint); i++ {
-		compressed := DeserializeCompressed(curve, input[offset:offset + 33])
+		compressed := DeserializeCompressed(curve, input[offset:offset+33])
 		if compressed == nil {
 			return ret, errors.New("invalid input data")
 		}
@@ -771,7 +771,7 @@ func deserializePointArray(input []byte, numPoint uint32) ([]ECPoint, error) {
 	return ret, nil
 }
 
-func (ipp* InnerProdArg) Serialize() []byte {
+func (ipp *InnerProdArg) Serialize() []byte {
 	proof := []byte{}
 
 	spa := serializePointArray(ipp.L, false)
@@ -797,27 +797,27 @@ func (ipp* InnerProdArg) Serialize() []byte {
 	return proof
 }
 
-func (ipp* InnerProdArg) Deserialize(proof []byte, numChallenges int) error {
+func (ipp *InnerProdArg) Deserialize(proof []byte, numChallenges int) error {
 	if len(proof) <= 12 {
 		return errors.New("proof data too short")
 	}
 	offset := 0
-	L, err := deserializePointArray(proof[:], uint32(numChallenges) - 1)
+	L, err := deserializePointArray(proof[:], uint32(numChallenges)-1)
 	if err != nil {
 		return err
 	}
 	ipp.L = append(ipp.L, L[:]...)
-	offset += len(L)*33
+	offset += len(L) * 33
 
-	R, err := deserializePointArray(proof[offset:], uint32(numChallenges) - 1)
+	R, err := deserializePointArray(proof[offset:], uint32(numChallenges)-1)
 	if err != nil {
 		return err
 	}
 
 	ipp.R = append(ipp.R, R[:]...)
-	offset += len(R)*33
+	offset += len(R) * 33
 
-	if len(proof) <= offset + 64 + 4 {
+	if len(proof) <= offset+64+4 {
 		return errors.New("proof data too short")
 	}
 
@@ -830,13 +830,13 @@ func (ipp* InnerProdArg) Deserialize(proof []byte, numChallenges int) error {
 		return errors.New("input data too short")
 	}
 	for i := 0; i < int(numChallenges); i++ {
-		ipp.Challenges = append(ipp.Challenges, new(big.Int).SetBytes(proof[offset : offset+32]))
+		ipp.Challenges = append(ipp.Challenges, new(big.Int).SetBytes(proof[offset:offset+32]))
 		offset += 32
 	}
 	return nil
 }
 
-func (mrp* MultiRangeProof) Serialize() []byte {
+func (mrp *MultiRangeProof) Serialize() []byte {
 	proof := []byte{}
 
 	serializedPA := serializePointArray(mrp.Comms, true)
@@ -884,40 +884,40 @@ func (mrp* MultiRangeProof) Serialize() []byte {
 	return proof
 }
 
-func (mrp* MultiRangeProof) Deserialize(proof []byte) error {
+func (mrp *MultiRangeProof) Deserialize(proof []byte) error {
 	Cs, err := deserializePointArray(proof[:], 0)
 	if err != nil {
 		return err
 	}
 	mrp.Comms = append(mrp.Comms, Cs[:]...)
 
-	offset := 4 + len(Cs) * 33
+	offset := 4 + len(Cs)*33
 
-	if len(proof) <= offset + 4 + 4*33 + 6*32 {
+	if len(proof) <= offset+4+4*33+6*32 {
 		return errors.New("invalid input data")
 	}
-	compressed := DeserializeCompressed(curve, proof[offset:offset + 33])
+	compressed := DeserializeCompressed(curve, proof[offset:offset+33])
 	if compressed == nil {
 		return errors.New("failed to decode A")
 	}
 	offset += 33
 	mrp.A = *toECPoint(compressed)
 
-	compressed = DeserializeCompressed(curve, proof[offset:offset + 33])
+	compressed = DeserializeCompressed(curve, proof[offset:offset+33])
 	if compressed == nil {
 		return errors.New("failed to decode S")
 	}
 	offset += 33
 	mrp.S = *toECPoint(compressed)
 
-	compressed = DeserializeCompressed(curve, proof[offset:offset + 33])
+	compressed = DeserializeCompressed(curve, proof[offset:offset+33])
 	if compressed == nil {
 		return errors.New("failed to decode T2")
 	}
 	offset += 33
 	mrp.T1 = *toECPoint(compressed)
 
-	compressed = DeserializeCompressed(curve, proof[offset:offset + 33])
+	compressed = DeserializeCompressed(curve, proof[offset:offset+33])
 	if compressed == nil {
 		return errors.New("failed to decode T2")
 	}
@@ -1394,5 +1394,3 @@ func init() {
 		ECPoint{big.NewInt(0), big.NewInt(0)},
 		ECPoint{big.NewInt(0), big.NewInt(0)}}
 }
-
-

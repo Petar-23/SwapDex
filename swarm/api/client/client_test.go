@@ -25,8 +25,8 @@ import (
 	"sort"
 	"testing"
 
-	"github.com/tomochain/tomochain/swarm/api"
-	"github.com/tomochain/tomochain/swarm/testutil"
+	"github.com/69th-byte/SmartDex-Chain/swarm/api"
+	"github.com/69th-byte/SmartDex-Chain/swarm/testutil"
 )
 
 // TestClientUploadDownloadRaw test uploading and downloading raw data to swarm

@@ -23,8 +23,8 @@ import (
 	"math/big"
 	"sync/atomic"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/rlp"
+	"github.com/69th-byte/SmartDex-Chain/common"
+	"github.com/69th-byte/SmartDex-Chain/rlp"
 )
 
 //go:generate gencodec -type txdata -field-override txdataMarshaling -out gen_tx_json.go

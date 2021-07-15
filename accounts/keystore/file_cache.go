@@ -24,8 +24,8 @@ import (
 	"sync"
 	"time"
 
+	"github.com/69th-byte/SmartDex-Chain/log"
 	mapset "github.com/deckarep/golang-set"
-	"github.com/tomochain/tomochain/log"
 )
 
 // fileCache is a cache of files seen during scan of keystore.

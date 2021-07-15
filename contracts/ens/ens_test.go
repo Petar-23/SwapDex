@@ -20,11 +20,11 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/tomochain/tomochain/accounts/abi/bind"
-	"github.com/tomochain/tomochain/accounts/abi/bind/backends"
-	"github.com/tomochain/tomochain/contracts/ens/contract"
-	"github.com/tomochain/tomochain/core"
-	"github.com/tomochain/tomochain/crypto"
+	"github.com/69th-byte/SmartDex-Chain/accounts/abi/bind"
+	"github.com/69th-byte/SmartDex-Chain/accounts/abi/bind/backends"
+	"github.com/69th-byte/SmartDex-Chain/contracts/ens/contract"
+	"github.com/69th-byte/SmartDex-Chain/core"
+	"github.com/69th-byte/SmartDex-Chain/crypto"
 )
 
 var (

@@ -21,8 +21,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/rpc"
+	"github.com/69th-byte/SmartDex-Chain/common"
+	"github.com/69th-byte/SmartDex-Chain/rpc"
 )
 
 func TestUnmarshalJSONNewFilterArgs(t *testing.T) {

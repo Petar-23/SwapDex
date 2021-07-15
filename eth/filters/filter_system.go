@@ -25,12 +25,12 @@ import (
 	"sync"
 	"time"
 
-	ethereum "github.com/tomochain/tomochain"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core"
-	"github.com/tomochain/tomochain/core/types"
-	"github.com/tomochain/tomochain/event"
-	"github.com/tomochain/tomochain/rpc"
+	ethereum "github.com/69th-byte/SmartDex-Chain"
+	"github.com/69th-byte/SmartDex-Chain/common"
+	"github.com/69th-byte/SmartDex-Chain/core"
+	"github.com/69th-byte/SmartDex-Chain/core/types"
+	"github.com/69th-byte/SmartDex-Chain/event"
+	"github.com/69th-byte/SmartDex-Chain/rpc"
 )
 
 // Type determines the kind of filter and is used to put the filter in to

@@ -19,7 +19,7 @@ package swarm
 import (
 	"testing"
 
-	"github.com/tomochain/tomochain/common"
+	"github.com/69th-byte/SmartDex-Chain/common"
 )
 
 func TestParseEnsAPIAddress(t *testing.T) {

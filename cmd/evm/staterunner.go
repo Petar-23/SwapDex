@@ -23,10 +23,10 @@ import (
 	"io/ioutil"
 	"os"
 
-	"github.com/tomochain/tomochain/core/state"
-	"github.com/tomochain/tomochain/core/vm"
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/tests"
+	"github.com/69th-byte/SmartDex-Chain/core/state"
+	"github.com/69th-byte/SmartDex-Chain/core/vm"
+	"github.com/69th-byte/SmartDex-Chain/log"
+	"github.com/69th-byte/SmartDex-Chain/tests"
 
 	cli "gopkg.in/urfave/cli.v1"
 )

@@ -20,15 +20,15 @@ import (
 	"crypto/sha256"
 	"encoding/binary"
 	"errors"
+	"github.com/69th-byte/SmartDex-Chain/core/vm/privacy"
 	"math/big"
-	"github.com/tomochain/tomochain/core/vm/privacy"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/common/math"
-	"github.com/tomochain/tomochain/crypto"
-	"github.com/tomochain/tomochain/crypto/blake2b"
-	"github.com/tomochain/tomochain/crypto/bn256"
-	"github.com/tomochain/tomochain/params"
+	"github.com/69th-byte/SmartDex-Chain/common"
+	"github.com/69th-byte/SmartDex-Chain/common/math"
+	"github.com/69th-byte/SmartDex-Chain/crypto"
+	"github.com/69th-byte/SmartDex-Chain/crypto/blake2b"
+	"github.com/69th-byte/SmartDex-Chain/crypto/bn256"
+	"github.com/69th-byte/SmartDex-Chain/params"
 
 	//lint:ignore SA1019 Needed for precompile
 	"golang.org/x/crypto/ripemd160"
@@ -71,15 +71,15 @@ var PrecompiledContractsByzantium = map[common.Address]PrecompiledContract{
 // PrecompiledContractsIstanbul contains the default set of pre-compiled Ethereum
 // contracts used in the Istanbul release.
 var PrecompiledContractsIstanbul = map[common.Address]PrecompiledContract{
-	common.BytesToAddress([]byte{1}): &ecrecover{},
-	common.BytesToAddress([]byte{2}): &sha256hash{},
-	common.BytesToAddress([]byte{3}): &ripemd160hash{},
-	common.BytesToAddress([]byte{4}): &dataCopy{},
-	common.BytesToAddress([]byte{5}): &bigModExp{},
-	common.BytesToAddress([]byte{6}): &bn256AddIstanbul{},
-	common.BytesToAddress([]byte{7}): &bn256ScalarMulIstanbul{},
-	common.BytesToAddress([]byte{8}): &bn256PairingIstanbul{},
-	common.BytesToAddress([]byte{9}): &blake2F{},
+	common.BytesToAddress([]byte{1}):  &ecrecover{},
+	common.BytesToAddress([]byte{2}):  &sha256hash{},
+	common.BytesToAddress([]byte{3}):  &ripemd160hash{},
+	common.BytesToAddress([]byte{4}):  &dataCopy{},
+	common.BytesToAddress([]byte{5}):  &bigModExp{},
+	common.BytesToAddress([]byte{6}):  &bn256AddIstanbul{},
+	common.BytesToAddress([]byte{7}):  &bn256ScalarMulIstanbul{},
+	common.BytesToAddress([]byte{8}):  &bn256PairingIstanbul{},
+	common.BytesToAddress([]byte{9}):  &blake2F{},
 	common.BytesToAddress([]byte{30}): &ringSignatureVerifier{},
 	common.BytesToAddress([]byte{40}): &bulletproofVerifier{},
 	common.BytesToAddress([]byte{41}): &sdxxLastPrice{},

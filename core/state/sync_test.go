@@ -21,12 +21,12 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core/rawdb"
-	"github.com/tomochain/tomochain/crypto"
-	"github.com/tomochain/tomochain/ethdb"
-	"github.com/tomochain/tomochain/ethdb/memorydb"
-	"github.com/tomochain/tomochain/trie"
+	"github.com/69th-byte/SmartDex-Chain/common"
+	"github.com/69th-byte/SmartDex-Chain/core/rawdb"
+	"github.com/69th-byte/SmartDex-Chain/crypto"
+	"github.com/69th-byte/SmartDex-Chain/ethdb"
+	"github.com/69th-byte/SmartDex-Chain/ethdb/memorydb"
+	"github.com/69th-byte/SmartDex-Chain/trie"
 )
 
 // testAccount is the data associated with an account used by the state tests.

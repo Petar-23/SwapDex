@@ -30,7 +30,7 @@ import (
 	"time"
 
 	mapset "github.com/deckarep/golang-set"
-	"github.com/tomochain/tomochain/log"
+	"github.com/69th-byte/SmartDex-Chain/log"
 	"golang.org/x/net/websocket"
 )
 

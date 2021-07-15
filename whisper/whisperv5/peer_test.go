@@ -25,11 +25,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/crypto"
-	"github.com/tomochain/tomochain/p2p"
-	"github.com/tomochain/tomochain/p2p/discover"
-	"github.com/tomochain/tomochain/p2p/nat"
+	"github.com/69th-byte/SmartDex-Chain/common"
+	"github.com/69th-byte/SmartDex-Chain/crypto"
+	"github.com/69th-byte/SmartDex-Chain/p2p"
+	"github.com/69th-byte/SmartDex-Chain/p2p/discover"
+	"github.com/69th-byte/SmartDex-Chain/p2p/nat"
 )
 
 var keys []string = []string{

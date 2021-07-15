@@ -21,8 +21,8 @@ import (
 
 	"sync/atomic"
 
-	"github.com/tomochain/tomochain/consensus"
-	"github.com/tomochain/tomochain/log"
+	"github.com/69th-byte/SmartDex-Chain/consensus"
+	"github.com/69th-byte/SmartDex-Chain/log"
 )
 
 type CpuAgent struct {

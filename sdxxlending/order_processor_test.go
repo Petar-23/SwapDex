@@ -5,11 +5,11 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core/rawdb"
-	"github.com/tomochain/tomochain/sdxx"
-	"github.com/tomochain/tomochain/sdxx/tradingstate"
-	"github.com/tomochain/tomochain/sdxxlending/lendingstate"
+	"github.com/69th-byte/SmartDex-Chain/common"
+	"github.com/69th-byte/SmartDex-Chain/core/rawdb"
+	"github.com/69th-byte/SmartDex-Chain/sdxx"
+	"github.com/69th-byte/SmartDex-Chain/sdxx/tradingstate"
+	"github.com/69th-byte/SmartDex-Chain/sdxxlending/lendingstate"
 )
 
 func Test_getCancelFeeV1(t *testing.T) {

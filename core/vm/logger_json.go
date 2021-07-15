@@ -22,8 +22,8 @@ import (
 	"math/big"
 	"time"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/common/math"
+	"github.com/69th-byte/SmartDex-Chain/common"
+	"github.com/69th-byte/SmartDex-Chain/common/math"
 )
 
 type JSONLogger struct {

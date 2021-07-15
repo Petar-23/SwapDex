@@ -7,8 +7,8 @@ import (
 	"errors"
 	"math/big"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/common/hexutil"
+	"github.com/69th-byte/SmartDex-Chain/common"
+	"github.com/69th-byte/SmartDex-Chain/common/hexutil"
 )
 
 var _ = (*headerMarshaling)(nil)

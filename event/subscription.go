@@ -21,7 +21,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/tomochain/tomochain/common/mclock"
+	"github.com/69th-byte/SmartDex-Chain/common/mclock"
 )
 
 // Subscription represents a stream of events. The carrier of the events is typically a

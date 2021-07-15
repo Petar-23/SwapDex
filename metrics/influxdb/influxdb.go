@@ -6,8 +6,8 @@ import (
 	uurl "net/url"
 	"time"
 
+	"github.com/69th-byte/SmartDex-Chain/metrics"
 	"github.com/influxdata/influxdb/client"
-	"github.com/tomochain/tomochain/metrics"
 )
 
 type reporter struct {

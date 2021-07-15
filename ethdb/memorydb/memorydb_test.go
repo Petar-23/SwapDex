@@ -19,8 +19,8 @@ package memorydb
 import (
 	"testing"
 
-	"github.com/tomochain/tomochain/ethdb"
-	"github.com/tomochain/tomochain/ethdb/dbtest"
+	"github.com/69th-byte/SmartDex-Chain/ethdb"
+	"github.com/69th-byte/SmartDex-Chain/ethdb/dbtest"
 )
 
 func TestMemoryDB(t *testing.T) {

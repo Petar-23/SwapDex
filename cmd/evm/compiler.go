@@ -21,7 +21,7 @@ import (
 	"fmt"
 	"io/ioutil"
 
-	"github.com/tomochain/tomochain/cmd/evm/internal/compiler"
+	"github.com/69th-byte/SmartDex-Chain/cmd/evm/internal/compiler"
 
 	cli "gopkg.in/urfave/cli.v1"
 )

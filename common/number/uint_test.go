@@ -20,7 +20,7 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/tomochain/tomochain/common"
+	"github.com/69th-byte/SmartDex-Chain/common"
 )
 
 func TestSet(t *testing.T) {

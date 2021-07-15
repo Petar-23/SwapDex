@@ -18,14 +18,14 @@ package core
 
 import (
 	"fmt"
-	"github.com/tomochain/tomochain/core/rawdb"
+	"github.com/69th-byte/SmartDex-Chain/core/rawdb"
 	"math/big"
 	"math/rand"
 	"testing"
 	"time"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core/types"
+	"github.com/69th-byte/SmartDex-Chain/common"
+	"github.com/69th-byte/SmartDex-Chain/core/types"
 )
 
 // Runs multiple tests with randomized parameters.

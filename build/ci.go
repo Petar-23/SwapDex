@@ -47,7 +47,7 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/tomochain/tomochain/internal/build"
+	"github.com/69th-byte/SmartDex-Chain/internal/build"
 )
 
 var (

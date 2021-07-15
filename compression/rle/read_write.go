@@ -21,7 +21,7 @@ import (
 	"bytes"
 	"errors"
 
-	"github.com/tomochain/tomochain/crypto"
+	"github.com/69th-byte/SmartDex-Chain/crypto"
 )
 
 const (

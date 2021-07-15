@@ -21,7 +21,7 @@ import (
 	"sort"
 	"sync"
 
-	"github.com/tomochain/tomochain/event"
+	"github.com/69th-byte/SmartDex-Chain/event"
 )
 
 // Manager is an overarching account manager that can communicate with various

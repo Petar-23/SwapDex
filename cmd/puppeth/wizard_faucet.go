@@ -20,8 +20,8 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/tomochain/tomochain/accounts/keystore"
-	"github.com/tomochain/tomochain/log"
+	"github.com/69th-byte/SmartDex-Chain/accounts/keystore"
+	"github.com/69th-byte/SmartDex-Chain/log"
 )
 
 // deployFaucet queries the user for various input on deploying a faucet, after

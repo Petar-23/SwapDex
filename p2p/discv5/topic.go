@@ -23,8 +23,8 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/tomochain/tomochain/common/mclock"
-	"github.com/tomochain/tomochain/log"
+	"github.com/69th-byte/SmartDex-Chain/common/mclock"
+	"github.com/69th-byte/SmartDex-Chain/log"
 )
 
 const (

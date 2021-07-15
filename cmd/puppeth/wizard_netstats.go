@@ -23,9 +23,9 @@ import (
 	"strings"
 	"sync"
 
+	"github.com/69th-byte/SmartDex-Chain/core"
+	"github.com/69th-byte/SmartDex-Chain/log"
 	"github.com/olekukonko/tablewriter"
-	"github.com/tomochain/tomochain/core"
-	"github.com/tomochain/tomochain/log"
 )
 
 // networkStats verifies the status of network components and generates a protip

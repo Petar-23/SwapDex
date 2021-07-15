@@ -28,12 +28,12 @@ import (
 	"testing"
 	"testing/quick"
 
+	"github.com/69th-byte/SmartDex-Chain/common"
+	"github.com/69th-byte/SmartDex-Chain/crypto"
+	"github.com/69th-byte/SmartDex-Chain/ethdb/leveldb"
+	"github.com/69th-byte/SmartDex-Chain/ethdb/memorydb"
+	"github.com/69th-byte/SmartDex-Chain/rlp"
 	"github.com/davecgh/go-spew/spew"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/crypto"
-	"github.com/tomochain/tomochain/ethdb/leveldb"
-	"github.com/tomochain/tomochain/ethdb/memorydb"
-	"github.com/tomochain/tomochain/rlp"
 )
 
 func init() {

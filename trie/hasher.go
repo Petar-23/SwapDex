@@ -20,7 +20,7 @@ import (
 	"hash"
 	"sync"
 
-	"github.com/tomochain/tomochain/rlp"
+	"github.com/69th-byte/SmartDex-Chain/rlp"
 	"golang.org/x/crypto/sha3"
 )
 

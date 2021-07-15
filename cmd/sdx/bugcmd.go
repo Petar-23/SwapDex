@@ -26,10 +26,10 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/tomochain/tomochain/cmd/internal/browser"
-	"github.com/tomochain/tomochain/params"
+	"github.com/69th-byte/SmartDex-Chain/cmd/internal/browser"
+	"github.com/69th-byte/SmartDex-Chain/params"
 
-	"github.com/tomochain/tomochain/cmd/utils"
+	"github.com/69th-byte/SmartDex-Chain/cmd/utils"
 	cli "gopkg.in/urfave/cli.v1"
 )
 
@@ -41,7 +41,7 @@ var bugCommand = cli.Command{
 	Category:  "MISCELLANEOUS COMMANDS",
 }
 
-const issueUrl = "https://github.com/tomochain/tomochain/issues/new"
+const issueUrl = "https://github.com/69th-byte/SmartDex-Chain/issues/new"
 
 // reportBug reports a bug by opening a new URL to the go-ethereum GH issue
 // tracker and setting default values as the issue body.

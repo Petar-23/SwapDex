@@ -24,8 +24,8 @@ import (
 	"encoding/hex"
 	"testing"
 
-	"github.com/tomochain/tomochain/common/math"
-	"github.com/tomochain/tomochain/crypto/randentropy"
+	"github.com/69th-byte/SmartDex-Chain/common/math"
+	"github.com/69th-byte/SmartDex-Chain/crypto/randentropy"
 )
 
 const TestCount = 1000

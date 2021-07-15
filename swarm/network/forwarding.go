@@ -21,8 +21,8 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/swarm/storage"
+	"github.com/69th-byte/SmartDex-Chain/log"
+	"github.com/69th-byte/SmartDex-Chain/swarm/storage"
 )
 
 const requesterCount = 3

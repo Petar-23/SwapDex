@@ -22,10 +22,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/p2p"
-	"github.com/tomochain/tomochain/p2p/discover"
-	"github.com/tomochain/tomochain/p2p/simulations/adapters"
+	"github.com/69th-byte/SmartDex-Chain/log"
+	"github.com/69th-byte/SmartDex-Chain/p2p"
+	"github.com/69th-byte/SmartDex-Chain/p2p/discover"
+	"github.com/69th-byte/SmartDex-Chain/p2p/simulations/adapters"
 )
 
 var errTimedOut = errors.New("timed out")

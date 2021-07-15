@@ -20,10 +20,10 @@ import (
 	"fmt"
 	"sync"
 
+	"github.com/69th-byte/SmartDex-Chain/common"
+	"github.com/69th-byte/SmartDex-Chain/ethdb"
+	"github.com/69th-byte/SmartDex-Chain/trie"
 	lru "github.com/hashicorp/golang-lru"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/ethdb"
-	"github.com/tomochain/tomochain/trie"
 )
 
 // Trie cache generation limit after which to evic trie nodes from memory.

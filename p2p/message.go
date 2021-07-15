@@ -25,9 +25,9 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/tomochain/tomochain/event"
-	"github.com/tomochain/tomochain/p2p/discover"
-	"github.com/tomochain/tomochain/rlp"
+	"github.com/69th-byte/SmartDex-Chain/event"
+	"github.com/69th-byte/SmartDex-Chain/p2p/discover"
+	"github.com/69th-byte/SmartDex-Chain/rlp"
 )
 
 // Msg defines the structure of a p2p message.

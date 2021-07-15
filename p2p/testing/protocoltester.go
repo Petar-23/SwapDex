@@ -32,14 +32,14 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/node"
-	"github.com/tomochain/tomochain/p2p"
-	"github.com/tomochain/tomochain/p2p/discover"
-	"github.com/tomochain/tomochain/p2p/simulations"
-	"github.com/tomochain/tomochain/p2p/simulations/adapters"
-	"github.com/tomochain/tomochain/rlp"
-	"github.com/tomochain/tomochain/rpc"
+	"github.com/69th-byte/SmartDex-Chain/log"
+	"github.com/69th-byte/SmartDex-Chain/node"
+	"github.com/69th-byte/SmartDex-Chain/p2p"
+	"github.com/69th-byte/SmartDex-Chain/p2p/discover"
+	"github.com/69th-byte/SmartDex-Chain/p2p/simulations"
+	"github.com/69th-byte/SmartDex-Chain/p2p/simulations/adapters"
+	"github.com/69th-byte/SmartDex-Chain/rlp"
+	"github.com/69th-byte/SmartDex-Chain/rpc"
 )
 
 // ProtocolTester is the tester environment used for unit testing protocol

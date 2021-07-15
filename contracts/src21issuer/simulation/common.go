@@ -1,7 +1,7 @@
 package simulation
 
 import (
-	"github.com/tomochain/tomochain/crypto"
+	"github.com/69th-byte/SmartDex-Chain/crypto"
 	"math/big"
 )
 

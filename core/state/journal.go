@@ -19,7 +19,7 @@ package state
 import (
 	"math/big"
 
-	"github.com/tomochain/tomochain/common"
+	"github.com/69th-byte/SmartDex-Chain/common"
 )
 
 type journalEntry interface {

@@ -22,10 +22,10 @@ import (
 	"sync"
 	"time"
 
+	"github.com/69th-byte/SmartDex-Chain/accounts"
+	"github.com/69th-byte/SmartDex-Chain/event"
+	"github.com/69th-byte/SmartDex-Chain/log"
 	"github.com/karalabe/hid"
-	"github.com/tomochain/tomochain/accounts"
-	"github.com/tomochain/tomochain/event"
-	"github.com/tomochain/tomochain/log"
 )
 
 // LedgerScheme is the protocol scheme prefixing account and wallet URLs.

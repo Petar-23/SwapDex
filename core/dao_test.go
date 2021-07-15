@@ -17,13 +17,13 @@
 package core
 
 import (
-	"github.com/tomochain/tomochain/core/rawdb"
+	"github.com/69th-byte/SmartDex-Chain/core/rawdb"
 	"math/big"
 	"testing"
 
-	"github.com/tomochain/tomochain/consensus/ethash"
-	"github.com/tomochain/tomochain/core/vm"
-	"github.com/tomochain/tomochain/params"
+	"github.com/69th-byte/SmartDex-Chain/consensus/ethash"
+	"github.com/69th-byte/SmartDex-Chain/core/vm"
+	"github.com/69th-byte/SmartDex-Chain/params"
 )
 
 // Tests that DAO-fork enabled clients can properly filter out fork-commencing

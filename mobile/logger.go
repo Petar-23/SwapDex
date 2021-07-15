@@ -19,7 +19,7 @@ package geth
 import (
 	"os"
 
-	"github.com/tomochain/tomochain/log"
+	"github.com/69th-byte/SmartDex-Chain/log"
 )
 
 // SetVerbosity sets the global verbosity level (between 0 and 6 - see logger/verbosity.go).

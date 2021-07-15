@@ -1,14 +1,14 @@
 package utils
 
 import (
-	"github.com/tomochain/tomochain/eth"
-	"github.com/tomochain/tomochain/eth/downloader"
-	"github.com/tomochain/tomochain/ethstats"
-	"github.com/tomochain/tomochain/les"
-	"github.com/tomochain/tomochain/node"
-	"github.com/tomochain/tomochain/sdxx"
-	"github.com/tomochain/tomochain/sdxxlending"
-	whisper "github.com/tomochain/tomochain/whisper/whisperv6"
+	"github.com/69th-byte/SmartDex-Chain/eth"
+	"github.com/69th-byte/SmartDex-Chain/eth/downloader"
+	"github.com/69th-byte/SmartDex-Chain/ethstats"
+	"github.com/69th-byte/SmartDex-Chain/les"
+	"github.com/69th-byte/SmartDex-Chain/node"
+	"github.com/69th-byte/SmartDex-Chain/sdxx"
+	"github.com/69th-byte/SmartDex-Chain/sdxxlending"
+	whisper "github.com/69th-byte/SmartDex-Chain/whisper/whisperv6"
 )
 
 // RegisterEthService adds an Ethereum client to the stack.

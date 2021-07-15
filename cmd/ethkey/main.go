@@ -20,7 +20,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/tomochain/tomochain/cmd/utils"
+	"github.com/69th-byte/SmartDex-Chain/cmd/utils"
 	"gopkg.in/urfave/cli.v1"
 )
 

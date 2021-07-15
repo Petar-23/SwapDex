@@ -5,12 +5,12 @@ package eth
 import (
 	"math/big"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/common/hexutil"
-	"github.com/tomochain/tomochain/consensus/ethash"
-	"github.com/tomochain/tomochain/core"
-	"github.com/tomochain/tomochain/eth/downloader"
-	"github.com/tomochain/tomochain/eth/gasprice"
+	"github.com/69th-byte/SmartDex-Chain/common"
+	"github.com/69th-byte/SmartDex-Chain/common/hexutil"
+	"github.com/69th-byte/SmartDex-Chain/consensus/ethash"
+	"github.com/69th-byte/SmartDex-Chain/core"
+	"github.com/69th-byte/SmartDex-Chain/eth/downloader"
+	"github.com/69th-byte/SmartDex-Chain/eth/gasprice"
 )
 
 var _ = (*configMarshaling)(nil)

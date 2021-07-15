@@ -21,7 +21,7 @@ import (
 	"math/rand"
 	"testing"
 
-	"github.com/tomochain/tomochain/core/types"
+	"github.com/69th-byte/SmartDex-Chain/core/types"
 )
 
 // Tests that batched bloom bits are correctly rotated from the input bloom

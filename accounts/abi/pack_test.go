@@ -24,7 +24,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/tomochain/tomochain/common"
+	"github.com/69th-byte/SmartDex-Chain/common"
 )
 
 func TestPack(t *testing.T) {

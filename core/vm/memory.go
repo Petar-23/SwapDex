@@ -20,7 +20,7 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/tomochain/tomochain/common/math"
+	"github.com/69th-byte/SmartDex-Chain/common/math"
 )
 
 // Memory implements a simple memory model for the ethereum virtual machine.

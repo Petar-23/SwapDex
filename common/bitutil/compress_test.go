@@ -21,7 +21,7 @@ import (
 	"math/rand"
 	"testing"
 
-	"github.com/tomochain/tomochain/common/hexutil"
+	"github.com/69th-byte/SmartDex-Chain/common/hexutil"
 )
 
 // Tests that data bitset encoding and decoding works and is bijective.

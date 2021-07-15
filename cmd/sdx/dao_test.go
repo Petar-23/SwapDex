@@ -23,10 +23,10 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/tomochain/tomochain/core/rawdb"
+	"github.com/69th-byte/SmartDex-Chain/core/rawdb"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core"
+	"github.com/69th-byte/SmartDex-Chain/common"
+	"github.com/69th-byte/SmartDex-Chain/core"
 )
 
 // Genesis block for nodes which don't care about the DAO fork (i.e. not configured)

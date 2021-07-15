@@ -23,10 +23,10 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/tomochain/tomochain/cmd/utils"
-	"github.com/tomochain/tomochain/consensus/ethash"
-	"github.com/tomochain/tomochain/eth"
-	"github.com/tomochain/tomochain/params"
+	"github.com/69th-byte/SmartDex-Chain/cmd/utils"
+	"github.com/69th-byte/SmartDex-Chain/consensus/ethash"
+	"github.com/69th-byte/SmartDex-Chain/eth"
+	"github.com/69th-byte/SmartDex-Chain/params"
 	"gopkg.in/urfave/cli.v1"
 )
 

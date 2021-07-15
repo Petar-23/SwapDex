@@ -3,17 +3,17 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/tomochain/tomochain/core/state"
-	"github.com/tomochain/tomochain/sdxxlending/lendingstate"
+	"github.com/69th-byte/SmartDex-Chain/core/state"
+	"github.com/69th-byte/SmartDex-Chain/sdxxlending/lendingstate"
 	"math/big"
 	"os"
 	"time"
 
-	"github.com/tomochain/tomochain/accounts/abi/bind"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/contracts/sdxx"
-	"github.com/tomochain/tomochain/crypto"
-	"github.com/tomochain/tomochain/ethclient"
+	"github.com/69th-byte/SmartDex-Chain/accounts/abi/bind"
+	"github.com/69th-byte/SmartDex-Chain/common"
+	"github.com/69th-byte/SmartDex-Chain/contracts/sdxx"
+	"github.com/69th-byte/SmartDex-Chain/crypto"
+	"github.com/69th-byte/SmartDex-Chain/ethclient"
 )
 
 func main() {

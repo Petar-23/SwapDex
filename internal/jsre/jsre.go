@@ -26,9 +26,9 @@ import (
 	"math/rand"
 	"time"
 
+	"github.com/69th-byte/SmartDex-Chain/common"
+	"github.com/69th-byte/SmartDex-Chain/internal/jsre/deps"
 	"github.com/robertkrimen/otto"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/internal/jsre/deps"
 )
 
 var (

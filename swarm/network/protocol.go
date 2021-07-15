@@ -37,13 +37,13 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/tomochain/tomochain/contracts/chequebook"
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/metrics"
-	"github.com/tomochain/tomochain/p2p"
-	bzzswap "github.com/tomochain/tomochain/swarm/services/swap"
-	"github.com/tomochain/tomochain/swarm/services/swap/swap"
-	"github.com/tomochain/tomochain/swarm/storage"
+	"github.com/69th-byte/SmartDex-Chain/contracts/chequebook"
+	"github.com/69th-byte/SmartDex-Chain/log"
+	"github.com/69th-byte/SmartDex-Chain/metrics"
+	"github.com/69th-byte/SmartDex-Chain/p2p"
+	bzzswap "github.com/69th-byte/SmartDex-Chain/swarm/services/swap"
+	"github.com/69th-byte/SmartDex-Chain/swarm/services/swap/swap"
+	"github.com/69th-byte/SmartDex-Chain/swarm/storage"
 )
 
 //metrics variables

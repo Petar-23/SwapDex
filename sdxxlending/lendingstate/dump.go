@@ -18,12 +18,12 @@ package lendingstate
 
 import (
 	"fmt"
-	"github.com/tomochain/tomochain/rlp"
+	"github.com/69th-byte/SmartDex-Chain/rlp"
 	"math/big"
 	"sort"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/trie"
+	"github.com/69th-byte/SmartDex-Chain/common"
+	"github.com/69th-byte/SmartDex-Chain/trie"
 )
 
 type DumpOrderList struct {

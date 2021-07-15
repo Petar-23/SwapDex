@@ -21,8 +21,8 @@ import (
 	"reflect"
 	"testing"
 
+	"github.com/69th-byte/SmartDex-Chain/common"
 	"github.com/davecgh/go-spew/spew"
-	"github.com/tomochain/tomochain/common"
 )
 
 // typeWithoutStringer is a alias for the Type type which simply doesn't implement

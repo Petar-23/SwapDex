@@ -4,15 +4,15 @@ import (
 	"math/big"
 	"strings"
 
-	"github.com/tomochain/tomochain/contracts/sdxx/contract"
-	"github.com/tomochain/tomochain/log"
+	"github.com/69th-byte/SmartDex-Chain/contracts/sdxx/contract"
+	"github.com/69th-byte/SmartDex-Chain/log"
 
-	"github.com/tomochain/tomochain"
-	"github.com/tomochain/tomochain/accounts/abi"
-	"github.com/tomochain/tomochain/accounts/abi/bind/backends"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/consensus"
-	"github.com/tomochain/tomochain/core/state"
+	"github.com/69th-byte/SmartDex-Chain/accounts/abi"
+	"github.com/69th-byte/SmartDex-Chain/accounts/abi/bind/backends"
+	"github.com/69th-byte/SmartDex-Chain/common"
+	"github.com/69th-byte/SmartDex-Chain/consensus"
+	"github.com/69th-byte/SmartDex-Chain/core/state"
+	"github.com/69th-byte/SmartDex-Chain"
 )
 
 // GetTokenAbi return token abi

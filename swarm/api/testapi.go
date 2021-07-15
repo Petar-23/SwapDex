@@ -17,7 +17,7 @@
 package api
 
 import (
-	"github.com/tomochain/tomochain/swarm/network"
+	"github.com/69th-byte/SmartDex-Chain/swarm/network"
 )
 
 type Control struct {

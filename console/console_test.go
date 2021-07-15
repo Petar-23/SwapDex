@@ -25,15 +25,15 @@ import (
 	"testing"
 	"time"
 
-	"github.com/tomochain/tomochain/sdxx"
-	"github.com/tomochain/tomochain/sdxxlending"
+	"github.com/69th-byte/SmartDex-Chain/sdxx"
+	"github.com/69th-byte/SmartDex-Chain/sdxxlending"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/consensus/ethash"
-	"github.com/tomochain/tomochain/core"
-	"github.com/tomochain/tomochain/eth"
-	"github.com/tomochain/tomochain/internal/jsre"
-	"github.com/tomochain/tomochain/node"
+	"github.com/69th-byte/SmartDex-Chain/common"
+	"github.com/69th-byte/SmartDex-Chain/consensus/ethash"
+	"github.com/69th-byte/SmartDex-Chain/core"
+	"github.com/69th-byte/SmartDex-Chain/eth"
+	"github.com/69th-byte/SmartDex-Chain/internal/jsre"
+	"github.com/69th-byte/SmartDex-Chain/node"
 )
 
 const (

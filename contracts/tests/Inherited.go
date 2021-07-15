@@ -4,9 +4,9 @@
 package tests
 
 import (
-	"github.com/tomochain/tomochain/accounts/abi/bind"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/contracts/tests/contract"
+	"github.com/69th-byte/SmartDex-Chain/accounts/abi/bind"
+	"github.com/69th-byte/SmartDex-Chain/common"
+	"github.com/69th-byte/SmartDex-Chain/contracts/tests/contract"
 )
 
 type MyInherited struct {
@@ -29,7 +29,7 @@ func NewMyInherited(transactOpts *bind.TransactOpts, contractAddr common.Address
 	}, nil
 }
 
-func DeployMyInherited(transactOpts *bind.TransactOpts, contractBackend bind.ContractBackend) (common.Address, *MyInherited, error){
+func DeployMyInherited(transactOpts *bind.TransactOpts, contractBackend bind.ContractBackend) (common.Address, *MyInherited, error) {
 	contractAddr, _, _, err := contract.DeployInherited(transactOpts, contractBackend)
 	if err != nil {
 		return contractAddr, nil, err

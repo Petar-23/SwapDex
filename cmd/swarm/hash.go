@@ -21,8 +21,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/tomochain/tomochain/cmd/utils"
-	"github.com/tomochain/tomochain/swarm/storage"
+	"github.com/69th-byte/SmartDex-Chain/cmd/utils"
+	"github.com/69th-byte/SmartDex-Chain/swarm/storage"
 	"gopkg.in/urfave/cli.v1"
 )
 

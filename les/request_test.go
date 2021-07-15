@@ -18,16 +18,16 @@ package les
 
 import (
 	"context"
-	"github.com/tomochain/tomochain/core/rawdb"
+	"github.com/69th-byte/SmartDex-Chain/core/rawdb"
 	"testing"
 	"time"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/core"
-	"github.com/tomochain/tomochain/crypto"
-	"github.com/tomochain/tomochain/eth"
-	"github.com/tomochain/tomochain/ethdb"
-	"github.com/tomochain/tomochain/light"
+	"github.com/69th-byte/SmartDex-Chain/common"
+	"github.com/69th-byte/SmartDex-Chain/core"
+	"github.com/69th-byte/SmartDex-Chain/crypto"
+	"github.com/69th-byte/SmartDex-Chain/eth"
+	"github.com/69th-byte/SmartDex-Chain/ethdb"
+	"github.com/69th-byte/SmartDex-Chain/light"
 )
 
 var testBankSecureTrieKey = secAddr(testBankAddress)

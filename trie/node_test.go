@@ -20,7 +20,7 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/tomochain/tomochain/rlp"
+	"github.com/69th-byte/SmartDex-Chain/rlp"
 )
 
 func newTestFullNode(v []byte) []interface{} {

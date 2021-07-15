@@ -25,10 +25,10 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/69th-byte/SmartDex-Chain/common"
+	"github.com/69th-byte/SmartDex-Chain/crypto"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/crypto"
 )
 
 var jsonEventTransfer = []byte(`{
@@ -244,7 +244,7 @@ func unpackTestEventData(dest interface{}, hexData string, jsonEvent []byte, ass
 
 /*
 Taken from
-https://github.com/tomochain/tomochain/pull/15568
+https://github.com/69th-byte/SmartDex-Chain/pull/15568
 */
 
 type testResult struct {

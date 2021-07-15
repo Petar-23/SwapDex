@@ -20,9 +20,9 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/tomochain/tomochain/node"
-	"github.com/tomochain/tomochain/p2p"
-	"github.com/tomochain/tomochain/rpc"
+	"github.com/69th-byte/SmartDex-Chain/node"
+	"github.com/69th-byte/SmartDex-Chain/p2p"
+	"github.com/69th-byte/SmartDex-Chain/rpc"
 )
 
 // SampleService is a trivial network service that can be attached to a node for

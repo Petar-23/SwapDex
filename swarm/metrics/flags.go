@@ -19,10 +19,10 @@ package metrics
 import (
 	"time"
 
-	"github.com/tomochain/tomochain/cmd/utils"
-	"github.com/tomochain/tomochain/log"
-	gethmetrics "github.com/tomochain/tomochain/metrics"
-	"github.com/tomochain/tomochain/metrics/influxdb"
+	"github.com/69th-byte/SmartDex-Chain/cmd/utils"
+	"github.com/69th-byte/SmartDex-Chain/log"
+	gethmetrics "github.com/69th-byte/SmartDex-Chain/metrics"
+	"github.com/69th-byte/SmartDex-Chain/metrics/influxdb"
 	"gopkg.in/urfave/cli.v1"
 )
 

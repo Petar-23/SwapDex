@@ -21,9 +21,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/tomochain/tomochain/accounts/keystore"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/log"
+	"github.com/69th-byte/SmartDex-Chain/accounts/keystore"
+	"github.com/69th-byte/SmartDex-Chain/common"
+	"github.com/69th-byte/SmartDex-Chain/log"
 )
 
 // deployNode creates a new node configuration based on some user input.

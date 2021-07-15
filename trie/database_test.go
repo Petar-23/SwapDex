@@ -19,8 +19,8 @@ package trie
 import (
 	"testing"
 
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/ethdb/memorydb"
+	"github.com/69th-byte/SmartDex-Chain/common"
+	"github.com/69th-byte/SmartDex-Chain/ethdb/memorydb"
 )
 
 // Tests that the trie database returns a missing trie Node error if attempting

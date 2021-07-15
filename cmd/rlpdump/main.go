@@ -26,7 +26,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/tomochain/tomochain/rlp"
+	"github.com/69th-byte/SmartDex-Chain/rlp"
 )
 
 var (

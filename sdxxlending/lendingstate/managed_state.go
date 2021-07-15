@@ -19,7 +19,7 @@ package lendingstate
 import (
 	"sync"
 
-	"github.com/tomochain/tomochain/common"
+	"github.com/69th-byte/SmartDex-Chain/common"
 )
 
 type exchanges struct {

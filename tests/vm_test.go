@@ -20,9 +20,9 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/tomochain/tomochain/common"
+	"github.com/69th-byte/SmartDex-Chain/common"
 
-	"github.com/tomochain/tomochain/core/vm"
+	"github.com/69th-byte/SmartDex-Chain/core/vm"
 )
 
 func TestVM(t *testing.T) {

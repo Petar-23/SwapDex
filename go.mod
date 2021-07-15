@@ -1,4 +1,4 @@
-module github.com/tomochain/tomochain
+module github.com/69th-byte/SmartDex-Chain
 
 go 1.13
 

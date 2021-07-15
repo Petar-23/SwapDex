@@ -24,12 +24,12 @@ import (
 	"net"
 	"os"
 
+	"github.com/69th-byte/SmartDex-Chain/crypto"
+	"github.com/69th-byte/SmartDex-Chain/node"
+	"github.com/69th-byte/SmartDex-Chain/p2p"
+	"github.com/69th-byte/SmartDex-Chain/p2p/discover"
+	"github.com/69th-byte/SmartDex-Chain/rpc"
 	"github.com/docker/docker/pkg/reexec"
-	"github.com/tomochain/tomochain/crypto"
-	"github.com/tomochain/tomochain/node"
-	"github.com/tomochain/tomochain/p2p"
-	"github.com/tomochain/tomochain/p2p/discover"
-	"github.com/tomochain/tomochain/rpc"
 )
 
 // Node represents a node in a simulation network which is created by a

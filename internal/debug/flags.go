@@ -24,11 +24,11 @@ import (
 	"os"
 	"runtime"
 
+	"github.com/69th-byte/SmartDex-Chain/log"
+	"github.com/69th-byte/SmartDex-Chain/log/term"
+	"github.com/69th-byte/SmartDex-Chain/metrics"
+	"github.com/69th-byte/SmartDex-Chain/metrics/exp"
 	colorable "github.com/mattn/go-colorable"
-	"github.com/tomochain/tomochain/log"
-	"github.com/tomochain/tomochain/log/term"
-	"github.com/tomochain/tomochain/metrics"
-	"github.com/tomochain/tomochain/metrics/exp"
 	"gopkg.in/urfave/cli.v1"
 )
 

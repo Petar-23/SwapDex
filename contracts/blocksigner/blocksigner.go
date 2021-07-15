@@ -19,9 +19,9 @@ package blocksigner
 import (
 	"math/big"
 
-	"github.com/tomochain/tomochain/accounts/abi/bind"
-	"github.com/tomochain/tomochain/common"
-	"github.com/tomochain/tomochain/contracts/blocksigner/contract"
+	"github.com/69th-byte/SmartDex-Chain/accounts/abi/bind"
+	"github.com/69th-byte/SmartDex-Chain/common"
+	"github.com/69th-byte/SmartDex-Chain/contracts/blocksigner/contract"
 )
 
 type BlockSigner struct {

@@ -25,9 +25,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/tomochain/tomochain/rpc"
-	"github.com/tomochain/tomochain/swarm"
-	"github.com/tomochain/tomochain/swarm/api"
+	"github.com/69th-byte/SmartDex-Chain/rpc"
+	"github.com/69th-byte/SmartDex-Chain/swarm"
+	"github.com/69th-byte/SmartDex-Chain/swarm/api"
 
 	"github.com/docker/docker/pkg/reexec"
 )

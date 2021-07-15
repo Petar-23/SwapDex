@@ -21,11 +21,11 @@ import (
 	"net"
 	"time"
 
-	"github.com/tomochain/tomochain/contracts/chequebook"
-	"github.com/tomochain/tomochain/p2p/discover"
-	"github.com/tomochain/tomochain/swarm/network/kademlia"
-	"github.com/tomochain/tomochain/swarm/services/swap"
-	"github.com/tomochain/tomochain/swarm/storage"
+	"github.com/69th-byte/SmartDex-Chain/contracts/chequebook"
+	"github.com/69th-byte/SmartDex-Chain/p2p/discover"
+	"github.com/69th-byte/SmartDex-Chain/swarm/network/kademlia"
+	"github.com/69th-byte/SmartDex-Chain/swarm/services/swap"
+	"github.com/69th-byte/SmartDex-Chain/swarm/storage"
 )
 
 /*

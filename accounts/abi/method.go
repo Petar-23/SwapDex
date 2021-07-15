@@ -20,7 +20,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/tomochain/tomochain/crypto"
+	"github.com/69th-byte/SmartDex-Chain/crypto"
 )
 
 // Method represents a callable given a `Name` and whether the method is a constant.

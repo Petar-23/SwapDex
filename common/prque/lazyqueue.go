@@ -20,7 +20,7 @@ import (
 	"container/heap"
 	"time"
 
-	"github.com/tomochain/tomochain/common/mclock"
+	"github.com/69th-byte/SmartDex-Chain/common/mclock"
 )
 
 // LazyQueue is a priority queue data structure where priorities can change over
