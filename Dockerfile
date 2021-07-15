@@ -2,14 +2,14 @@ FROM golang:1.12-alpine as builder
 
 RUN apk add --no-cache make gcc musl-dev linux-headers git
 
-ADD . /tomochain
-RUN cd /tomochain && make sdx
+ADD . /sdx
+RUN cd /sdx && make sdx
 
 FROM alpine:latest
 
-WORKDIR /tomochain
+WORKDIR /SmartDex-Chain
 
-COPY --from=builder /tomochain/build/bin/sdx /usr/local/bin/sdx
+COPY --from=builder /SmartDex-Chain/build/bin/sdx /usr/local/bin/sdx
 
 RUN chmod +x /usr/local/bin/sdx
 
