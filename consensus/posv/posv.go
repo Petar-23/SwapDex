@@ -469,9 +469,9 @@ func (c *Posv) verifyCascadingFields(chain consensus.ChainReader, header *types.
 func (c *Posv) checkSignersOnCheckpoint(chain consensus.ChainReader, header *types.Header, signers []common.Address) error {
 	number := header.Number.Uint64()
 	// ignore signerCheck at checkpoint block 14458500 due to wrong snapshot at gap 14458495
-	if number == common.IgnoreSignerCheckBlock {
-		return nil
-	}
+	// if number == common.IgnoreSignerCheckBlock {
+	//	return nil
+	//}
 	penPenalties := []common.Address{}
 	if c.HookPenalty != nil || c.HookPenaltyTIPSigning != nil {
 		var err error
