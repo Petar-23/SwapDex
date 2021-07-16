@@ -1,8 +1,8 @@
 # SdxChain
 
-[![Build Status](https://travis-ci.org/Sdxchain/Sdxchain.svg?branch=master)](https://travis-ci.org/Sdxchain/Sdxchain)
+[![Build Status](https://travis-ci.org/69th-byte/SmartDex-Chain.svg?branch=master)](https://travis-ci.org/69th-byte/SmartDex-Chain)
 [![codecov](https://codecov.io/gh/Sdxchain/Sdxchain/branch/master/graph/badge.svg)](https://codecov.io/gh/Sdxchain/Sdxchain)
-[![Join the chat at https://gitter.im/Sdxchain/Sdxchain](https://badges.gitter.im/Sdxchain/Sdxchain.svg)](https://gitter.im/Sdxchain/Sdxchain?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Join the chat at https://gitter.im/69th-byte/SmartDex-Chain](https://badges.gitter.im/69th-byte/SmartDex-Chain.svg)](https://gitter.im/69th-byte/SmartDex-Chain?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## About SdxChain
 
