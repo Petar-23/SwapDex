@@ -32,7 +32,7 @@ Building `sdx` requires both a Go (1.7+) and C compiler; install both of these.
 Once the dependencies are installed, just run the below commands:
 
 ```bash
-$ git clone https://github.com/Sdxchain/Sdxchain Sdxchain
+$ git clone https://github.com/69th-byte/SmartDex-Chain sdxchain
 $ cd Sdxchain
 $ make sdx
 ```
