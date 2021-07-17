@@ -51,7 +51,7 @@ done
 # networkid
 if [[ ! -z $NETWORK_ID ]]; then
   case $NETWORK_ID in
-    88 )
+    7879 )
       genesisPath="mainnet.json"
       ;;
     89 )
