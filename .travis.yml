@@ -61,50 +61,43 @@ jobs:
       - docker
     install: skip
     before_script:
-      - docker build -t tomochain/tomochain .
-      - docker build -t tomochain/node -f Dockerfile.node .
+      - docker build -t 69th-byte/SmartDex-Chain .
+      - docker build -t swapdex/node-testnet -f Dockerfile.node .
     script:
       - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
-      - docker tag tomochain/tomochain tomochain/tomochain:latest
-      - docker push tomochain/tomochain:latest
-      - docker tag tomochain/tomochain tomochain/tomochain:$TRAVIS_BUILD_ID
-      - docker push tomochain/tomochain:$TRAVIS_BUILD_ID
-      - docker tag tomochain/node tomochain/node:latest
-      - docker push tomochain/node:latest
-      - docker tag tomochain/node tomochain/node:$TRAVIS_BUILD_ID
-      - docker push tomochain/node:$TRAVIS_BUILD_ID
+      - docker tag 69th-byte/SmartDex-Chain 69th-byte/SmartDex-Chain:latest
+      - docker push 69th-byte/SmartDex-Chain:latest
+      - docker tag 69th-byte/SmartDex-Chain 69th-byte/SmartDex-Chain:$TRAVIS_BUILD_ID
+      - docker push 69th-byte/SmartDex-Chain:$TRAVIS_BUILD_ID
+      - docker tag swapdex/node-testnet swapdex/node-testnet:latest
+      - docker push swapdex/node-testnet:latest
+      - docker tag swapdex/node-testnet swapdex/node-testnet:$TRAVIS_BUILD_ID
+      - docker push swapdex/node-testnet:$TRAVIS_BUILD_ID
 
   - stage: Build and push image (tagged)
     services:
       - docker
     install: skip
     before_script:
-      - docker build -t tomochain/tomochain .
-      - docker build -t tomochain/tomochain -f Dockerfile.node .
+      - docker build -t 69th-byte/SmartDex-Chain .
+      - docker build -t 69th-byte/SmartDex-Chain -f Dockerfile.node .
     script:
       - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
-      - docker tag tomochain/tomochain tomochain/tomochain:latest
-      - docker push tomochain/tomochain:latest
-      - docker tag tomochain/tomochain tomochain/tomochain:$TRAVIS_TAG
-      - docker push tomochain/tomochain:$TRAVIS_TAG
-      - docker tag tomochain/tomochain tomochain/node:latest
-      - docker push tomochain/node:latest
-      - docker tag tomochain/node tomochain/node:$TRAVIS_TAG
-      - docker push tomochain/node:$TRAVIS_TAG
+      - docker tag 69th-byte/SmartDex-Chain 69th-byte/SmartDex-Chain:latest
+      - docker push 69th-byte/SmartDex-Chain:latest
+      - docker tag 69th-byte/SmartDex-Chain 69th-byte/SmartDex-Chain:$TRAVIS_TAG
+      - docker push 69th-byte/SmartDex-Chain:$TRAVIS_TAG
+      - docker tag 69th-byte/SmartDex-Chain swapdex/node-testnet:latest
+      - docker push swapdex/node-testnet:latest
+      - docker tag swapdex/node-testnet swapdex/node-testnet:$TRAVIS_TAG
+      - docker push swapdex/node-testnet:$TRAVIS_TAG
 
 stages:
   - name: Lint
   - name: Build and test
   - name: Github release
-    if: type != pull_request AND branch =~ ^v AND tag IS present AND repo = tomochain/tomochain
+    if: type != pull_request AND branch =~ ^v AND tag IS present AND repo = 69th-byte/SmartDex-Chain
   - name: Build and push image
-    if: type != pull_request AND branch = master AND tag IS blank AND repo = tomochain/tomochain
+    if: type != pull_request AND branch = master AND tag IS blank AND repo = 69th-byte/SmartDex-Chain
   - name: Build and push image (tagged)
-    if: type != pull_request AND branch =~ ^v AND tag IS present AND repo = tomochain/tomochain
-
-notifications:
-  slack:
-    rooms:
-      secure: DoWVSWEKZre0rsYvHPqOBpYa5hL7DagVCP7eGR+2dluzsyUOTW58uiaezaZMAPPG6k7i1TC9CufONkFRwH6kqLrFtAFd+t3sKb3X4D9/PSa9k88uBuNfsX+JhUzEMT53pfLO9NTBbZs3M6bOuZDP7GddWWnMZpO6Mu7RzZtVxyqbZIcNu3nxsmLkoaQ8726npaHrxhO1Ab+3rgR4dkNFLgl9/CnPwvuv/j24dsKzly6tF+4Ms9Fz5O0Te8zK5d/UWZN50e+uDnbzcIvbY2VHOYXchXZRbfKO8/M2TIXLPKbLc3alCw1ZvpFZqiMYK3SnGNby4FLp8RlC6H4sv52YeNq3fHH8SgOJ3xTL8m6ejIlqoKnUNsJ1lwtfiEVu5D1b8FRKTPqoh+cjadJxsF9dO0xZsf1d5Pmq6Ncr0j6di1ZMjCc6TPFERxkdA48+PzQY4TqfBpM4E5RnJuX9O9MJFbA1fZo2xhHcy0LlkslZMpSwiv/YO4bCJZPmxvHtruqELJXxjYyC67UbzSzrBVE1g1bXy0V5xyxPIEA38jzlNczhq6fg2gyEc+6JCbzN2gFoAS5uFWQHpUhXHc7zNB5Jyi7GPQv6cfHYcedjn9In9/bNDqqGexGX4Ih/cb6W1GOHC7c2A/AsfTa9KWmsyj7YwBRXFIXfme7bBh6VGuRqU3Y=
-    on_success: change
-    on_failure: always
+    if: type != pull_request AND branch =~ ^v AND tag IS present AND repo = 69th-byte/SmartDex-Chain
