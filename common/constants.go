@@ -32,11 +32,11 @@ var Rewound = uint64(0)
 // hardforks
 var TIP2019Block = big.NewInt(1050000)
 var TIPSigning = big.NewInt(1648000)
-var TIPRandomize = big.NewInt(1648000)
+var TIPRandomize = big.NewInt(1648500)
 var BlackListHFNumber = uint64(999999999999999)
-var TIPSdxX = big.NewInt(1648000)
-var TIPSdxXLending = big.NewInt(1648000)
-var TIPSdxXCancellationFee = big.NewInt(1648000)
+var TIPSdxX = big.NewInt(1649000)
+var TIPSdxXLending = big.NewInt(1649500)
+var TIPSdxXCancellationFee = big.NewInt(1650000)
 var TIPSdxXTestnet = big.NewInt(0)
 var IsTestnet bool = false
 var StoreRewardFolder string
