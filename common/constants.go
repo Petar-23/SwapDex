@@ -33,7 +33,7 @@ var Rewound = uint64(0)
 var TIP2019Block = big.NewInt(1050000)
 var TIPSigning = big.NewInt(1648000)
 var TIPRandomize = big.NewInt(1648000)
-var BlackListHFNumber = uint64(1648000)
+var BlackListHFNumber = uint64(999999999999999)
 var TIPSdxX = big.NewInt(1648000)
 var TIPSdxXLending = big.NewInt(1648000)
 var TIPSdxXCancellationFee = big.NewInt(1648000)
@@ -68,5 +68,5 @@ var BaseRecall = big.NewInt(100)
 var Blacklist = map[Address]bool{
 	HexToAddress(""): true,
 }
-var TIPSRC21Fee = big.NewInt(1648000)
+var TIPSRC21Fee = big.NewInt(999999999999999)
 var LimitTimeFinality = uint64(30) // limit in 30 block
